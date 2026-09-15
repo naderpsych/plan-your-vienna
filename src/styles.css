@@ -94,6 +94,11 @@
   --input: oklch(0.885 0.016 250);
   --ring: oklch(0.55 0.09 253);
   --map-route: oklch(0.47 0.13 253);
+  /* Title bar of a place card: a bluer band than the white body under it,
+     with the name itself in the burnt orange already used for the accents. */
+  --card-head: oklch(0.925 0.035 250);
+  --card-head-border: oklch(0.87 0.045 250);
+  --place-title: oklch(0.47 0.135 52);
   --shadow-card: 0 1px 2px oklch(0.23 0.04 258 / 6%), 0 12px 28px -18px oklch(0.23 0.04 258 / 28%);
   --gradient-header: linear-gradient(
     160deg,

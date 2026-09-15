@@ -18,6 +18,7 @@ const MyNotes = lazy(() => import("@/components/MyNotes"));
 const Weather = lazy(() => import("@/components/Weather"));
 
 const FIRST_DAY = days[0]!.iso;
+const warehouseCount = warehouse.reduce((n, g) => n + g.items.length, 0);
 const LAST_DAY = days[days.length - 1]!.iso;
 
 function navUrl(s: Stop) {
@@ -39,7 +40,7 @@ const EMPTY_PLAN: PlanState = { removed: [], added: {}, mine: [] };
 
 export default function App() {
   const [dayIdx, setDayIdx] = useState(0);
-  const [view, setView] = useState<"itinerary" | "map">("itinerary");
+  const [view, setView] = useState<"itinerary" | "map" | "warehouse">("itinerary");
   const [openList, setOpenList] = useState<string | null>(null);
   const [plan, setPlan] = useState<PlanState>(EMPTY_PLAN);
 
@@ -98,25 +99,39 @@ export default function App() {
             with the full route — add or drop a place whenever the plan changes.
           </p>
 
-          <div className="mt-6 inline-flex rounded-full bg-primary-foreground/12 p-1 backdrop-blur">
-            {(
-              [
-                ["itinerary", "Itinerary"],
-                ["map", "Day map"],
-              ] as const
-            ).map(([key, label]) => (
-              <button
-                key={key}
-                onClick={() => setView(key)}
-                className={`rounded-full px-5 py-2 text-sm font-semibold transition-colors ${
-                  view === key
-                    ? "bg-gold text-gold-foreground"
-                    : "text-primary-foreground/80 hover:text-primary-foreground"
-                }`}
-              >
-                {label}
-              </button>
-            ))}
+          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <div className="inline-flex rounded-full bg-primary-foreground/12 p-1 backdrop-blur">
+              {(
+                [
+                  ["itinerary", "Itinerary"],
+                  ["map", "Day map"],
+                ] as const
+              ).map(([key, label]) => (
+                <button
+                  key={key}
+                  onClick={() => setView(key)}
+                  className={`rounded-full px-5 py-2 text-sm font-semibold transition-colors ${
+                    view === key
+                      ? "bg-gold text-gold-foreground"
+                      : "text-primary-foreground/80 hover:text-primary-foreground"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={() => setView("warehouse")}
+              className={`rounded-full border px-5 py-2 text-sm font-semibold transition-colors ${
+                view === "warehouse"
+                  ? "border-gold bg-gold text-gold-foreground"
+                  : "border-primary-foreground/30 text-primary-foreground/80 hover:border-primary-foreground/60 hover:text-primary-foreground"
+              }`}
+            >
+              📍 Warehouse
+              <span className="ml-2 font-mono text-xs opacity-70">{warehouseCount}</span>
+            </button>
           </div>
         </div>
       </header>
@@ -167,7 +182,54 @@ export default function App() {
           </div>
         </div>
 
-        {view === "map" ? (
+        {view === "warehouse" ? (
+          <section className="space-y-3">
+            <p className="text-sm text-muted-foreground">
+              {warehouseCount} places from your Vienna map, nothing scheduled. Open a
+              category, read what a place is, and drop it into{" "}
+              <span className="font-semibold text-foreground">
+                {day.weekday} {day.date}
+              </span>{" "}
+              — or any other day — at a time you pick. Switch the day above first if you
+              want a different one.
+            </p>
+            {warehouse.map((group) => {
+              const open = openList === group.title;
+              return (
+                <div
+                  key={group.title}
+                  className="overflow-hidden rounded-2xl border border-border bg-card"
+                >
+                  <button
+                    onClick={() => setOpenList(open ? null : group.title)}
+                    className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left font-bold"
+                  >
+                    <span>📍 {group.title}</span>
+                    <span className="flex items-center gap-2">
+                      <span className="font-mono text-xs text-muted-foreground">
+                        {group.items.length}
+                      </span>
+                      <span className="text-muted-foreground">{open ? "−" : "+"}</span>
+                    </span>
+                  </button>
+                  {open && (
+                    <div className="space-y-3 border-t border-border px-4 py-4">
+                      {group.items.map((item) => (
+                        <PlaceRow
+                          key={item.id}
+                          item={item}
+                          plan={plan}
+                          onAdd={addStop}
+                          defaultDayId={day.id}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </section>
+        ) : view === "map" ? (
           <section className="space-y-4">
             <div className="h-[65vh] overflow-hidden rounded-2xl border border-border shadow-[var(--shadow-card)]">
               <Suspense
@@ -371,43 +433,6 @@ export default function App() {
                   )}
                 </div>
 
-                {warehouse.map((group) => {
-                  const key = `map:${group.title}`;
-                  const open = openList === key;
-                  return (
-                    <div
-                      key={key}
-                      className="overflow-hidden rounded-2xl border border-border bg-card"
-                    >
-                      <button
-                        onClick={() => setOpenList(open ? null : key)}
-                        className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left font-bold"
-                      >
-                        <span>📍 {group.title}</span>
-                        <span className="flex items-center gap-2">
-                          <span className="font-mono text-xs text-muted-foreground">
-                            {group.items.length}
-                          </span>
-                          <span className="text-muted-foreground">{open ? "−" : "+"}</span>
-                        </span>
-                      </button>
-                      {open && (
-                        <div className="space-y-3 border-t border-border px-4 py-4">
-                          {group.items.map((item) => (
-                            <PlaceRow
-                              key={item.id}
-                              item={item}
-                              plan={plan}
-                              onAdd={addStop}
-                              defaultDayId={day.id}
-                            />
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-
                 {foodList.map((group) => {
                   const open = openList === group.title;
                   return (
@@ -466,13 +491,19 @@ function StopCard({
   const fit = stop.time && !stop.fixed ? checkFit(stop, iso, stop.time) : null;
 
   return (
-    <article className="rounded-2xl border border-border bg-card p-4 shadow-[var(--shadow-card)] transition-transform hover:-translate-y-0.5">
-      <div className="flex items-start justify-between gap-3">
+    <article className="overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] transition-transform hover:-translate-y-0.5">
+      <div
+        className="flex items-start justify-between gap-3 border-b px-4 py-3"
+        style={{
+          background: "var(--card-head)",
+          borderColor: "var(--card-head-border)",
+        }}
+      >
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           {stop.time && (
             <span className="font-mono text-sm font-bold text-primary">{stop.time}</span>
           )}
-          <h3 className="text-lg font-bold text-primary">
+          <h3 className="text-lg font-bold" style={{ color: "var(--place-title)" }}>
             {stop.title} {stop.star && <span className="text-gold">⭐</span>}
           </h3>
         </div>
@@ -481,14 +512,15 @@ function StopCard({
             onClick={onRemove}
             aria-label={`Remove ${stop.title} from this day`}
             title="Remove from this day"
-            className="shrink-0 rounded-lg px-2 py-1 text-sm text-muted-foreground hover:bg-secondary hover:text-destructive"
+            className="shrink-0 rounded-lg px-2 py-1 text-sm text-muted-foreground hover:bg-card hover:text-destructive"
           >
             ✕
           </button>
         )}
       </div>
 
-      {stop.about && <p className="mt-2 text-sm leading-relaxed">{stop.about}</p>}
+      <div className="px-4 py-3">
+      {stop.about && <p className="text-sm leading-relaxed">{stop.about}</p>}
       {stop.plan && (
         <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
           <span className="font-semibold text-foreground">The plan: </span>
@@ -544,6 +576,7 @@ function StopCard({
             Hours on Google
           </a>
         )}
+      </div>
       </div>
     </article>
   );
@@ -644,11 +677,39 @@ function PlaceRow({
   );
 
   return (
-    <div className="rounded-xl border border-border bg-background p-3">
-      <div className="flex items-start justify-between gap-3">
+    <div className="overflow-hidden rounded-xl border border-border bg-background">
+      <div
+        className="flex items-center justify-between gap-3 border-b px-3 py-2"
+        style={{
+          background: "var(--card-head)",
+          borderColor: "var(--card-head-border)",
+        }}
+      >
+        <h4 className="min-w-0 font-bold" style={{ color: "var(--place-title)" }}>
+          {item.title}
+        </h4>
+        <div className="flex shrink-0 items-center gap-1">
+          <button
+            onClick={() => setOpen(!open)}
+            className="rounded-lg border border-primary/30 bg-card px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/5"
+          >
+            {open ? "Close" : actionLabel}
+          </button>
+          {onDelete && (
+            <button
+              onClick={onDelete}
+              aria-label={`Delete ${item.title}`}
+              className="rounded-lg px-2 py-1 text-sm text-muted-foreground hover:text-destructive"
+            >
+              ✕
+            </button>
+          )}
+        </div>
+      </div>
+
+      <div className="px-3 py-3">
         <div className="min-w-0">
-          <h4 className="font-bold text-primary">{item.title}</h4>
-          {item.about && <p className="mt-1 text-sm text-muted-foreground">{item.about}</p>}
+          {item.about && <p className="text-sm text-muted-foreground">{item.about}</p>}
           {item.plan && (
             <p className="mt-1 text-sm text-muted-foreground">
               <span className="font-semibold text-foreground">The plan: </span>
@@ -664,23 +725,6 @@ function PlaceRow({
             <p className="mt-2 text-xs font-semibold text-primary">
               Added to {placedOn.map((d) => `${d.weekday} ${d.date}`).join(", ")}
             </p>
-          )}
-        </div>
-        <div className="flex shrink-0 items-center gap-1">
-          <button
-            onClick={() => setOpen(!open)}
-            className="rounded-lg border border-primary/30 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/5"
-          >
-            {open ? "Close" : actionLabel}
-          </button>
-          {onDelete && (
-            <button
-              onClick={onDelete}
-              aria-label={`Delete ${item.title}`}
-              className="rounded-lg px-2 py-1 text-sm text-muted-foreground hover:text-destructive"
-            >
-              ✕
-            </button>
           )}
         </div>
       </div>
