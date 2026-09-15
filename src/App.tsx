@@ -103,8 +103,8 @@ export default function App() {
             with the full route — add or drop a place whenever the plan changes.
           </p>
 
-          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <div className="inline-flex rounded-full bg-primary-foreground/12 p-1 backdrop-blur">
+          <div className="mt-6 flex items-center gap-3">
+            <div className="inline-flex shrink-0 rounded-full bg-primary-foreground/12 p-1 backdrop-blur">
               {(
                 [
                   ["itinerary", "Itinerary"],
@@ -114,7 +114,7 @@ export default function App() {
                 <button
                   key={key}
                   onClick={() => setView(key)}
-                  className={`rounded-full px-5 py-2 text-sm font-semibold transition-colors ${
+                  className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
                     view === key
                       ? "bg-gold text-gold-foreground"
                       : "text-primary-foreground/80 hover:text-primary-foreground"
@@ -127,14 +127,14 @@ export default function App() {
 
             <button
               onClick={() => setView("warehouse")}
-              className={`rounded-full border px-5 py-2 text-sm font-semibold transition-colors ${
+              className={`ml-auto shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
                 view === "warehouse"
                   ? "border-gold bg-gold text-gold-foreground"
                   : "border-primary-foreground/30 text-primary-foreground/80 hover:border-primary-foreground/60 hover:text-primary-foreground"
               }`}
             >
-              📍 Warehouse
-              <span className="ml-2 font-mono text-xs opacity-70">{warehouseCount}</span>
+              More
+              <span className="ml-1.5 font-mono text-xs opacity-70">{warehouseCount}</span>
             </button>
           </div>
         </div>
@@ -615,16 +615,22 @@ function headStyle(stop: Stop) {
 /** What the place is, and — on a day card — when it is open on that date. */
 function KindLine({ stop, iso }: { stop: Stop; iso?: string }) {
   const label = stop.kind ? KIND_LABEL[stop.kind] : null;
-  const today = iso ? hoursToday(stop, iso) : null;
-  if (!label && !today) return null;
+  const hours = iso ? hoursToday(stop, iso) : null;
+  if (!label && !hours) return null;
+
+  // The hours belong to the day this stop sits on, not to the real-world today,
+  // so the line names that weekday rather than saying "today".
+  const weekday = iso
+    ? new Date(`${iso}T12:00:00`).toLocaleDateString("en-GB", { weekday: "short" })
+    : "";
 
   return (
     <p className="mt-0.5 text-xs text-muted-foreground">
       {label && <span className="font-bold uppercase tracking-wide">{label}</span>}
-      {label && today && " · "}
-      {today && (
-        <span className={today === "Closed" ? "font-semibold text-destructive" : ""}>
-          {today === "Closed" ? "Closed today" : `Open today ${today}`}
+      {label && hours && " · "}
+      {hours && (
+        <span className={hours === "Closed" ? "font-semibold text-destructive" : ""}>
+          {hours === "Closed" ? `Closed on ${weekday}` : `Open ${weekday} ${hours}`}
         </span>
       )}
     </p>
