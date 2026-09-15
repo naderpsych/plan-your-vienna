@@ -528,7 +528,6 @@ function StopCard({
   onRemove?: () => void;
   onShowMap: () => void;
 }) {
-  const hours = hoursFor(stop);
   // Hotel anchors and travel blocks have no opening hours to argue with.
   const fit = stop.time && !stop.fixed ? checkFit(stop, iso, stop.time) : null;
 
@@ -585,9 +584,6 @@ function StopCard({
           {fit.message}
         </p>
       )}
-      {hours?.note && fit?.level === "ok" && (
-        <p className="mt-3 font-mono text-xs text-muted-foreground">{hours.note}</p>
-      )}
 
       <div className="mt-3 flex flex-wrap gap-2">
         {stop.lat && (
@@ -637,28 +633,52 @@ function headStyle(stop: Stop) {
       };
 }
 
-/** What the place is, and — on a day card — when it is open on that date. */
+/**
+ * What the place is, plus a clock you tap for the hours. The full week is a
+ * long line to carry on every card for something you check now and then, so it
+ * stays folded — except a shut door, which says so without being asked.
+ */
 function KindLine({ stop, iso }: { stop: Stop; iso?: string }) {
+  const [show, setShow] = useState(false);
   const label = stop.kind ? KIND_LABEL[stop.kind] : null;
-  const hours = iso ? hoursToday(stop, iso) : null;
-  if (!label && !hours) return null;
+  const today = iso ? hoursToday(stop, iso) : null;
+  const week = hoursFor(stop)?.note;
+  if (!label && !today && !week) return null;
 
-  // The hours belong to the day this stop sits on, not to the real-world today,
-  // so the line names that weekday rather than saying "today".
+  // The hours belong to the day this card sits on, not to the real-world today.
   const weekday = iso
     ? new Date(`${iso}T12:00:00`).toLocaleDateString("en-GB", { weekday: "short" })
     : "";
+  const closed = today === "Closed";
 
   return (
-    <p className="mt-0.5 text-xs text-muted-foreground">
-      {label && <span className="font-bold uppercase tracking-wide">{label}</span>}
-      {label && hours && " · "}
-      {hours && (
-        <span className={hours === "Closed" ? "font-semibold text-destructive" : ""}>
-          {hours === "Closed" ? `Closed on ${weekday}` : `Open ${weekday} ${hours}`}
-        </span>
-      )}
-    </p>
+    <div className="mt-0.5 text-xs text-muted-foreground">
+      <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
+        {label && <span className="font-bold uppercase tracking-wide">{label}</span>}
+        {(today || week) && (
+          <button
+            onClick={() => setShow(!show)}
+            title={closed ? `Closed on ${weekday}` : today ? `Open ${weekday} ${today}` : "Opening hours"}
+            aria-label="Opening hours"
+            aria-expanded={show}
+            className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 transition-colors ${
+              closed
+                ? "border-destructive/40 font-semibold text-destructive"
+                : "border-border/70 hover:border-primary/40 hover:text-primary"
+            }`}
+          >
+            <span aria-hidden>🕐</span>
+            {closed && <span>Closed {weekday}</span>}
+            {!closed && show && today && (
+              <span>
+                {weekday} {today}
+              </span>
+            )}
+          </button>
+        )}
+      </p>
+      {show && week && <p className="mt-1 font-mono leading-relaxed">{week}</p>}
+    </div>
   );
 }
 

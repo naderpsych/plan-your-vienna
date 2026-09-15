@@ -200,7 +200,7 @@ export const days: Day[] = [
     iso: "2026-09-20",
     date: "Sep 20",
     weekday: "Sunday",
-    theme: "Art, wine and a concert",
+    theme: "Art, a walk and a concert",
     star: true,
     warn: "Every shop in Vienna is closed. Museums, cafés and restaurants are open",
     stops: [
@@ -233,19 +233,29 @@ export const days: Day[] = [
         query: "Beethovengang Wien",
       },
       {
-        id: "sun-heuriger",
+        id: "sun-palmenhaus",
         kind: "food",
         time: "14:30",
-        title: "Heuriger in Nussdorf",
+        title: "Palmenhaus",
         about:
-          "A wine tavern in the vineyard village at the edge of the city, where growers pour their own young wine in the courtyard.",
+          "The imperial glass palm house of 1901 on the Burggarten — a brasserie under the iron and glass, with palms still growing inside.",
         plan:
-          "Late lunch outdoors. Order the pumpkin soup with pumpkin seed oil and whatever is on the buffet counter.",
-        warn: "Sturm is alcoholic → ask for Traubenmost for your wife",
-        lat: 48.2585,
-        lng: 16.348,
-        query: "Heuriger Nussdorf Wien",
-        hours: { week: daily("15:00-23:00"), note: "Varies by tavern", source: "manual" },
+          "Late lunch on the way back into town, and it is open all day Sunday. Order the pumpkin soup with pumpkin seed oil.",
+        lat: 48.2047,
+        lng: 16.3673,
+        query: "Palmenhaus Burggarten Wien",
+        hours: {
+          week: [
+            "09:00-23:00",
+            "10:00-23:00",
+            "10:00-23:00",
+            "10:00-23:00",
+            "10:00-23:00",
+            "10:00-23:00",
+            "09:00-23:00",
+          ],
+          source: "manual",
+        },
       },
       {
         id: "sun-konzerthaus",
@@ -278,23 +288,13 @@ export const days: Day[] = [
     ],
     alternatives: [
       {
-        id: "alt-sun-palmenhaus",
-        kind: "food",
-        title: "Palmenhaus",
-        about:
-          "The imperial glass palm house of 1901 on the Burggarten, now a brasserie under the iron and glass.",
-        plan: "Drinks or a late dinner in the greenhouse. Open until 23:00.",
-        lat: 48.2047,
-        lng: 16.3673,
-        query: "Palmenhaus Burggarten Wien",
-      },
-      {
         id: "alt-sun-kahlenberg",
         kind: "view",
         title: "Kahlenberg",
         about:
-          "The vineyard hill north of the city with the terrace view over Vienna and the Danube.",
-        plan: "Bus 38A from Heiligenstadt. Best about an hour before sunset.",
+          "The hill north of the city, with a terrace looking over Vienna and the Danube across the vine slopes.",
+        plan:
+          "Bus 38A from Heiligenstadt. Best about an hour before sunset. It is a viewpoint — nothing to drink involved.",
         lat: 48.2789,
         lng: 16.3335,
         query: "Kahlenberg Wien",
@@ -912,7 +912,7 @@ export const foodList: { title: string; items: { name: string; text: string }[] 
     items: [
       {
         name: "Wiener Schnitzel",
-        text: 'Pounded veal. If it is pork it is called "Schnitzel Wiener Art". Served with lemon and potato salad',
+        text: 'Pounded veal. Ask for Kalb — anything labelled "Schnitzel Wiener Art" is pork. Served with lemon and potato salad',
       },
       {
         name: "Tafelspitz",
@@ -942,7 +942,7 @@ export const foodList: { title: string; items: { name: string; text: string }[] 
       { name: "Wild / Hirschragout", text: "Game season opens in September" },
       {
         name: "Sturm",
-        text: "Fermenting grape juice. ⚠️ Alcoholic. The safe version: Traubenmost",
+        text: "Fermenting grape juice. ⚠️ Alcoholic. For a non-alcoholic drink ask for Traubenmost instead",
       },
       { name: "Maroni", text: "Roasted chestnuts, street stalls from late September" },
     ],
