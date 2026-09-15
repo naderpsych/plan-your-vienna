@@ -852,17 +852,6 @@ export const wishlist: Stop[] = [
     hours: { week: [null, "09:00-19:00", "09:00-19:00", "09:00-19:00", "09:00-19:00", "09:00-19:00", "09:00-18:00"], source: "manual" },
   },
   {
-    id: "w-oberlaa",
-    kind: "cafe",
-    title: "Oberlaa",
-    about: "Viennese pastry chain at Neuer Markt, known for the Kardinalschnitte.",
-    plan: "A 20-minute coffee stop — what the Viennese actually buy rather than the tourist cake.",
-    lat: 48.2049,
-    lng: 16.3703,
-    query: "Oberlaa Neuer Markt 16 Wien",
-    hours: { week: daily("08:00-20:00"), source: "manual" },
-  },
-  {
     id: "w-joseph",
     kind: "cafe",
     title: "Joseph Brot",

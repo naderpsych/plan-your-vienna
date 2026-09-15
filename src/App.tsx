@@ -28,7 +28,7 @@ import {
 
 const TripMap = lazy(() => import("@/components/TripMap"));
 const MyNotes = lazy(() => import("@/components/MyNotes"));
-const Weather = lazy(() => import("@/components/Weather"));
+import { useForecast, WeatherLine, WeatherMini } from "@/components/Weather";
 
 const FORECAST_RANGE = days.map((d) => d.iso).sort();
 const FIRST_DAY = FORECAST_RANGE[0]!;
@@ -58,6 +58,7 @@ export default function App() {
   const [openList, setOpenList] = useState<string | null>(null);
   const [altOpen, setAltOpen] = useState(false);
   const [plan, setPlan] = useState<PlanState>(EMPTY_PLAN);
+  const forecast = useForecast(FIRST_DAY, LAST_DAY);
 
   useEffect(() => {
     setPlan(loadPlan());
@@ -93,7 +94,12 @@ export default function App() {
   }
 
   function removeMine(id: string) {
-    update({ ...plan, mine: plan.mine.filter((s) => s.id !== id) });
+    update({
+      ...plan,
+      mine: plan.mine.filter((s) => s.id !== id),
+      // Remember the deletion, or a seeded place would come back on reload.
+      removed: plan.removed.includes(id) ? plan.removed : [...plan.removed, id],
+    });
   }
 
   const removedHere = day.stops.filter((s) => plan.removed.includes(s.id));
@@ -174,6 +180,7 @@ export default function App() {
               >
                 {d.date}
               </span>
+              <WeatherMini day={forecast?.[d.iso]} />
             </button>
           ))}
         </div>
@@ -188,9 +195,7 @@ export default function App() {
             <p className="text-sm text-muted-foreground">{day.theme}</p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <Suspense fallback={null}>
-              <Weather iso={day.iso} from={FIRST_DAY} to={LAST_DAY} />
-            </Suspense>
+            <WeatherLine day={forecast?.[day.iso]} />
             <span className="font-mono text-xs text-muted-foreground">
               {located.length} stops on the map
             </span>
@@ -416,7 +421,7 @@ export default function App() {
                     onClick={() => setOpenList(openList === "wish" ? null : "wish")}
                     className="flex w-full items-center justify-between px-4 py-3 text-left font-bold"
                   >
-                    <span>⭐ Wish list — places to slot into a day</span>
+                    <span>⭐ Recommendations — places to slot into a day</span>
                     <span className="text-muted-foreground">
                       {openList === "wish" ? "−" : "+"}
                     </span>

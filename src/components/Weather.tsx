@@ -1,7 +1,7 @@
 /**
  * Live Vienna forecast for the trip dates, from Open-Meteo.
- * No key, no account — one request covering the whole range, cached for
- * three hours so flipping between days does not re-fetch.
+ * No key, no account — one request covering the whole range, cached for three
+ * hours and shared by every day cell through the hook below.
  */
 import { useEffect, useState } from "react";
 
@@ -10,7 +10,7 @@ const LNG = 16.3738;
 const CACHE_KEY = "vienna-weather-v2";
 const CACHE_MS = 3 * 60 * 60 * 1000;
 
-type DayWeather = {
+export type DayWeather = {
   code: number;
   max: number;
   min: number;
@@ -20,7 +20,7 @@ type DayWeather = {
 type Cache = { at: number; days: Record<string, DayWeather> };
 
 /** WMO weather codes → what to show. */
-function describe(code: number): { icon: string; label: string } {
+export function describe(code: number): { icon: string; label: string } {
   if (code === 0) return { icon: "☀️", label: "Clear" };
   if (code <= 2) return { icon: "🌤️", label: "Mostly sunny" };
   if (code === 3) return { icon: "☁️", label: "Overcast" };
@@ -63,15 +63,16 @@ async function fetchRange(from: string, to: string) {
   return out;
 }
 
-export default function Weather({ iso, from, to }: { iso: string; from: string; to: string }) {
+/** One fetch for the whole range, shared by every cell that asks for it. */
+export function useForecast(from: string, to: string) {
   const [days, setDays] = useState<Record<string, DayWeather> | null>(null);
-  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
+    // The key carries the range, so adding a day refetches instead of serving
+    // a cache that never covered it.
+    const cacheKey = `${CACHE_KEY}:${from}:${to}`;
     try {
-      // The key carries the range, so adding a day to the trip refetches
-      // instead of serving a cache that never covered it.
-      const raw = localStorage.getItem(`${CACHE_KEY}:${from}:${to}`);
+      const raw = localStorage.getItem(cacheKey);
       if (raw) {
         const cached = JSON.parse(raw) as Cache;
         if (Date.now() - cached.at < CACHE_MS) {
@@ -88,43 +89,39 @@ export default function Weather({ iso, from, to }: { iso: string; from: string; 
       .then((result) => {
         setDays(result);
         try {
-          localStorage.setItem(
-            `${CACHE_KEY}:${from}:${to}`,
-            JSON.stringify({ at: Date.now(), days: result }),
-          );
+          localStorage.setItem(cacheKey, JSON.stringify({ at: Date.now(), days: result }));
         } catch {
           /* ignore */
         }
       })
-      .catch(() => setFailed(true))
+      .catch(() => setDays(null))
       .finally(() => {
         inflight = null;
       });
   }, [from, to]);
 
-  if (failed) return null;
+  return days;
+}
 
-  const day = days?.[iso];
-  if (!day) {
-    return (
-      <span className="font-mono text-xs text-muted-foreground">
-        {days ? "Forecast not out yet" : "Loading forecast…"}
-      </span>
-    );
-  }
-
-  const { icon, label } = describe(day.code);
+/** Icon and high, small enough to live inside a day button. */
+export function WeatherMini({ day }: { day: DayWeather | undefined }) {
+  if (!day) return null;
+  const { icon } = describe(day.code);
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-sm">
-      <span aria-hidden className="text-base">
-        {icon}
-      </span>
+    <span className="mt-1 flex items-center gap-1 text-xs">
+      <span aria-hidden>{icon}</span>
       <span className="font-semibold">{day.max}°</span>
-      <span className="text-muted-foreground">/ {day.min}°</span>
-      <span className="text-xs text-muted-foreground">
-        {label}
-        {day.rain > 20 ? ` · ${day.rain}% rain` : ""}
-      </span>
+    </span>
+  );
+}
+
+/** The fuller line for the day you are looking at. */
+export function WeatherLine({ day }: { day: DayWeather | undefined }) {
+  if (!day) return null;
+  const { label } = describe(day.code);
+  return (
+    <span className="font-mono text-xs text-muted-foreground">
+      {label} · {day.max}° / {day.min}°{day.rain > 20 ? ` · ${day.rain}% rain` : ""}
     </span>
   );
 }

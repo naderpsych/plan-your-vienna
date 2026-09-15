@@ -9,7 +9,7 @@
 import { days, wishlist, type Stop } from "@/data/itinerary";
 import { warehouse } from "@/data/warehouse";
 
-export type Source = "Wish list" | "Alternatives" | "Map" | "My places";
+export type Source = "Recommendations" | "Alternatives" | "Map" | "My places";
 
 export type CatalogueItem = Stop & { sources: Source[] };
 
@@ -41,7 +41,7 @@ export function buildCatalogue(mine: Stop[] = []): CatalogueItem[] {
     merged.set(k, richness(stop) > richness(seen) ? { ...stop, sources } : { ...seen, sources });
   };
 
-  wishlist.forEach((s) => add(s, "Wish list"));
+  wishlist.forEach((s) => add(s, "Recommendations"));
   days.forEach((d) => d.alternatives.forEach((s) => add(s, "Alternatives")));
   warehouse.forEach((g) => g.items.forEach((s) => add(s, "Map")));
   mine.forEach((s) => add(s, "My places"));

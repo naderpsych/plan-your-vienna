@@ -6,6 +6,7 @@
  * so the trip survives a reload without needing a server.
  */
 import { FOOD_KINDS, holidays, type Hours, type Stop } from "@/data/itinerary";
+import { myPlacesSeed } from "@/data/myplaces";
 import generatedHours from "@/data/hours.generated.json";
 
 const KEY = "vienna-plan-v1";
@@ -21,18 +22,29 @@ export type PlanState = {
 
 const EMPTY: PlanState = { removed: [], added: {}, mine: [] };
 
+/**
+ * Seeded places join "My places" unless they are already there or you deleted
+ * them — deleting records the id in `removed`, so it stays deleted.
+ */
+function withSeeds(plan: PlanState): PlanState {
+  const have = new Set(plan.mine.map((s) => s.id));
+  const gone = new Set(plan.removed);
+  const missing = myPlacesSeed.filter((s) => !have.has(s.id) && !gone.has(s.id));
+  return missing.length ? { ...plan, mine: [...missing, ...plan.mine] } : plan;
+}
+
 export function loadPlan(): PlanState {
   try {
     const raw = localStorage.getItem(KEY);
-    if (!raw) return EMPTY;
+    if (!raw) return withSeeds(EMPTY);
     const parsed = JSON.parse(raw) as Partial<PlanState>;
-    return {
+    return withSeeds({
       removed: parsed.removed ?? [],
       added: parsed.added ?? {},
       mine: parsed.mine ?? [],
-    };
+    });
   } catch {
-    return EMPTY;
+    return withSeeds(EMPTY);
   }
 }
 
