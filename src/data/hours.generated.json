@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-15T15:44:01+00:00",
+  "generated": "2026-09-15T16:12:58+00:00",
   "places": {
     "alt-sat-hacken": {
       "week": [
@@ -510,6 +510,854 @@
       "human": "Tue 08:00-17:30 · Wed 08:00-17:30 · Thu 08:00-17:30 · Fri 08:00-17:30 · Sat 08:00-17:30 · Sun 08:00-17:30 · Mon 08:00-17:30",
       "google_name": "Twin City Liner",
       "address": "Schiffstation Wien City Franz-Josefs-Kai Schwedenplatz 2, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "tue-peterskirche": {
+      "week": [
+        "09:00-19:00",
+        "08:00-19:00",
+        "11:00-17:30",
+        "11:00-17:30",
+        "08:00-19:00",
+        "08:00-19:00",
+        "09:00-19:00"
+      ],
+      "human": "Tue 08:00-19:00 · Wed 08:00-19:00 · Thu 08:00-19:00 · Fri 08:00-19:00 · Sat 09:00-19:00 · Sun 09:00-19:00 · Mon 08:00-19:00 · Tue 11:00-11:30, 12:30-13:00, 17:00-17:30 · Wed 11:00-11:30, 12:30-13:00, 17:00-17:30",
+      "google_name": "Peterskirche",
+      "address": "Peterspl., 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-hofburg": {
+      "week": [
+        "09:00-18:00",
+        "09:00-18:00",
+        "09:00-18:00",
+        "09:00-18:00",
+        "09:00-18:00",
+        "09:00-18:00",
+        "09:00-18:00"
+      ],
+      "human": "Tue 09:00-18:00 · Wed 09:00-18:00 · Thu 09:00-18:00 · Fri 09:00-18:00 · Sat 09:00-18:00 · Sun 09:00-18:00 · Mon 09:00-18:00",
+      "google_name": "Hofburg",
+      "address": "1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-imperial-treasury-vienna": {
+      "week": [
+        "09:00-17:30",
+        "09:00-17:30",
+        null,
+        "09:00-17:30",
+        "09:00-17:30",
+        "09:00-17:30",
+        "09:00-17:30"
+      ],
+      "human": "Tue Closed · Wed 09:00-17:30 · Thu 09:00-17:30 · Fri 09:00-17:30 · Sat 09:00-17:30 · Sun 09:00-17:30 · Mon 09:00-17:30",
+      "google_name": "Kaiserliche Schatzkammer",
+      "address": "Schweizerhof, Hofburg, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-neue-burg-teil-der-wiener-hofburg": {
+      "week": [
+        "10:00-18:00",
+        null,
+        "10:00-21:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00"
+      ],
+      "human": "Tue 10:00-21:00 · Wed 10:00-18:00 · Thu 10:00-18:00 · Fri 10:00-18:00 · Sat 10:00-18:00 · Sun 10:00-18:00 · Mon Closed",
+      "google_name": "Neue Burg",
+      "address": "Heldenplatz, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-st-stephen-s-cathedral": {
+      "week": [
+        "07:00-22:00",
+        "06:00-22:00",
+        "06:00-22:00",
+        "06:00-22:00",
+        "06:00-22:00",
+        "06:00-22:00",
+        "07:00-22:00"
+      ],
+      "human": "Tue 06:00-22:00 · Wed 06:00-22:00 · Thu 06:00-22:00 · Fri 06:00-22:00 · Sat 07:00-22:00 · Sun 07:00-22:00 · Mon 06:00-22:00",
+      "google_name": "Domkirche St. Stephan",
+      "address": "Stephansplatz 3, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-vienna-city-hall": {
+      "week": [
+        null,
+        "08:00-18:00",
+        "08:00-18:00",
+        "08:00-18:00",
+        "08:00-18:00",
+        "08:00-18:00",
+        null
+      ],
+      "human": "Tue 08:00-18:00 · Wed 08:00-18:00 · Thu 08:00-18:00 · Fri 08:00-18:00 · Sat Closed · Sun Closed · Mon 08:00-18:00",
+      "google_name": "Das Wiener Rathaus",
+      "address": "Friedrich-Schmidt-Platz 1, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-austrian-parliament": {
+      "week": [
+        null,
+        "09:00-13:00",
+        "09:00-18:00",
+        "09:00-18:00",
+        "09:00-21:00",
+        "09:00-18:00",
+        "09:00-17:00"
+      ],
+      "human": "Tue 09:00-18:00 · Wed 09:00-18:00 · Thu 09:00-21:00 · Fri 09:00-18:00 · Sat 09:00-17:00 · Sun Closed · Mon 09:00-13:00",
+      "google_name": "Parlament Österreich",
+      "address": "Dr.-Karl-Renner-Ring 3, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-sch-nbrunn-palace": {
+      "week": [
+        "08:30-17:30",
+        "08:30-17:30",
+        "08:30-17:30",
+        "08:30-17:30",
+        "08:30-17:30",
+        "08:30-17:30",
+        "08:30-17:30"
+      ],
+      "human": "Tue 08:30-17:30 · Wed 08:30-17:30 · Thu 08:30-17:30 · Fri 08:30-17:30 · Sat 08:30-17:30 · Sun 08:30-17:30 · Mon 08:30-17:30",
+      "google_name": "Schloss Schönbrunn",
+      "address": "Schönbrunner Schloßstraße 47, 1130 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-secession": {
+      "week": [
+        "10:00-18:00",
+        null,
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00"
+      ],
+      "human": "Tue 10:00-18:00 · Wed 10:00-18:00 · Thu 10:00-18:00 · Fri 10:00-18:00 · Sat 10:00-18:00 · Sun 10:00-18:00 · Mon Closed",
+      "google_name": "Wiener Secession",
+      "address": "Friedrichstraße 12, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-karlskirche": {
+      "week": [
+        "09:00-19:00",
+        "07:30-19:00",
+        "07:30-19:00",
+        "07:30-19:00",
+        "07:30-19:00",
+        "07:30-19:00",
+        "08:30-18:00"
+      ],
+      "human": "Tue 07:30-19:00 · Wed 07:30-19:00 · Thu 07:30-19:00 · Fri 07:30-19:00 · Sat 08:30-18:00 · Sun 09:00-19:00 · Mon 07:30-19:00",
+      "google_name": "Karlskirche",
+      "address": "Karlskirche, Karlsplatz 10, 1040 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-votive-church": {
+      "week": [
+        "09:00-13:00",
+        null,
+        "10:00-16:00",
+        "10:00-16:00",
+        "10:00-16:00",
+        "10:00-16:00",
+        "11:00-19:00"
+      ],
+      "human": "Tue 10:00-16:00 · Wed 10:00-16:00 · Thu 10:00-16:00 · Fri 10:00-16:00 · Sat 11:00-19:00 · Sun 09:00-13:00 · Mon Closed",
+      "google_name": "Votivkirche",
+      "address": "Rooseveltplatz, 1090 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-st-francis-of-assisi-church": {
+      "week": [
+        "08:00-19:30",
+        "08:00-12:00",
+        "08:00-12:00",
+        "08:00-12:00",
+        "08:00-19:30",
+        "08:00-19:30",
+        "08:00-19:30"
+      ],
+      "human": "Tue 08:00-12:00 · Wed 08:00-12:00 · Thu 08:00-12:00, 18:30-19:30 · Fri 08:00-12:00, 18:30-19:30 · Sat 08:00-12:00, 18:30-19:30 · Sun 08:00-12:00, 18:30-19:30 · Mon 08:00-12:00",
+      "google_name": "Katholische Kirche St. Franziskus von Assisi",
+      "address": "Mexikoplatz 12, 1020 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-otto-wagner-kirche-am-steinhof": {
+      "week": [
+        "11:00-17:00",
+        null,
+        "10:00-17:00",
+        "10:00-17:00",
+        "10:00-17:00",
+        "10:00-17:00",
+        "10:00-17:00"
+      ],
+      "human": "Tue 10:00-17:00 · Wed 10:00-17:00 · Thu 10:00-17:00 · Fri 10:00-17:00 · Sat 10:00-17:00 · Sun 11:00-17:00 · Mon Closed",
+      "google_name": "Wien Museum Otto-Wagner-Kirche am Steinhof",
+      "address": "Baumgartner Höhe 1, 1140 Wien-Penzing, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-sisi-museum": {
+      "week": [
+        "09:00-17:30",
+        "09:00-17:30",
+        "09:00-17:30",
+        "09:00-17:30",
+        "09:00-17:30",
+        "09:00-17:30",
+        "09:00-17:30"
+      ],
+      "human": "Tue 09:00-17:30 · Wed 09:00-17:30 · Thu 09:00-17:30 · Fri 09:00-17:30 · Sat 09:00-17:30 · Sun 09:00-17:30 · Mon 09:00-17:30",
+      "google_name": "Sisi Museum Hofburg Wien",
+      "address": "Michaelerkuppel, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-ephesos-museum-der-antikensammlung-des": {
+      "week": [
+        "10:00-18:00",
+        null,
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-20:00",
+        "10:00-18:00",
+        "10:00-18:00"
+      ],
+      "human": "Tue 10:00-18:00 · Wed 10:00-18:00 · Thu 10:00-20:00 · Fri 10:00-18:00 · Sat 10:00-18:00 · Sun 10:00-18:00 · Mon Closed",
+      "google_name": "Ephesos Museum",
+      "address": "Heldenplatz, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-papyrus-collection-and-papyrus-museum-": {
+      "week": [
+        "10:00-18:00",
+        null,
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-21:00",
+        "10:00-18:00",
+        "10:00-18:00"
+      ],
+      "human": "Tue 10:00-18:00 · Wed 10:00-18:00 · Thu 10:00-21:00 · Fri 10:00-18:00 · Sat 10:00-18:00 · Sun 10:00-18:00 · Mon Closed",
+      "google_name": "Papyrusmuseum der Österreichischen Nationalbibliothek",
+      "address": "Neue Burg Heldenplatz Untergeschoß, Heldenplatz, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-weltmuseum-wien": {
+      "week": [
+        "10:00-18:00",
+        null,
+        "10:00-21:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00"
+      ],
+      "human": "Tue 10:00-21:00 · Wed 10:00-18:00 · Thu 10:00-18:00 · Fri 10:00-18:00 · Sat 10:00-18:00 · Sun 10:00-18:00 · Mon Closed",
+      "google_name": "Weltmuseum Wien",
+      "address": "Heldenplatz, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-albertina": {
+      "week": [
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-21:00",
+        "10:00-18:00",
+        "10:00-21:00",
+        "10:00-18:00"
+      ],
+      "human": "Tue 10:00-18:00 · Wed 10:00-21:00 · Thu 10:00-18:00 · Fri 10:00-21:00 · Sat 10:00-18:00 · Sun 10:00-18:00 · Mon 10:00-18:00",
+      "google_name": null,
+      "address": "Albertinapl. 1, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-kunsthistorisches-museum-wien": {
+      "week": [
+        "10:00-18:00",
+        null,
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-21:00",
+        "10:00-18:00",
+        "10:00-18:00"
+      ],
+      "human": "Tue 10:00-18:00 · Wed 10:00-18:00 · Thu 10:00-21:00 · Fri 10:00-18:00 · Sat 10:00-18:00 · Sun 10:00-18:00 · Mon Closed",
+      "google_name": "Kunsthistorisches Museum Wien",
+      "address": "Maria-Theresien-Platz, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-mumok-museum-moderner-kunst-stiftung-l": {
+      "week": [
+        "10:00-18:00",
+        null,
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00"
+      ],
+      "human": "Tue 10:00-18:00 · Wed 10:00-18:00 · Thu 10:00-18:00 · Fri 10:00-18:00 · Sat 10:00-18:00 · Sun 10:00-18:00 · Mon Closed",
+      "google_name": "mumok - Museum moderner Kunst Stiftung Ludwig Wien",
+      "address": "Museumsplatz 1, 1070 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-architekturzentrum-wien": {
+      "week": [
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-20:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00"
+      ],
+      "human": "Tue 10:00-18:00 · Wed 10:00-20:00 · Thu 10:00-18:00 · Fri 10:00-18:00 · Sat 10:00-18:00 · Sun 10:00-18:00 · Mon 10:00-18:00",
+      "google_name": "Architekturzentrum Wien",
+      "address": "Museumsplatz 1, 1070 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-kunsthalle-wien-museumsquartier": {
+      "week": [
+        "10:00-18:00",
+        null,
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-20:00",
+        "10:00-18:00",
+        "10:00-18:00"
+      ],
+      "human": "Tue 10:00-18:00 · Wed 10:00-18:00 · Thu 10:00-20:00 · Fri 10:00-18:00 · Sat 10:00-18:00 · Sun 10:00-18:00 · Mon Closed",
+      "google_name": "Kunsthalle Wien Museumsquartier",
+      "address": "Museumsplatz 1, 1070 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-imperial-carriage-museum-vienna": {
+      "week": [
+        "09:00-17:00",
+        "09:00-17:00",
+        "09:00-17:00",
+        "09:00-17:00",
+        "09:00-17:00",
+        "09:00-17:00",
+        "09:00-17:00"
+      ],
+      "human": "Tue 09:00-17:00 · Wed 09:00-17:00 · Thu 09:00-17:00 · Fri 09:00-17:00 · Sat 09:00-17:00 · Sun 09:00-17:00 · Mon 09:00-17:00",
+      "google_name": "Kaiserliche Wagenburg",
+      "address": "Wagenburg Museum of Carriages at Schönbrunn Palace, 1130, Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-kunst-haus-wien-museum-hundertwasser": {
+      "week": [
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00"
+      ],
+      "human": "Tue 10:00-18:00 · Wed 10:00-18:00 · Thu 10:00-18:00 · Fri 10:00-18:00 · Sat 10:00-18:00 · Sun 10:00-18:00 · Mon 10:00-18:00",
+      "google_name": "Kunst Haus Wien - Museum Hundertwasser",
+      "address": "Untere Weißgerberstraße 13, 1030 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-globe-museum-of-the-austrian-national-": {
+      "week": [
+        "10:00-18:00",
+        null,
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-21:00",
+        "10:00-18:00",
+        "10:00-18:00"
+      ],
+      "human": "Tue 10:00-18:00 · Wed 10:00-18:00 · Thu 10:00-21:00 · Fri 10:00-18:00 · Sat 10:00-18:00 · Sun 10:00-18:00 · Mon Closed",
+      "google_name": "Globenmuseum der Österreichischen Nationalbibliothek",
+      "address": "Palais Mollard, Herrengasse 9, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-heldenplatz": {
+      "week": [
+        "00:00-24:00",
+        "00:00-24:00",
+        "00:00-24:00",
+        "00:00-24:00",
+        "00:00-24:00",
+        "00:00-24:00",
+        "00:00-24:00"
+      ],
+      "human": "Tue open 24h · Wed open 24h · Thu open 24h · Fri open 24h · Sat open 24h · Sun open 24h · Mon open 24h",
+      "google_name": "Heldenplatz",
+      "address": "Heldenplatz 21/4, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-danube-tower": {
+      "week": [
+        "10:00-22:00",
+        "10:00-22:00",
+        "10:00-22:00",
+        "10:00-22:00",
+        "10:00-22:00",
+        "10:00-22:00",
+        "10:00-22:00"
+      ],
+      "human": "Tue 10:00-22:00 · Wed 10:00-22:00 · Thu 10:00-22:00 · Fri 10:00-22:00 · Sat 10:00-22:00 · Sun 10:00-22:00 · Mon 10:00-22:00",
+      "google_name": "Donauturm",
+      "address": "Donauturmplatz 1, 1220 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-caf-im-kunsthistorischen-museum-wien": {
+      "week": [
+        "10:00-17:30",
+        "10:00-17:30",
+        "10:00-17:30",
+        "10:00-17:30",
+        "10:00-22:00",
+        "10:00-17:30",
+        "10:00-17:30"
+      ],
+      "human": "Tue 10:00-17:30 · Wed 10:00-17:30 · Thu 10:00-14:30, 18:00-22:00 · Fri 10:00-17:30 · Sat 10:00-17:30 · Sun 10:00-17:30 · Mon 10:00-17:30",
+      "google_name": "Café im Kunsthistorischen Museum Wien",
+      "address": "Maria-Theresien-Platz 1, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-justizpalast": {
+      "week": [
+        null,
+        "07:30-15:30",
+        "07:30-15:30",
+        "07:30-15:30",
+        "07:30-15:30",
+        "07:30-15:30",
+        null
+      ],
+      "human": "Tue 07:30-15:30 · Wed 07:30-15:30 · Thu 07:30-15:30 · Fri 07:30-15:30 · Sat Closed · Sun Closed · Mon 07:30-15:30",
+      "google_name": "Justizpalast",
+      "address": "Schmerlingpl. 10-11, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-albertina-terrace": {
+      "week": [
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-21:00",
+        "10:00-18:00",
+        "10:00-21:00",
+        "10:00-18:00"
+      ],
+      "human": "Tue 10:00-18:00 · Wed 10:00-21:00 · Thu 10:00-18:00 · Fri 10:00-21:00 · Sat 10:00-18:00 · Sun 10:00-18:00 · Mon 10:00-18:00",
+      "google_name": null,
+      "address": "Albertinapl. 1, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-stephansdom-nordturm": {
+      "week": [
+        "09:00-20:30",
+        "09:00-20:30",
+        "09:00-20:30",
+        "09:00-20:30",
+        "09:00-20:30",
+        "09:00-20:30",
+        "09:00-20:30"
+      ],
+      "human": "Tue 09:00-20:30 · Wed 09:00-20:30 · Thu 09:00-20:30 · Fri 09:00-20:30 · Sat 09:00-20:30 · Sun 09:00-20:30 · Mon 09:00-20:30",
+      "google_name": "Stephansdom Nordturm",
+      "address": "Stephansplatz 8, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-mq-libelle": {
+      "week": [
+        "10:00-22:00",
+        "10:00-22:00",
+        "10:00-22:00",
+        "10:00-22:00",
+        "10:00-22:00",
+        "10:00-22:00",
+        "10:00-22:00"
+      ],
+      "human": "Tue 10:00-22:00 · Wed 10:00-22:00 · Thu 10:00-22:00 · Fri 10:00-22:00 · Sat 10:00-22:00 · Sun 10:00-22:00 · Mon 10:00-22:00",
+      "google_name": "MQ Libelle",
+      "address": "Museumsplatz 1/5, 1070 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-ikea-westbahnhof-roof-terrace": {
+      "week": [
+        null,
+        "09:30-20:00",
+        "09:30-20:00",
+        "09:30-20:00",
+        "09:30-22:00",
+        "09:30-22:00",
+        "09:30-22:00"
+      ],
+      "human": "Tue 09:30-20:00 · Wed 09:30-20:00 · Thu 09:30-22:00 · Fri 09:30-22:00 · Sat 09:30-22:00 · Sun Closed · Mon 09:30-20:00",
+      "google_name": "Rooftop IKEA Wien Westbahnhof",
+      "address": "Europaplatz 1, 1150 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-gloriette-sch-nbrunn": {
+      "week": [
+        "09:30-17:30",
+        "09:30-17:30",
+        "09:30-17:30",
+        "09:30-17:30",
+        "09:30-17:30",
+        "09:30-17:30",
+        "09:30-17:30"
+      ],
+      "human": "Tue 09:30-17:30 · Wed 09:30-17:30 · Thu 09:30-17:30 · Fri 09:30-17:30 · Sat 09:30-17:30 · Sun 09:30-17:30 · Mon 09:30-17:30",
+      "google_name": null,
+      "address": "Gloriettestraße, 1130 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-burggarten": {
+      "week": [
+        "06:00-22:00",
+        "06:00-22:00",
+        "06:00-22:00",
+        "06:00-22:00",
+        "06:00-22:00",
+        "06:00-22:00",
+        "06:00-22:00"
+      ],
+      "human": "Tue 06:00-22:00 · Wed 06:00-22:00 · Thu 06:00-22:00 · Fri 06:00-22:00 · Sat 06:00-22:00 · Sun 06:00-22:00 · Mon 06:00-22:00",
+      "google_name": "Burggarten",
+      "address": "Josefsplatz 1, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-volksgarten": {
+      "week": [
+        "06:00-22:00",
+        "06:00-22:00",
+        "06:00-22:00",
+        "06:00-22:00",
+        "06:00-22:00",
+        "06:00-22:00",
+        "06:00-22:00"
+      ],
+      "human": "Tue 06:00-22:00 · Wed 06:00-22:00 · Thu 06:00-22:00 · Fri 06:00-22:00 · Sat 06:00-22:00 · Sun 06:00-22:00 · Mon 06:00-22:00",
+      "google_name": "Volksgarten",
+      "address": "1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-stadtpark": {
+      "week": [
+        "00:00-24:00",
+        "00:00-24:00",
+        "00:00-24:00",
+        "00:00-24:00",
+        "00:00-24:00",
+        "00:00-24:00",
+        "00:00-24:00"
+      ],
+      "human": "Tue open 24h · Wed open 24h · Thu open 24h · Fri open 24h · Sat open 24h · Sun open 24h · Mon open 24h",
+      "google_name": "Stadtpark",
+      "address": "Parkring 1, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-setagayapark": {
+      "week": [
+        "07:00-20:00",
+        "07:00-20:00",
+        "07:00-20:00",
+        "07:00-20:00",
+        "07:00-20:00",
+        "07:00-20:00",
+        "07:00-20:00"
+      ],
+      "human": "Tue 07:00-20:00 · Wed 07:00-20:00 · Thu 07:00-20:00 · Fri 07:00-20:00 · Sat 07:00-20:00 · Sun 07:00-20:00 · Mon 07:00-20:00",
+      "google_name": "Setagayapark",
+      "address": "Gallmeyergasse 4, 1190 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-caf-sperl": {
+      "week": [
+        "10:00-20:00",
+        "07:00-22:00",
+        "07:00-22:00",
+        "07:00-22:00",
+        "07:00-22:00",
+        "07:00-22:00",
+        "07:00-22:00"
+      ],
+      "human": "Tue 07:00-22:00 · Wed 07:00-22:00 · Thu 07:00-22:00 · Fri 07:00-22:00 · Sat 07:00-22:00 · Sun 10:00-20:00 · Mon 07:00-22:00",
+      "google_name": "Cafe Sperl",
+      "address": "Gumpendorfer Str. 11, 1060 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-caf-landtmann": {
+      "week": [
+        "07:30-22:00",
+        "07:30-24:00",
+        "07:30-24:00",
+        "07:30-24:00",
+        "07:30-24:00",
+        "07:30-24:00",
+        "07:30-24:00"
+      ],
+      "human": "Tue 07:30-24:00 · Wed 07:30-24:00 · Thu 07:30-24:00 · Fri 07:30-24:00 · Sat 07:30-24:00 · Sun 07:30-22:00 · Mon 07:30-24:00",
+      "google_name": "Café Landtmann",
+      "address": "Universitätsring 4, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-caf-sacher-wien": {
+      "week": [
+        "07:00-23:00",
+        "07:00-23:00",
+        "07:00-23:00",
+        "07:00-23:00",
+        "07:00-23:00",
+        "07:00-23:00",
+        "07:00-23:00"
+      ],
+      "human": "Tue 07:00-23:00 · Wed 07:00-23:00 · Thu 07:00-23:00 · Fri 07:00-23:00 · Sat 07:00-23:00 · Sun 07:00-23:00 · Mon 07:00-23:00",
+      "google_name": "Café Sacher Wien",
+      "address": "Philharmoniker Str. 4, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-caf-pr-ckel": {
+      "week": [
+        "08:30-22:00",
+        "08:30-22:00",
+        "08:30-22:00",
+        "08:30-22:00",
+        "08:30-22:00",
+        "08:30-22:00",
+        "08:30-22:00"
+      ],
+      "human": "Tue 08:30-22:00 · Wed 08:30-22:00 · Thu 08:30-22:00 · Fri 08:30-22:00 · Sat 08:30-22:00 · Sun 08:30-22:00 · Mon 08:30-22:00",
+      "google_name": "Café Prückel",
+      "address": "Stubenring 24, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-terrassencaf-im-hundertwasserhaus": {
+      "week": [
+        "09:00-17:00",
+        "09:00-17:00",
+        "09:00-17:00",
+        "09:00-17:00",
+        "09:00-17:00",
+        "09:00-17:00",
+        "09:00-17:00"
+      ],
+      "human": "Tue 09:00-17:00 · Wed 09:00-17:00 · Thu 09:00-17:00 · Fri 09:00-17:00 · Sat 09:00-17:00 · Sun 09:00-17:00 · Mon 09:00-17:00",
+      "google_name": "Terrassencafé im Hundertwasserhaus",
+      "address": "Kegelgasse 34-38, 1030 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-gasthaus-kopp": {
+      "week": [
+        "10:00-23:00",
+        null,
+        null,
+        "10:00-23:00",
+        "10:00-23:00",
+        "10:00-23:00",
+        "10:00-23:00"
+      ],
+      "human": "Tue Closed · Wed 10:00-23:00 · Thu 10:00-23:00 · Fri 10:00-23:00 · Sat 10:00-23:00 · Sun 10:00-23:00 · Mon Closed",
+      "google_name": "Gasthaus Kopp",
+      "address": "Engerthstr. 104, 1200 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-bitzinger-sausage-stand": {
+      "week": [
+        "08:00-04:00",
+        "08:00-04:00",
+        "08:00-04:00",
+        "08:00-04:00",
+        "08:00-04:00",
+        "08:00-04:00",
+        "08:00-04:00"
+      ],
+      "human": "Tue 08:00-04:00 · Wed 08:00-04:00 · Thu 08:00-04:00 · Fri 08:00-04:00 · Sat 08:00-04:00 · Sun 08:00-04:00 · Mon 08:00-04:00",
+      "google_name": "Bitzinger",
+      "address": "Albertinapl. 1, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-zw-lf-apostelkeller": {
+      "week": [
+        "11:00-24:00",
+        "11:00-24:00",
+        "11:00-24:00",
+        "11:00-24:00",
+        "11:00-24:00",
+        "11:00-24:00",
+        "11:00-24:00"
+      ],
+      "human": "Tue 11:00-24:00 · Wed 11:00-24:00 · Thu 11:00-24:00 · Fri 11:00-24:00 · Sat 11:00-24:00 · Sun 11:00-24:00 · Mon 11:00-24:00",
+      "google_name": "Zwölf Apostelkeller",
+      "address": "Sonnenfelsgasse 3, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-gasthaus-woracziczky": {
+      "week": [
+        null,
+        "11:30-23:00",
+        "11:30-23:00",
+        "11:30-23:00",
+        "11:30-23:00",
+        "11:30-23:00",
+        null
+      ],
+      "human": "Tue 11:30-14:00, 18:00-23:00 · Wed 11:30-14:00, 18:00-23:00 · Thu 11:30-14:00, 18:00-23:00 · Fri 11:30-14:00, 18:00-23:00 · Sat Closed · Sun Closed · Mon 11:30-14:00, 18:00-23:00",
+      "google_name": "Gasthaus Woracziczky",
+      "address": "Spengergasse 52, 1050 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-atmosphere-rooftop-bar": {
+      "week": [
+        "17:00-23:30",
+        "17:00-23:30",
+        "17:00-23:30",
+        "17:00-23:30",
+        "17:00-23:30",
+        "17:00-01:00",
+        "17:00-01:00"
+      ],
+      "human": "Tue 17:00-23:30 · Wed 17:00-23:30 · Thu 17:00-23:30 · Fri 17:00-01:00 · Sat 17:00-01:00 · Sun 17:00-23:30 · Mon 17:00-23:30",
+      "google_name": "Atmosphere Rooftop Bar",
+      "address": "Schubertring 5/7, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-lam-e-rooftop": {
+      "week": [
+        "12:00-01:00",
+        "12:00-01:00",
+        "12:00-01:00",
+        "12:00-01:00",
+        "12:00-02:00",
+        "12:00-02:00",
+        "12:00-02:00"
+      ],
+      "human": "Tue 12:00-01:00 · Wed 12:00-01:00 · Thu 12:00-02:00 · Fri 12:00-02:00 · Sat 12:00-02:00 · Sun 12:00-01:00 · Mon 12:00-01:00",
+      "google_name": "Lamée Rooftop",
+      "address": "Lichtensteg 2, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-via-toledo-enopizzeria": {
+      "week": [
+        "12:00-22:30",
+        "12:00-22:30",
+        "12:00-22:30",
+        "12:00-22:30",
+        "12:00-22:30",
+        "12:00-22:30",
+        "12:00-22:30"
+      ],
+      "human": "Tue 12:00-22:30 · Wed 12:00-22:30 · Thu 12:00-22:30 · Fri 12:00-22:30 · Sat 12:00-22:30 · Sun 12:00-22:30 · Mon 12:00-22:30",
+      "google_name": "Via Toledo Enopizzeria",
+      "address": "Laudongasse 13, 1080 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-sterreichische-werkst-tten": {
+      "week": [
+        null,
+        "10:00-19:00",
+        "10:00-19:00",
+        "10:00-19:00",
+        "10:00-19:00",
+        "10:00-19:00",
+        "10:00-18:00"
+      ],
+      "human": "Tue 10:00-19:00 · Wed 10:00-19:00 · Thu 10:00-19:00 · Fri 10:00-19:00 · Sat 10:00-18:00 · Sun Closed · Mon 10:00-19:00",
+      "google_name": "Österreichische Werkstätten",
+      "address": "Kärntner Str. 6, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-the-world-to-go-vienna": {
+      "week": [
+        "10:00-16:00",
+        "10:00-18:30",
+        "10:00-18:30",
+        "10:00-18:30",
+        "10:00-18:30",
+        "10:00-18:30",
+        "10:00-18:30"
+      ],
+      "human": "Tue 10:00-18:30 · Wed 10:00-18:30 · Thu 10:00-18:30 · Fri 10:00-18:30 · Sat 10:00-18:30 · Sun 10:00-16:00 · Mon 10:00-18:30",
+      "google_name": "THE WORLD TO GO VIENNA",
+      "address": "Josefsplatz 6/1, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "map-shakespeare-company": {
+      "week": [
+        null,
+        "09:00-20:00",
+        "09:00-20:00",
+        "09:00-20:00",
+        "09:00-20:00",
+        "09:00-20:00",
+        "09:00-20:00"
+      ],
+      "human": "Tue 09:00-20:00 · Wed 09:00-20:00 · Thu 09:00-20:00 · Fri 09:00-20:00 · Sat 09:00-20:00 · Sun Closed · Mon 09:00-20:00",
+      "google_name": "Shakespeare & Company",
+      "address": "Sterngasse 2, 1010 Wien, Österreich",
       "closed_permanently": false,
       "checked": "2026-09-15"
     }
