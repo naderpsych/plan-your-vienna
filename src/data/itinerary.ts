@@ -45,12 +45,34 @@ export const KIND_LABEL: Record<Kind, string> = {
   transport: "Travel",
 };
 
+/** Fallback visit length when a place has no figure of its own. */
+export const DEFAULT_MINUTES: Record<Kind, number> = {
+  hotel: 60,
+  food: 90,
+  cafe: 45,
+  market: 60,
+  museum: 120,
+  sight: 45,
+  view: 20,
+  park: 90,
+  walk: 45,
+  shop: 30,
+  concert: 120,
+  transport: 30,
+};
+
+export function visitMinutes(stop: Stop): number {
+  return stop.minutes ?? (stop.kind ? DEFAULT_MINUTES[stop.kind] : 60);
+}
+
 /** Anything you eat or drink at — these cards get the warm colour. */
 export const FOOD_KINDS: Kind[] = ["food", "cafe", "market"];
 
 export type Stop = {
   id: string;
   kind?: Kind;
+  /** Roughly how long the visit takes, in minutes. */
+  minutes?: number;
   time?: string;
   title: string;
   about?: string;
@@ -132,6 +154,7 @@ export const days: Day[] = [
     stops: [
       {
         id: "sat-hotel",
+        minutes: 60,
         kind: "hotel",
         time: "18:00",
         title: HOTEL.name,
@@ -144,6 +167,7 @@ export const days: Day[] = [
       },
       {
         id: "sat-plachutta",
+        minutes: 120,
         kind: "food",
         time: "19:30",
         title: "Plachutta Wollzeile 38",
@@ -162,6 +186,7 @@ export const days: Day[] = [
     alternatives: [
       {
         id: "alt-sat-hacken",
+        minutes: 120,
         kind: "food",
         title: "Gasthaus zu den 3 Hacken",
         about:
@@ -173,6 +198,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-sat-meissl",
+        minutes: 120,
         kind: "food",
         title: "Meissl & Schadn",
         about:
@@ -184,6 +210,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-sat-skopik",
+        minutes: 120,
         kind: "food",
         title: "Skopik & Lohn",
         about:
@@ -207,6 +234,7 @@ export const days: Day[] = [
       breakfast("sun"),
       {
         id: "sun-belvedere",
+        minutes: 120,
         kind: "museum",
         time: "10:15",
         title: "Belvedere",
@@ -221,6 +249,7 @@ export const days: Day[] = [
       },
       {
         id: "sun-beethovengang",
+        minutes: 45,
         kind: "walk",
         time: "12:30",
         title: "Beethovengang",
@@ -234,6 +263,7 @@ export const days: Day[] = [
       },
       {
         id: "sun-palmenhaus",
+        minutes: 90,
         kind: "food",
         time: "14:30",
         title: "Palmenhaus",
@@ -259,6 +289,7 @@ export const days: Day[] = [
       },
       {
         id: "sun-konzerthaus",
+        minutes: 120,
         kind: "concert",
         time: "19:00",
         title: "50 Pianos · Konzerthaus",
@@ -273,6 +304,7 @@ export const days: Day[] = [
       },
       {
         id: "sun-gerstner",
+        minutes: 45,
         kind: "cafe",
         time: "21:30",
         title: "Gerstner",
@@ -289,6 +321,7 @@ export const days: Day[] = [
     alternatives: [
       {
         id: "alt-sun-kahlenberg",
+        minutes: 90,
         kind: "view",
         title: "Kahlenberg",
         about:
@@ -301,6 +334,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-sun-stadtpark",
+        minutes: 40,
         kind: "park",
         title: "Stadtpark",
         about:
@@ -312,6 +346,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-sun-leopold",
+        minutes: 120,
         kind: "museum",
         title: "Leopold Museum / Albertina",
         about:
@@ -336,6 +371,7 @@ export const days: Day[] = [
       breakfast("mon"),
       {
         id: "mon-lainzer",
+        minutes: 150,
         kind: "park",
         time: "10:15",
         title: "Lainzer Tiergarten",
@@ -351,6 +387,7 @@ export const days: Day[] = [
       },
       {
         id: "mon-brunnenmarkt",
+        minutes: 75,
         kind: "market",
         time: "14:30",
         title: "Brunnenmarkt",
@@ -368,6 +405,7 @@ export const days: Day[] = [
       },
       {
         id: "mon-prunksaal",
+        minutes: 45,
         kind: "sight",
         time: "16:00",
         title: "Prunksaal",
@@ -383,6 +421,7 @@ export const days: Day[] = [
       },
       {
         id: "mon-central",
+        minutes: 45,
         kind: "cafe",
         time: "17:00",
         title: "Café Central",
@@ -399,6 +438,7 @@ export const days: Day[] = [
       },
       {
         id: "mon-zuckerl",
+        minutes: 15,
         kind: "shop",
         time: "17:45",
         title: "Zuckerlwerkstatt",
@@ -412,6 +452,7 @@ export const days: Day[] = [
       },
       {
         id: "mon-figlmuller",
+        minutes: 90,
         kind: "food",
         time: "20:00",
         title: "Figlmüller Wollzeile",
@@ -429,6 +470,7 @@ export const days: Day[] = [
     alternatives: [
       {
         id: "alt-mon-schatzkammer",
+        minutes: 60,
         kind: "museum",
         title: "Schatzkammer",
         about:
@@ -441,6 +483,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-mon-landtmann",
+        minutes: 60,
         kind: "cafe",
         title: "Café Landtmann",
         about: "The Ring café beside the Burgtheater that was genuinely Freud's regular.",
@@ -451,6 +494,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-mon-poeschl",
+        minutes: 90,
         kind: "food",
         title: "Meissl & Schadn / Pöschl",
         about:
@@ -462,6 +506,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-mon-hundertwasser",
+        minutes: 60,
         kind: "sight",
         title: "Hundertwasserhaus + Kunst Haus Wien",
         about:
@@ -484,6 +529,7 @@ export const days: Day[] = [
       breakfast("tue"),
       {
         id: "tue-khm",
+        minutes: 120,
         kind: "museum",
         time: "10:15",
         title: "Kunsthistorisches Museum",
@@ -502,6 +548,7 @@ export const days: Day[] = [
       },
       {
         id: "tue-ankeruhr",
+        minutes: 15,
         kind: "sight",
         time: "12:00",
         title: "Anker Clock",
@@ -515,6 +562,7 @@ export const days: Day[] = [
       },
       {
         id: "tue-tea",
+        minutes: 60,
         kind: "shop",
         time: "12:30",
         title: "Schönbichler → Haas & Haas",
@@ -528,6 +576,7 @@ export const days: Day[] = [
       },
       {
         id: "tue-graben",
+        minutes: 60,
         kind: "shop",
         time: "14:00",
         title: "Altmann & Kühne · Julius Meinl · Lobmeyr",
@@ -542,6 +591,7 @@ export const days: Day[] = [
       },
       {
         id: "tue-peterskirche",
+        minutes: 30,
         kind: "concert",
         time: "15:00",
         title: "Free organ concert · Peterskirche",
@@ -556,6 +606,7 @@ export const days: Day[] = [
       },
       {
         id: "tue-gegenbauer",
+        minutes: 30,
         kind: "shop",
         time: "16:30",
         title: "Gegenbauer",
@@ -570,6 +621,7 @@ export const days: Day[] = [
       },
       {
         id: "tue-vollpension",
+        minutes: 60,
         kind: "cafe",
         time: "17:15",
         title: "Vollpension + 3 galleries",
@@ -583,6 +635,7 @@ export const days: Day[] = [
       },
       {
         id: "tue-schnitzelwirt",
+        minutes: 90,
         kind: "food",
         time: "20:00",
         title: "Schnitzelwirt",
@@ -598,6 +651,7 @@ export const days: Day[] = [
     alternatives: [
       {
         id: "alt-tue-demel",
+        minutes: 45,
         kind: "cafe",
         title: "Demel",
         about: "Imperial court bakery on the Kohlmarkt, where the bakers work behind glass.",
@@ -608,6 +662,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-tue-hawelka",
+        minutes: 45,
         kind: "cafe",
         title: "Café Hawelka",
         about: "A dim, unreformed coffee house from 1939 hung with artists' posters.",
@@ -618,6 +673,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-tue-secession",
+        minutes: 40,
         kind: "museum",
         title: "Secession",
         about:
@@ -630,6 +686,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-tue-supersense",
+        minutes: 60,
         kind: "shop",
         title: "Supersense",
         about:
@@ -641,6 +698,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-tue-sperl",
+        minutes: 45,
         kind: "cafe",
         title: "Café Sperl",
         about: "An 1880 café with its original billiard tables, five minutes from the hotel.",
@@ -663,6 +721,7 @@ export const days: Day[] = [
       breakfast("wed"),
       {
         id: "wed-josephinum",
+        minutes: 60,
         kind: "museum",
         time: "10:15",
         title: "Josephinum",
@@ -677,6 +736,7 @@ export const days: Day[] = [
       },
       {
         id: "wed-deewan",
+        minutes: 60,
         kind: "food",
         time: "12:30",
         title: "Der Wiener Deewan",
@@ -690,6 +750,7 @@ export const days: Day[] = [
       },
       {
         id: "wed-donaukanal",
+        minutes: 45,
         kind: "walk",
         time: "14:30",
         title: "Donaukanal",
@@ -702,6 +763,7 @@ export const days: Day[] = [
       },
       {
         id: "wed-rest",
+        minutes: 60,
         kind: "hotel",
         time: "15:30",
         title: "Back to the hotel",
@@ -713,6 +775,7 @@ export const days: Day[] = [
       },
       {
         id: "wed-swing",
+        minutes: 45,
         kind: "food",
         time: "17:00",
         title: "Swing Kitchen",
@@ -725,6 +788,7 @@ export const days: Day[] = [
       },
       {
         id: "wed-oper",
+        minutes: 195,
         kind: "concert",
         time: "19:00",
         title: "Wiener Staatsoper",
@@ -741,6 +805,7 @@ export const days: Day[] = [
     alternatives: [
       {
         id: "alt-wed-tian",
+        minutes: 150,
         kind: "food",
         title: "TIAN",
         about: "Michelin-starred vegetarian tasting menus in the first district.",
@@ -753,6 +818,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-wed-harvest",
+        minutes: 75,
         kind: "food",
         title: "Harvest",
         about: "A long-running vegan bistro in Leopoldstadt, small and unfussy.",
@@ -763,6 +829,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-wed-hundertwasser",
+        minutes: 30,
         kind: "sight",
         title: "Hundertwasserhaus",
         about: "The wavy council block with trees in the windows, 15 minutes from the canal walk.",
@@ -783,6 +850,7 @@ export const days: Day[] = [
     stops: [
       {
         id: "thu-hotel",
+        minutes: 60,
         kind: "hotel",
         time: "08:00",
         title: HOTEL.name,
@@ -796,6 +864,7 @@ export const days: Day[] = [
       },
       {
         id: "thu-depart",
+        minutes: 30,
         kind: "transport",
         time: "09:00",
         title: "Leave for the airport",

@@ -10,8 +10,9 @@ import {
 // `days` is the six planned days plus today, so every day control gets it free.
 import { allDays as days, todayDay } from "@/lib/days";
 import { buildCatalogue, type CatalogueItem } from "@/lib/catalogue";
+import { formatDistance, formatMinutes, legBetween } from "@/lib/geo";
 import { warehouse } from "@/data/warehouse";
-import { KIND_LABEL } from "@/data/itinerary";
+import { KIND_LABEL, visitMinutes } from "@/data/itinerary";
 import {
   checkFit,
   googleUrl,
@@ -79,6 +80,22 @@ export default function App() {
 
   function restoreAll() {
     update({ ...plan, removed: [] });
+  }
+
+  /** Same slot, different place: the old one steps out, the new one takes its time. */
+  function swapStop(dayId: string, out: Stop, into: Stop) {
+    const time = out.time;
+    update({
+      ...plan,
+      removed: plan.removed.includes(out.id) ? plan.removed : [...plan.removed, out.id],
+      added: {
+        ...plan.added,
+        [dayId]: [
+          ...(plan.added[dayId] ?? []).filter((s) => s.id !== out.id),
+          { ...into, id: `${into.id}--${dayId}`, ...(time ? { time } : {}) },
+        ],
+      },
+    });
   }
 
   function addStop(dayId: string, stop: Stop) {
@@ -322,17 +339,46 @@ export default function App() {
             )}
 
             <ol className="relative space-y-3 border-l-2 border-dashed border-border pl-5">
-              {stops.map((s) => (
-                <li key={s.id} className="relative">
-                  <span className="absolute -left-[27px] top-5 size-3 rounded-full border-2 border-background bg-gold" />
-                  <StopCard
-                    stop={s}
-                    iso={day.iso}
-                    onShowMap={() => setView("map")}
-                    {...(s.fixed ? {} : { onRemove: () => removeStop(s.id) })}
-                  />
-                </li>
-              ))}
+              {stops.map((s, i) => {
+                const next = stops[i + 1];
+                const leg = next ? legBetween(s, next) : null;
+                const swaps = day.alternatives.filter(
+                  (alt) => alt.kind === s.kind && !plan.removed.includes(alt.id),
+                );
+                return (
+                  <li key={s.id} className="relative">
+                    <span className="absolute -left-[27px] top-5 size-3 rounded-full border-2 border-background bg-gold" />
+                    <StopCard
+                      stop={s}
+                      iso={day.iso}
+                      onShowMap={() => setView("map")}
+                      {...(s.fixed ? {} : { onRemove: () => removeStop(s.id) })}
+                      {...(s.fixed || swaps.length === 0
+                        ? {}
+                        : {
+                            swaps,
+                            onSwap: (into: Stop) => swapStop(day.id, s, into),
+                          })}
+                    />
+                    {leg && (
+                      <a
+                        href={leg.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-2 inline-flex items-center gap-2 pl-1 text-xs text-muted-foreground hover:text-primary"
+                      >
+                        <span aria-hidden>↓</span>
+                        <span>
+                          {formatDistance(leg.km)} ·{" "}
+                          {leg.mode === "walk"
+                            ? `${leg.minutes} min walk`
+                            : `~${leg.minutes} min by public transport`}
+                        </span>
+                      </a>
+                    )}
+                  </li>
+                );
+              })}
               <li className="relative">
                 <span className="absolute -left-[27px] top-5 size-3 rounded-full border-2 border-background bg-border" />
                 <AddPlacePanel
@@ -522,12 +568,17 @@ function StopCard({
   iso,
   onRemove,
   onShowMap,
+  swaps,
+  onSwap,
 }: {
   stop: Stop;
   iso: string;
   onRemove?: () => void;
   onShowMap: () => void;
+  swaps?: Stop[];
+  onSwap?: (into: Stop) => void;
 }) {
+  const [swapOpen, setSwapOpen] = useState(false);
   // Hotel anchors and travel blocks have no opening hours to argue with.
   const fit = stop.time && !stop.fixed ? checkFit(stop, iso, stop.time) : null;
 
@@ -548,17 +599,83 @@ function StopCard({
           </div>
           <KindLine stop={stop} iso={iso} />
         </div>
-        {onRemove && (
-          <button
-            onClick={onRemove}
-            aria-label={`Remove ${stop.title} from this day`}
-            title="Remove from this day"
-            className="shrink-0 rounded-lg px-2 py-1 text-sm text-muted-foreground hover:bg-card hover:text-destructive"
-          >
-            ✕
-          </button>
-        )}
+        <div className="flex shrink-0 items-center gap-1">
+          {swaps && swaps.length > 0 && onSwap && (
+            <button
+              onClick={() => setSwapOpen(!swapOpen)}
+              aria-label={`Swap ${stop.title} for something else`}
+              title="Swap for an alternative"
+              className="rounded-lg px-2 py-1 text-sm text-muted-foreground hover:bg-card hover:text-primary"
+            >
+              ⇄
+            </button>
+          )}
+          {onRemove && (
+            <button
+              onClick={onRemove}
+              aria-label={`Remove ${stop.title} from this day`}
+              title="Remove from this day"
+              className="rounded-lg px-2 py-1 text-sm text-muted-foreground hover:bg-card hover:text-destructive"
+            >
+              ✕
+            </button>
+          )}
+        </div>
       </div>
+
+      {swapOpen && swaps && onSwap && (
+        <div className="space-y-2 border-b border-border bg-secondary px-4 py-3">
+          <p className="text-xs text-muted-foreground">
+            Same slot, same category — {stop.time} on this day. Swapping keeps the time and
+            drops {stop.title}.
+          </p>
+          {swaps.map((alt) => {
+            const fit = checkFit(alt, iso, stop.time ?? "12:00");
+            const longer = visitMinutes(alt) - visitMinutes(stop);
+            return (
+              <div
+                key={alt.id}
+                className="flex items-start justify-between gap-3 rounded-xl border border-border bg-background px-3 py-2"
+              >
+                <div className="min-w-0">
+                  <p className="font-semibold" style={{ color: "var(--place-title)" }}>
+                    {alt.title}
+                  </p>
+                  {alt.about && (
+                    <p className="mt-0.5 text-xs text-muted-foreground">{alt.about}</p>
+                  )}
+                  <p
+                    className={`mt-1 text-xs font-semibold ${
+                      fit.level === "ok"
+                        ? "text-primary"
+                        : fit.level === "bad"
+                          ? "text-destructive"
+                          : "text-muted-foreground"
+                    }`}
+                  >
+                    {fit.level === "ok" ? "✅" : fit.level === "bad" ? "⛔" : "ℹ️"} {fit.message}
+                  </p>
+                  {longer >= 30 && (
+                    <p className="mt-0.5 text-xs text-muted-foreground">
+                      ⏳ About {formatMinutes(longer)} longer than {stop.title} — check what
+                      comes after.
+                    </p>
+                  )}
+                </div>
+                <button
+                  onClick={() => {
+                    onSwap(alt);
+                    setSwapOpen(false);
+                  }}
+                  className="shrink-0 rounded-lg border border-primary/30 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/5"
+                >
+                  Swap in
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      )}
 
       <div className="px-4 py-3">
       {stop.about && <p className="text-sm leading-relaxed">{stop.about}</p>}
@@ -655,6 +772,7 @@ function KindLine({ stop, iso }: { stop: Stop; iso?: string }) {
     <div className="mt-0.5 text-xs text-muted-foreground">
       <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
         {label && <span className="font-bold uppercase tracking-wide">{label}</span>}
+        {stop.minutes && <span>≈ {formatMinutes(stop.minutes)}</span>}
         {(today || week) && (
           <button
             onClick={() => setShow(!show)}
