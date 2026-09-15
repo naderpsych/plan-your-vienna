@@ -1,10 +1,13 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { days, bookings, foodList, wishlist, type Stop } from "@/data/itinerary";
 import { warehouse } from "@/data/warehouse";
+import { KIND_LABEL } from "@/data/itinerary";
 import {
   checkFit,
   googleUrl,
   hoursFor,
+  hoursToday,
+  isFood,
   loadPlan,
   newStopId,
   savePlan,
@@ -494,18 +497,18 @@ function StopCard({
     <article className="overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] transition-transform hover:-translate-y-0.5">
       <div
         className="flex items-start justify-between gap-3 border-b px-4 py-3"
-        style={{
-          background: "var(--card-head)",
-          borderColor: "var(--card-head-border)",
-        }}
+        style={headStyle(stop)}
       >
-        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          {stop.time && (
-            <span className="font-mono text-sm font-bold text-primary">{stop.time}</span>
-          )}
-          <h3 className="text-lg font-bold" style={{ color: "var(--place-title)" }}>
-            {stop.title} {stop.star && <span className="text-gold">⭐</span>}
-          </h3>
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            {stop.time && (
+              <span className="font-mono text-sm font-bold text-primary">{stop.time}</span>
+            )}
+            <h3 className="text-lg font-bold" style={{ color: "var(--place-title)" }}>
+              {stop.title} {stop.star && <span className="text-gold">⭐</span>}
+            </h3>
+          </div>
+          <KindLine stop={stop} iso={iso} />
         </div>
         {onRemove && (
           <button
@@ -579,6 +582,38 @@ function StopCard({
       </div>
       </div>
     </article>
+  );
+}
+
+/** A blue band, or a warm one when the place is somewhere you eat. */
+function headStyle(stop: Stop) {
+  return isFood(stop)
+    ? {
+        background: "var(--card-head-food)",
+        borderColor: "var(--card-head-food-border)",
+      }
+    : {
+        background: "var(--card-head)",
+        borderColor: "var(--card-head-border)",
+      };
+}
+
+/** What the place is, and — on a day card — when it is open on that date. */
+function KindLine({ stop, iso }: { stop: Stop; iso?: string }) {
+  const label = stop.kind ? KIND_LABEL[stop.kind] : null;
+  const today = iso ? hoursToday(stop, iso) : null;
+  if (!label && !today) return null;
+
+  return (
+    <p className="mt-0.5 text-xs text-muted-foreground">
+      {label && <span className="font-bold uppercase tracking-wide">{label}</span>}
+      {label && today && " · "}
+      {today && (
+        <span className={today === "Closed" ? "font-semibold text-destructive" : ""}>
+          {today === "Closed" ? "Closed today" : `Open today ${today}`}
+        </span>
+      )}
+    </p>
   );
 }
 
@@ -680,14 +715,14 @@ function PlaceRow({
     <div className="overflow-hidden rounded-xl border border-border bg-background">
       <div
         className="flex items-center justify-between gap-3 border-b px-3 py-2"
-        style={{
-          background: "var(--card-head)",
-          borderColor: "var(--card-head-border)",
-        }}
+        style={headStyle(item)}
       >
-        <h4 className="min-w-0 font-bold" style={{ color: "var(--place-title)" }}>
-          {item.title}
-        </h4>
+        <div className="min-w-0">
+          <h4 className="font-bold" style={{ color: "var(--place-title)" }}>
+            {item.title}
+          </h4>
+          <KindLine stop={item} />
+        </div>
         <div className="flex shrink-0 items-center gap-1">
           <button
             onClick={() => setOpen(!open)}

@@ -13,6 +13,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
     items: [
       {
         id: "map-hofburg",
+        kind: "sight",
         title: "Hofburg",
         about: "The Habsburg winter palace — a whole city block of courtyards, now holding the treasury, the Sisi rooms and the national library.",
         lat: 48.20566,
@@ -21,6 +22,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-imperial-treasury-vienna",
+        kind: "sight",
         title: "Imperial Treasury Vienna",
         about: "The Schatzkammer: the crown of the Holy Roman Empire, the Holy Lance and the Habsburg jewels.",
         lat: 48.20674,
@@ -29,6 +31,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-neue-burg-teil-der-wiener-hofburg",
+        kind: "sight",
         title: "Neue Burg - Teil der Wiener Hofburg",
         about: "The last wing of the Hofburg, holding the arms, historic instruments and Ephesos collections.",
         lat: 48.20548,
@@ -37,6 +40,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-prunksaal-austrian-national-library",
+        kind: "sight",
         title: "Prunksaal Austrian National Library",
         about: "The 1726 State Hall — 80 metres of dark wood, ceiling frescoes and giant Renaissance globes.",
         lat: 48.20626,
@@ -45,6 +49,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-st-stephen-s-cathedral",
+        kind: "sight",
         title: "St. Stephen's Cathedral",
         about: "The Gothic cathedral at the dead centre of the city, under its patterned tiled roof.",
         lat: 48.20841,
@@ -53,6 +58,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-vienna-state-opera",
+        kind: "sight",
         title: "Vienna State Opera",
         about: "The 1869 opera house, running a different production almost every night of the season.",
         lat: 48.20343,
@@ -61,6 +67,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-vienna-city-hall",
+        kind: "sight",
         title: "Vienna City Hall",
         about: "The neo-Gothic Rathaus on the Ring, with a square that nearly always has a festival on it.",
         lat: 48.21082,
@@ -69,6 +76,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-austrian-parliament",
+        kind: "sight",
         title: "Austrian Parliament",
         about: "The Greek-revival parliament behind the Athena fountain, reopened after a long rebuild.",
         lat: 48.20804,
@@ -77,6 +85,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-sch-nbrunn-palace",
+        kind: "sight",
         title: "Schönbrunn Palace",
         about: "The Habsburg summer palace and its gardens, out at Hietzing.",
         lat: 48.18581,
@@ -85,6 +94,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-belvedere-palace",
+        kind: "sight",
         title: "Belvedere Palace",
         about: "Two baroque palaces facing each other across a formal garden.",
         lat: 48.19148,
@@ -93,6 +103,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-prater",
+        kind: "sight",
         title: "Prater",
         about: "The old imperial hunting park, now a free funfair around the 1897 ferris wheel.",
         lat: 48.21546,
@@ -101,6 +112,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-secession",
+        kind: "sight",
         title: "Secession",
         about: "The golden-domed 1898 art nouveau hall holding Klimt's Beethoven Frieze.",
         lat: 48.20051,
@@ -109,6 +121,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-wotrubakirche-katholische-kirche-zur-h",
+        kind: "sight",
         title: "Wotrubakirche - Katholische Kirche zur Heiligsten Dreifaltigkeit",
         about: "A brutalist church built from 152 stacked concrete blocks, on the southern edge of the city.",
         lat: 48.14764,
@@ -117,6 +130,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-karlskirche",
+        kind: "sight",
         title: "Karlskirche",
         about: "The baroque church with two Trajan-style columns; a lift takes you up to the dome frescoes.",
         lat: 48.19839,
@@ -125,6 +139,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-votive-church",
+        kind: "sight",
         title: "Votive Church",
         about: "A neo-Gothic twin-spired church on the Ring, built in thanks for a failed assassination.",
         lat: 48.2154,
@@ -133,6 +148,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-st-francis-of-assisi-church",
+        kind: "sight",
         title: "St. Francis of Assisi Church",
         about: "The basilica by the Danube, built for Franz Joseph's golden jubilee.",
         lat: 48.22449,
@@ -141,6 +157,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-otto-wagner-kirche-am-steinhof",
+        kind: "sight",
         title: "Otto Wagner Kirche am Steinhof",
         about: "Wagner's white art nouveau church on a hill in the old psychiatric hospital grounds.",
         lat: 48.21062,
@@ -154,6 +171,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
     items: [
       {
         id: "map-sisi-museum",
+        kind: "museum",
         title: "Sisi Museum",
         about: "Empress Elisabeth's rooms and possessions, inside the Hofburg.",
         lat: 48.2077,
@@ -162,6 +180,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-ephesos-museum-der-antikensammlung-des",
+        kind: "museum",
         title: "Ephesos-Museum der Antikensammlung des Kunsthistorischen Museums Wien",
         about: "Roman finds from the Austrian excavation at Ephesus, in the Neue Burg.",
         lat: 48.20538,
@@ -170,6 +189,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-papyrus-collection-and-papyrus-museum-",
+        kind: "museum",
         title: "Papyrus Collection and Papyrus Museum Vienna",
         about: "Ancient Egyptian papyri from the national library's collection.",
         lat: 48.20553,
@@ -178,6 +198,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-weltmuseum-wien",
+        kind: "museum",
         title: "Weltmuseum Wien",
         about: "The ethnographic museum in the Hofburg, home of the Aztec feather headdress.",
         lat: 48.20512,
@@ -186,6 +207,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-albertina",
+        kind: "museum",
         title: "Albertina",
         about: "Habsburg print rooms above the imperial state rooms — Dürer, Monet, and the big touring shows.",
         lat: 48.2047,
@@ -194,6 +216,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-kunsthistorisches-museum-wien",
+        kind: "museum",
         title: "Kunsthistorisches Museum Wien",
         about: "The imperial art collection: the Bruegel room, Vermeer, Caravaggio.",
         lat: 48.2038,
@@ -202,6 +225,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-leopold-museum",
+        kind: "museum",
         title: "Leopold Museum",
         about: "The largest Schiele collection in the world, in the MuseumsQuartier.",
         lat: 48.20265,
@@ -210,6 +234,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-mumok-museum-moderner-kunst-stiftung-l",
+        kind: "museum",
         title: "mumok - Museum moderner Kunst Stiftung Ludwig Wien",
         about: "Modern and contemporary art inside a windowless block of grey basalt.",
         lat: 48.20378,
@@ -218,6 +243,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-architekturzentrum-wien",
+        kind: "museum",
         title: "Architekturzentrum Wien",
         about: "Austrian architecture from 1850 on, in the MuseumsQuartier.",
         lat: 48.20417,
@@ -226,6 +252,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-kunsthalle-wien-museumsquartier",
+        kind: "museum",
         title: "Kunsthalle Wien Museumsquartier",
         about: "Contemporary exhibitions, no permanent collection.",
         lat: 48.20354,
@@ -234,6 +261,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-imperial-carriage-museum-vienna",
+        kind: "museum",
         title: "Imperial Carriage Museum Vienna",
         about: "The imperial coaches, sleighs and Sisi's funeral carriage, at Schönbrunn.",
         lat: 48.18637,
@@ -242,6 +270,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-upper-belvedere",
+        kind: "museum",
         title: "Upper Belvedere",
         about: "The Klimt half of the Belvedere — The Kiss hangs here.",
         lat: 48.19154,
@@ -250,6 +279,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-kunst-haus-wien-museum-hundertwasser",
+        kind: "museum",
         title: "Kunst Haus Wien. Museum Hundertwasser",
         about: "Hundertwasser's own museum, with the uneven floors he insisted on.",
         lat: 48.21108,
@@ -258,6 +288,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-globe-museum-of-the-austrian-national-",
+        kind: "museum",
         title: "Globe Museum of the Austrian National Library",
         about: "The only museum in the world devoted to globes, in the Palais Mollard.",
         lat: 48.20929,
@@ -271,6 +302,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
     items: [
       {
         id: "map-hundertwasser-house",
+        kind: "view",
         title: "Hundertwasser House",
         about: "The council block with wavy floors and trees growing out of the windows.",
         lat: 48.20734,
@@ -279,6 +311,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-heldenplatz",
+        kind: "view",
         title: "Heldenplatz",
         about: "The vast open square in front of the Hofburg.",
         lat: 48.20636,
@@ -287,6 +320,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-danube-tower",
+        kind: "view",
         title: "Danube Tower",
         about: "A 252-metre tower with a revolving restaurant and the widest view over the city.",
         lat: 48.24034,
@@ -295,6 +329,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-michaelerplatz",
+        kind: "view",
         title: "Michaelerplatz",
         about: "The curved Hofburg gate facing Loos' deliberately plain modernist house.",
         lat: 48.20818,
@@ -303,6 +338,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-caf-im-kunsthistorischen-museum-wien",
+        kind: "view",
         title: "Café im Kunsthistorischen Museum Wien",
         about: "Coffee under the museum's domed cupola hall — worth it for the room alone.",
         lat: 48.20391,
@@ -311,6 +347,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-graben",
+        kind: "view",
         title: "Graben",
         about: "The wide pedestrian street with the twisted baroque plague column.",
         lat: 48.20868,
@@ -319,6 +356,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-herrengasse",
+        kind: "view",
         title: "Herrengasse",
         about: "The palace-lined street running from the Hofburg past Café Central.",
         lat: 48.20997,
@@ -327,6 +365,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-justizpalast",
+        kind: "view",
         title: "Justizpalast",
         about: "The law courts, with a rooftop café above a glass-roofed central hall.",
         lat: 48.20676,
@@ -335,6 +374,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-albertina-terrace",
+        kind: "view",
         title: "Albertina Terrace",
         about: "The balcony over the opera and the Burggarten. Free to walk onto.",
         lat: 48.20409,
@@ -343,6 +383,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-stephansdom-nordturm",
+        kind: "view",
         title: "Stephansdom Nordturm",
         about: "The cathedral's north tower, reached by lift, with the great Pummerin bell.",
         lat: 48.20872,
@@ -351,6 +392,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-mq-libelle",
+        kind: "view",
         title: "MQ Libelle",
         about: "A glass pavilion on the roof of the Leopold, with a free public terrace.",
         lat: 48.20257,
@@ -359,6 +401,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-ikea-westbahnhof-roof-terrace",
+        kind: "view",
         title: "IKEA Westbahnhof Roof Terrace",
         about: "A free rooftop with a city view, above the car-free IKEA at the station.",
         lat: 48.19578,
@@ -367,6 +410,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-gloriette-sch-nbrunn",
+        kind: "view",
         title: "Gloriette Schönbrunn",
         about: "The colonnade on the hill above Schönbrunn, looking back down over the palace.",
         lat: 48.17827,
@@ -380,6 +424,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
     items: [
       {
         id: "map-burggarten",
+        kind: "park",
         title: "Burggarten",
         about: "The old imperial garden, with the Mozart statue and the glass palm house.",
         lat: 48.20434,
@@ -388,6 +433,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-volksgarten",
+        kind: "park",
         title: "Volksgarten",
         about: "A formal rose garden beside the Hofburg.",
         lat: 48.20804,
@@ -396,6 +442,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-t-rkenschanzpark",
+        kind: "park",
         title: "Türkenschanzpark",
         about: "A hilly local park in the 18th district with a small viewing terrace.",
         lat: 48.23483,
@@ -404,6 +451,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-stadtpark",
+        kind: "park",
         title: "Stadtpark",
         about: "The Ring park with the gilded Johann Strauss statue.",
         lat: 48.20473,
@@ -412,6 +460,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-augarten",
+        kind: "park",
         title: "Augarten",
         about: "A baroque park in Leopoldstadt with two enormous wartime flak towers still standing in it.",
         lat: 48.22611,
@@ -420,6 +469,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-setagayapark",
+        kind: "park",
         title: "Setagayapark",
         about: "A small Japanese garden in Döbling, free to enter.",
         lat: 48.24522,
@@ -428,6 +478,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-belvedere-gardens-gift-shop",
+        kind: "park",
         title: "Belvedere Gardens Gift Shop",
         about: "The shop in the Belvedere gardens.",
         lat: 48.1971,
@@ -441,6 +492,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
     items: [
       {
         id: "map-caf-central",
+        kind: "cafe",
         title: "Café Central",
         about: "The vaulted 1876 coffee house where Trotsky and Freud sat all day over one coffee.",
         lat: 48.21043,
@@ -449,6 +501,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-caf-sperl",
+        kind: "cafe",
         title: "Café Sperl",
         about: "An 1880 café with its original billiard tables, five minutes from the hotel.",
         lat: 48.19983,
@@ -457,6 +510,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-caf-landtmann",
+        kind: "cafe",
         title: "Café Landtmann",
         about: "Freud's actual regular, on the Ring beside the Burgtheater.",
         lat: 48.21155,
@@ -465,6 +519,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-caf-sacher-wien",
+        kind: "cafe",
         title: "Café Sacher Wien",
         about: "The hotel café behind the opera, and the original Sachertorte.",
         lat: 48.20393,
@@ -473,6 +528,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-gerstner-k-u-k-hofzuckerb-cker",
+        kind: "cafe",
         title: "Gerstner K. u. K. Hofzuckerbäcker",
         about: "Imperial court confectioner since 1847, three floors on Kärntner Straße.",
         lat: 48.20338,
@@ -486,6 +542,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
     items: [
       {
         id: "map-burggasse-24",
+        kind: "food",
         title: "Burggasse 24",
         about: "A café and second-hand clothes shop in one room, five minutes from the hotel.",
         lat: 48.20438,
@@ -494,6 +551,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-caf-pr-ckel",
+        kind: "food",
         title: "Café Prückel",
         about: "A café with an unchanged 1950s interior, opposite the applied arts museum.",
         lat: 48.20759,
@@ -502,6 +560,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-terrassencaf-im-hundertwasserhaus",
+        kind: "food",
         title: "Terrassencafé im Hundertwasserhaus",
         about: "The café on the terrace of the Hundertwasser house.",
         lat: 48.20754,
@@ -510,6 +569,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-gasthaus-kopp",
+        kind: "food",
         title: "Gasthaus Kopp",
         about: "A neighbourhood tavern doing updated Viennese cooking.",
         lat: 48.23781,
@@ -518,6 +578,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-bitzinger-sausage-stand",
+        kind: "food",
         title: "Bitzinger Sausage Stand",
         about: "The Würstelstand behind the opera — the one Viennese actually queue at, open late.",
         lat: 48.2041,
@@ -526,6 +587,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-zw-lf-apostelkeller",
+        kind: "food",
         title: "Zwölf Apostelkeller",
         about: "A deep medieval wine cellar on three levels under the old town.",
         lat: 48.20982,
@@ -534,6 +596,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-gasthaus-woracziczky",
+        kind: "food",
         title: "Gasthaus Woracziczky",
         about: "A small, cheap, old-school Beisl in the 5th district.",
         lat: 48.18925,
@@ -542,6 +605,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-atmosphere-rooftop-bar",
+        kind: "food",
         title: "Atmosphere Rooftop Bar",
         about: "A rooftop bar above the Ritz, looking across to the cathedral.",
         lat: 48.20235,
@@ -550,6 +614,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-lam-e-rooftop",
+        kind: "food",
         title: "Lamée Rooftop",
         about: "A small hotel rooftop facing the Anker Clock quarter.",
         lat: 48.21023,
@@ -558,6 +623,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-das-loft",
+        kind: "food",
         title: "Das LOFT",
         about: "The Sofitel's 18th-floor bar under Pipilotti Rist's coloured glass ceiling.",
         lat: 48.21273,
@@ -566,6 +632,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-jin-s-ramen-hietzing",
+        kind: "food",
         title: "Jin's Ramen Hietzing",
         about: "Ramen out near Schönbrunn.",
         lat: 48.18767,
@@ -574,6 +641,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-via-toledo-enopizzeria",
+        kind: "food",
         title: "Via Toledo Enopizzeria",
         about: "Neapolitan pizza, routinely rated the best in the city.",
         lat: 48.21323,
@@ -587,6 +655,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
     items: [
       {
         id: "map-sterreichische-werkst-tten",
+        kind: "shop",
         title: "Österreichische Werkstätten",
         about: "Austrian design and craft, on Kärntner Straße.",
         lat: 48.20737,
@@ -595,6 +664,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-the-world-to-go-vienna",
+        kind: "shop",
         title: "THE WORLD TO GO VIENNA",
         about: "A souvenir shop that actually stocks things made in Austria.",
         lat: 48.20629,
@@ -603,6 +673,7 @@ export const warehouse: { title: string; items: Stop[] }[] = [
       },
       {
         id: "map-shakespeare-company",
+        kind: "shop",
         title: "Shakespeare & Company",
         about: "A cramped English-language bookshop near the Judengasse.",
         lat: 48.21186,

@@ -5,7 +5,7 @@
  * to one, whether from the wish list or typed by hand — lives in localStorage
  * so the trip survives a reload without needing a server.
  */
-import { holidays, type Hours, type Stop } from "@/data/itinerary";
+import { FOOD_KINDS, holidays, type Hours, type Stop } from "@/data/itinerary";
 import generatedHours from "@/data/hours.generated.json";
 
 const KEY = "vienna-plan-v1";
@@ -182,6 +182,20 @@ export function checkFit(stop: Stop, iso: string, time: string): Fit {
     };
   }
   return { level: "ok", message: `Open ${range} on ${dayName}.` };
+}
+
+/** The opening hours for one date: "08:00–17:30", "Closed", or null when unknown. */
+export function hoursToday(stop: Stop, iso: string): string | null {
+  const hours = hoursFor(stop);
+  if (!hours?.week) return null;
+  const range = hours.week[new Date(`${iso}T12:00:00`).getDay()];
+  if (!range) return "Closed";
+  return range.replace("-", "–");
+}
+
+/** True for restaurants, cafés and markets — the cards that get the warm colour. */
+export function isFood(stop: Stop): boolean {
+  return stop.kind !== undefined && FOOD_KINDS.includes(stop.kind);
 }
 
 export function googleUrl(stop: Stop): string {

@@ -15,8 +15,42 @@ export type Hours = {
   checked?: string;
 };
 
+/** What sort of place this is — drives the label and the colour of the card. */
+export type Kind =
+  | "hotel"
+  | "food"
+  | "cafe"
+  | "market"
+  | "museum"
+  | "sight"
+  | "view"
+  | "park"
+  | "walk"
+  | "shop"
+  | "concert"
+  | "transport";
+
+export const KIND_LABEL: Record<Kind, string> = {
+  hotel: "Hotel",
+  food: "Restaurant",
+  cafe: "Café",
+  market: "Market",
+  museum: "Museum",
+  sight: "Landmark",
+  view: "Viewpoint",
+  park: "Park",
+  walk: "Walk",
+  shop: "Shop",
+  concert: "Concert",
+  transport: "Travel",
+};
+
+/** Anything you eat or drink at — these cards get the warm colour. */
+export const FOOD_KINDS: Kind[] = ["food", "cafe", "market"];
+
 export type Stop = {
   id: string;
+  kind?: Kind;
   time?: string;
   title: string;
   about?: string;
@@ -75,6 +109,7 @@ export const holidays: Record<string, string> = {
 
 const breakfast = (day: string): Stop => ({
   id: `${day}-hotel`,
+  kind: "hotel",
   time: "08:30",
   title: HOTEL.name,
   about: `Your hotel at ${HOTEL.address}, one street off Mariahilfer Straße.`,
@@ -97,6 +132,7 @@ export const days: Day[] = [
     stops: [
       {
         id: "sat-hotel",
+        kind: "hotel",
         time: "18:00",
         title: HOTEL.name,
         about: `Your hotel at ${HOTEL.address}, a two-minute walk from Mariahilfer Straße.`,
@@ -108,6 +144,7 @@ export const days: Day[] = [
       },
       {
         id: "sat-plachutta",
+        kind: "food",
         time: "19:30",
         title: "Plachutta Wollzeile 38",
         about:
@@ -125,6 +162,7 @@ export const days: Day[] = [
     alternatives: [
       {
         id: "alt-sat-hacken",
+        kind: "food",
         title: "Gasthaus zu den 3 Hacken",
         about:
           "A Beisl licensed since 1618 and claimed as the oldest inn in the city, with a courtyard at the back.",
@@ -135,6 +173,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-sat-meissl",
+        kind: "food",
         title: "Meissl & Schadn",
         about:
           "A grand dining hall that treats the veal schnitzel as a ceremony, carved and served at the table.",
@@ -145,6 +184,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-sat-skopik",
+        kind: "food",
         title: "Skopik & Lohn",
         about:
           "A modern bistro in Leopoldstadt under a ceiling covered in one long black scribble by an artist.",
@@ -167,6 +207,7 @@ export const days: Day[] = [
       breakfast("sun"),
       {
         id: "sun-belvedere",
+        kind: "museum",
         time: "10:15",
         title: "Belvedere",
         about:
@@ -180,6 +221,7 @@ export const days: Day[] = [
       },
       {
         id: "sun-beethovengang",
+        kind: "walk",
         time: "12:30",
         title: "Beethovengang",
         about:
@@ -192,6 +234,7 @@ export const days: Day[] = [
       },
       {
         id: "sun-heuriger",
+        kind: "food",
         time: "14:30",
         title: "Heuriger in Nussdorf",
         about:
@@ -206,6 +249,7 @@ export const days: Day[] = [
       },
       {
         id: "sun-konzerthaus",
+        kind: "concert",
         time: "19:00",
         title: "50 Pianos · Konzerthaus",
         about:
@@ -219,6 +263,7 @@ export const days: Day[] = [
       },
       {
         id: "sun-gerstner",
+        kind: "cafe",
         time: "21:30",
         title: "Gerstner",
         about:
@@ -234,6 +279,7 @@ export const days: Day[] = [
     alternatives: [
       {
         id: "alt-sun-palmenhaus",
+        kind: "food",
         title: "Palmenhaus",
         about:
           "The imperial glass palm house of 1901 on the Burggarten, now a brasserie under the iron and glass.",
@@ -244,6 +290,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-sun-kahlenberg",
+        kind: "view",
         title: "Kahlenberg",
         about:
           "The vineyard hill north of the city with the terrace view over Vienna and the Danube.",
@@ -254,6 +301,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-sun-stadtpark",
+        kind: "park",
         title: "Stadtpark",
         about:
           "The city park on the Ring, with the gilded Johann Strauss statue everyone photographs.",
@@ -264,6 +312,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-sun-leopold",
+        kind: "museum",
         title: "Leopold Museum / Albertina",
         about:
           "Two central museums — the largest Schiele collection in the world, and the Habsburg print rooms.",
@@ -287,6 +336,7 @@ export const days: Day[] = [
       breakfast("mon"),
       {
         id: "mon-lainzer",
+        kind: "park",
         time: "10:15",
         title: "Lainzer Tiergarten",
         about:
@@ -301,6 +351,7 @@ export const days: Day[] = [
       },
       {
         id: "mon-brunnenmarkt",
+        kind: "market",
         time: "14:30",
         title: "Brunnenmarkt",
         about:
@@ -317,6 +368,7 @@ export const days: Day[] = [
       },
       {
         id: "mon-prunksaal",
+        kind: "sight",
         time: "16:00",
         title: "Prunksaal",
         about:
@@ -331,6 +383,7 @@ export const days: Day[] = [
       },
       {
         id: "mon-central",
+        kind: "cafe",
         time: "17:00",
         title: "Café Central",
         about:
@@ -346,6 +399,7 @@ export const days: Day[] = [
       },
       {
         id: "mon-zuckerl",
+        kind: "shop",
         time: "17:45",
         title: "Zuckerlwerkstatt",
         about:
@@ -358,6 +412,7 @@ export const days: Day[] = [
       },
       {
         id: "mon-figlmuller",
+        kind: "food",
         time: "20:00",
         title: "Figlmüller Wollzeile",
         about:
@@ -374,6 +429,7 @@ export const days: Day[] = [
     alternatives: [
       {
         id: "alt-mon-schatzkammer",
+        kind: "museum",
         title: "Schatzkammer",
         about:
           "The imperial treasury in the Hofburg: the crown of the Holy Roman Empire, the Holy Lance, the Habsburg jewels.",
@@ -385,6 +441,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-mon-landtmann",
+        kind: "cafe",
         title: "Café Landtmann",
         about: "The Ring café beside the Burgtheater that was genuinely Freud's regular.",
         plan: "Coffee with far more elbow room than Café Central, and no queue at the door.",
@@ -394,6 +451,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-mon-poeschl",
+        kind: "food",
         title: "Meissl & Schadn / Pöschl",
         about:
           "Two schnitzel houses a few streets apart — one a grand hall, one a tiny panelled room.",
@@ -404,6 +462,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-mon-hundertwasser",
+        kind: "sight",
         title: "Hundertwasserhaus + Kunst Haus Wien",
         about:
           "Hundertwasser's council block with uneven floors and trees growing out of the windows, and his museum two streets away.",
@@ -425,6 +484,7 @@ export const days: Day[] = [
       breakfast("tue"),
       {
         id: "tue-khm",
+        kind: "museum",
         time: "10:15",
         title: "Kunsthistorisches Museum",
         about:
@@ -442,6 +502,7 @@ export const days: Day[] = [
       },
       {
         id: "tue-ankeruhr",
+        kind: "sight",
         time: "12:00",
         title: "Anker Clock",
         about:
@@ -454,6 +515,7 @@ export const days: Day[] = [
       },
       {
         id: "tue-tea",
+        kind: "shop",
         time: "12:30",
         title: "Schönbichler → Haas & Haas",
         about:
@@ -466,6 +528,7 @@ export const days: Day[] = [
       },
       {
         id: "tue-graben",
+        kind: "shop",
         time: "14:00",
         title: "Altmann & Kühne · Julius Meinl · Lobmeyr",
         about:
@@ -479,6 +542,7 @@ export const days: Day[] = [
       },
       {
         id: "tue-peterskirche",
+        kind: "concert",
         time: "15:00",
         title: "Free organ concert · Peterskirche",
         about:
@@ -492,6 +556,7 @@ export const days: Day[] = [
       },
       {
         id: "tue-gegenbauer",
+        kind: "shop",
         time: "16:30",
         title: "Gegenbauer",
         about:
@@ -505,6 +570,7 @@ export const days: Day[] = [
       },
       {
         id: "tue-vollpension",
+        kind: "cafe",
         time: "17:15",
         title: "Vollpension + 3 galleries",
         about:
@@ -517,6 +583,7 @@ export const days: Day[] = [
       },
       {
         id: "tue-schnitzelwirt",
+        kind: "food",
         time: "20:00",
         title: "Schnitzelwirt",
         about:
@@ -531,6 +598,7 @@ export const days: Day[] = [
     alternatives: [
       {
         id: "alt-tue-demel",
+        kind: "cafe",
         title: "Demel",
         about: "Imperial court bakery on the Kohlmarkt, where the bakers work behind glass.",
         plan: "Kaiserschmarrn made in front of you. Half an hour.",
@@ -540,6 +608,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-tue-hawelka",
+        kind: "cafe",
         title: "Café Hawelka",
         about: "A dim, unreformed coffee house from 1939 hung with artists' posters.",
         plan: "Go late — the Buchteln come out of the oven in the evening.",
@@ -549,6 +618,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-tue-secession",
+        kind: "museum",
         title: "Secession",
         about:
           "The 1898 hall under a golden dome of laurel leaves, built as a manifesto, holding Klimt's Beethoven Frieze in the basement.",
@@ -560,6 +630,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-tue-supersense",
+        kind: "shop",
         title: "Supersense",
         about:
           "An analogue workshop in a palazzo — instant film, letterpress, and a lathe that cuts records.",
@@ -570,6 +641,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-tue-sperl",
+        kind: "cafe",
         title: "Café Sperl",
         about: "An 1880 café with its original billiard tables, five minutes from the hotel.",
         plan: "The closest proper coffee house to where you sleep.",
@@ -591,12 +663,13 @@ export const days: Day[] = [
       breakfast("wed"),
       {
         id: "wed-josephinum",
+        kind: "museum",
         time: "10:15",
         title: "Josephinum",
         about:
           "Twelve hundred anatomical wax models, made in Florence in the 1780s so army surgeons could learn without corpses, in the old military-medical academy.",
         plan:
-          "An hour, and a two-minute walk from the Deewan. Swapped in for the Narrenturm — change it for anything from the wish list or the map below.",
+          "An hour. Two minutes from the Deewan, where you eat next.",
         star: true,
         lat: 48.2166,
         lng: 16.3513,
@@ -604,11 +677,12 @@ export const days: Day[] = [
       },
       {
         id: "wed-deewan",
+        kind: "food",
         time: "12:30",
         title: "Der Wiener Deewan",
         about:
           "Pakistani canteen run on a pay-as-you-wish basis — the curries are all vegan and the students keep it full.",
-        plan: "Lunch, 400 m from the Narrenturm. Take what you want, pay what you think it was worth.",
+        plan: "Lunch, 400 m from the Josephinum. Take what you want, pay what you think it was worth.",
         lat: 48.2148,
         lng: 16.3557,
         query: "Der Wiener Deewan Wien",
@@ -616,6 +690,7 @@ export const days: Day[] = [
       },
       {
         id: "wed-donaukanal",
+        kind: "walk",
         time: "14:30",
         title: "Donaukanal",
         about:
@@ -627,6 +702,7 @@ export const days: Day[] = [
       },
       {
         id: "wed-rest",
+        kind: "hotel",
         time: "15:30",
         title: "Back to the hotel",
         about: "Your own room, ten minutes from the opera house.",
@@ -637,6 +713,7 @@ export const days: Day[] = [
       },
       {
         id: "wed-swing",
+        kind: "food",
         time: "17:00",
         title: "Swing Kitchen",
         about: "Austrian vegan fast food — burgers that started as a Heuriger family's side project.",
@@ -648,6 +725,7 @@ export const days: Day[] = [
       },
       {
         id: "wed-oper",
+        kind: "concert",
         time: "19:00",
         title: "Wiener Staatsoper",
         about:
@@ -663,6 +741,7 @@ export const days: Day[] = [
     alternatives: [
       {
         id: "alt-wed-tian",
+        kind: "food",
         title: "TIAN",
         about: "Michelin-starred vegetarian tasting menus in the first district.",
         plan: "A whole evening at the table.",
@@ -674,6 +753,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-wed-harvest",
+        kind: "food",
         title: "Harvest",
         about: "A long-running vegan bistro in Leopoldstadt, small and unfussy.",
         plan: "A sit-down vegan dinner if Swing Kitchen feels too much like fast food.",
@@ -683,6 +763,7 @@ export const days: Day[] = [
       },
       {
         id: "alt-wed-hundertwasser",
+        kind: "sight",
         title: "Hundertwasserhaus",
         about: "The wavy council block with trees in the windows, 15 minutes from the canal walk.",
         plan: "Slots in neatly after the Donaukanal, before you head back to change.",
@@ -702,6 +783,7 @@ export const days: Day[] = [
     stops: [
       {
         id: "thu-hotel",
+        kind: "hotel",
         time: "08:00",
         title: HOTEL.name,
         about: `Your hotel at ${HOTEL.address}.`,
@@ -714,6 +796,7 @@ export const days: Day[] = [
       },
       {
         id: "thu-depart",
+        kind: "transport",
         time: "09:00",
         title: "Leave for the airport",
         about: "City Airport Train or the S7 from Wien Mitte, about 20–25 minutes to VIE.",
@@ -736,6 +819,7 @@ export const days: Day[] = [
 export const wishlist: Stop[] = [
   {
     id: "w-naschmarkt-flea",
+    kind: "market",
     title: "Naschmarkt Flea Market",
     about: "Vienna's big Saturday-only flea market, at the far end of the Naschmarkt.",
     plan: "Saturdays only, and it winds down by 16:00 — with an 18:00 landing this trip misses it entirely.",
@@ -747,6 +831,7 @@ export const wishlist: Stop[] = [
   },
   {
     id: "w-kaffemik",
+    kind: "cafe",
     title: "kaffemik",
     about: "Third-wave coffee bar on Zollergasse with rotating roasters.",
     plan: "Five minutes from the hotel — easy to slot in before any morning that starts in the centre.",
@@ -757,6 +842,7 @@ export const wishlist: Stop[] = [
   },
   {
     id: "w-mariahilfer",
+    kind: "shop",
     title: "Mariahilfer Straße",
     about: "The long pedestrian shopping street your hotel sits behind.",
     plan: "Shops run to about 19:00 on weekdays and 18:00 on Saturday. Closed Sunday.",
@@ -767,6 +853,7 @@ export const wishlist: Stop[] = [
   },
   {
     id: "w-oberlaa",
+    kind: "cafe",
     title: "Oberlaa",
     about: "Viennese pastry chain at Neuer Markt, known for the Kardinalschnitte.",
     plan: "A 20-minute coffee stop — what the Viennese actually buy rather than the tourist cake.",
@@ -777,6 +864,7 @@ export const wishlist: Stop[] = [
   },
   {
     id: "w-joseph",
+    kind: "cafe",
     title: "Joseph Brot",
     about: "Sourdough bakery and breakfast room, widely held to be the best bread in the city.",
     plan: "Breakfast outside the hotel, if you ever want to skip the buffet.",
@@ -787,6 +875,7 @@ export const wishlist: Stop[] = [
   },
   {
     id: "w-butterfly",
+    kind: "sight",
     title: "Schmetterlinghaus",
     about: "A small art nouveau palm house in the Burggarten flown full of live butterflies.",
     plan: "Twenty minutes, right in the centre — good filler between two city stops.",
@@ -797,6 +886,7 @@ export const wishlist: Stop[] = [
   },
   {
     id: "w-demel",
+    kind: "cafe",
     title: "Demel",
     about: "Imperial court bakery on the Kohlmarkt, where the bakers work behind glass.",
     plan: "Kaiserschmarrn made in front of you. Half an hour, any afternoon.",
@@ -807,6 +897,7 @@ export const wishlist: Stop[] = [
   },
   {
     id: "w-bratislava",
+    kind: "transport",
     title: "Day trip: Bratislava",
     about:
       "The Slovak capital, 75 minutes down the Danube by Twin City Liner, through the Donau-Auen national park.",
