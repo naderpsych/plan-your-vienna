@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ClientOnly } from "@tanstack/react-router";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { days, bookings, foodList, wishlist, type Stop } from "@/data/itinerary";
+import { warehouse } from "@/data/warehouse";
 import {
   checkFit,
   googleUrl,
@@ -56,7 +57,7 @@ function routeUrl(stops: Stop[]) {
   }`;
 }
 
-const EMPTY_PLAN: PlanState = { removed: [], added: {} };
+const EMPTY_PLAN: PlanState = { removed: [], added: {}, mine: [] };
 
 function Index() {
   const [dayIdx, setDayIdx] = useState(0);
@@ -91,6 +92,14 @@ function Index() {
       removed: plan.removed.filter((id) => id !== stop.id),
       added: { ...plan.added, [dayId]: [...(plan.added[dayId] ?? []), stop] },
     });
+  }
+
+  function addMine(stop: Stop) {
+    update({ ...plan, mine: [...plan.mine, stop] });
+  }
+
+  function removeMine(id: string) {
+    update({ ...plan, mine: plan.mine.filter((s) => s.id !== id) });
   }
 
   const removedHere = day.stops.filter((s) => plan.removed.includes(s.id));
@@ -288,18 +297,23 @@ function Index() {
             {day.alternatives.length > 0 && (
               <div className="rounded-2xl border border-border bg-secondary p-4">
                 <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
-                  Alternatives
+                  Alternatives for {day.weekday}
                 </h3>
-                <ul className="mt-2 flex flex-wrap gap-2">
-                  {day.alternatives.map((a) => (
-                    <li
-                      key={a}
-                      className="rounded-full border border-border bg-card px-3 py-1.5 text-sm"
-                    >
-                      {a}
-                    </li>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Tap one to read what it is, then drop it straight into the day.
+                </p>
+                <div className="mt-3 space-y-2">
+                  {day.alternatives.map((alt) => (
+                    <PlaceRow
+                      key={alt.id}
+                      item={alt}
+                      plan={plan}
+                      onAdd={addStop}
+                      defaultDayId={day.id}
+                      actionLabel="Add to this day"
+                    />
                   ))}
-                </ul>
+                </div>
               </div>
             )}
           </section>
@@ -322,7 +336,13 @@ function Index() {
             </section>
 
             <section className="mt-8">
-              <h2 className="text-2xl font-bold">🥨 Wish list &amp; the Austrian food list</h2>
+              <h2 className="text-2xl font-bold">
+                Places to pull in, and what to eat
+              </h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Every list below drops straight into a day, with the opening hours checked
+                for the day and time you pick.
+              </p>
               <div className="mt-4 space-y-2">
                 <div className="overflow-hidden rounded-2xl border border-gold/50 bg-card">
                   <button
@@ -337,16 +357,88 @@ function Index() {
                   {openList === "wish" && (
                     <div className="space-y-3 border-t border-border px-4 py-4">
                       {wishlist.map((item) => (
-                        <WishlistRow
-                          key={item.id}
-                          item={item}
-                          plan={plan}
-                          onAdd={addStop}
-                        />
+                        <PlaceRow key={item.id} item={item} plan={plan} onAdd={addStop} />
                       ))}
                     </div>
                   )}
                 </div>
+
+                <div className="overflow-hidden rounded-2xl border border-border bg-card">
+                  <button
+                    onClick={() => setOpenList(openList === "mine" ? null : "mine")}
+                    className="flex w-full items-center justify-between px-4 py-3 text-left font-bold"
+                  >
+                    <span>
+                      ➕ My places — anything you add yourself
+                      {plan.mine.length > 0 && (
+                        <span className="ml-2 font-mono text-xs text-muted-foreground">
+                          {plan.mine.length}
+                        </span>
+                      )}
+                    </span>
+                    <span className="text-muted-foreground">
+                      {openList === "mine" ? "−" : "+"}
+                    </span>
+                  </button>
+                  {openList === "mine" && (
+                    <div className="space-y-3 border-t border-border px-4 py-4">
+                      <NewPlaceForm onSave={addMine} />
+                      {plan.mine.length === 0 ? (
+                        <p className="text-sm text-muted-foreground">
+                          Nothing here yet. Add a place and it will sit alongside the wish
+                          list, ready to drop into any day.
+                        </p>
+                      ) : (
+                        plan.mine.map((item) => (
+                          <PlaceRow
+                            key={item.id}
+                            item={item}
+                            plan={plan}
+                            onAdd={addStop}
+                            onDelete={() => removeMine(item.id)}
+                          />
+                        ))
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                {warehouse.map((group) => {
+                  const key = `map:${group.title}`;
+                  const open = openList === key;
+                  return (
+                    <div
+                      key={key}
+                      className="overflow-hidden rounded-2xl border border-border bg-card"
+                    >
+                      <button
+                        onClick={() => setOpenList(open ? null : key)}
+                        className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left font-bold"
+                      >
+                        <span>📍 {group.title}</span>
+                        <span className="flex items-center gap-2">
+                          <span className="font-mono text-xs text-muted-foreground">
+                            {group.items.length}
+                          </span>
+                          <span className="text-muted-foreground">{open ? "−" : "+"}</span>
+                        </span>
+                      </button>
+                      {open && (
+                        <div className="space-y-3 border-t border-border px-4 py-4">
+                          {group.items.map((item) => (
+                            <PlaceRow
+                              key={item.id}
+                              item={item}
+                              plan={plan}
+                              onAdd={addStop}
+                              defaultDayId={day.id}
+                            />
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
 
                 {foodList.map((group) => {
                   const open = openList === group.title;
@@ -359,7 +451,7 @@ function Index() {
                         onClick={() => setOpenList(open ? null : group.title)}
                         className="flex w-full items-center justify-between px-4 py-3 text-left font-bold"
                       >
-                        <span>{group.title}</span>
+                        <span>🥨 {group.title}</span>
                         <span className="text-muted-foreground">{open ? "−" : "+"}</span>
                       </button>
                       {open && (
@@ -414,7 +506,7 @@ function StopCard({
           {stop.time && (
             <span className="font-mono text-sm font-bold text-primary">{stop.time}</span>
           )}
-          <h3 className="text-lg font-bold">
+          <h3 className="text-lg font-bold text-primary">
             {stop.title} {stop.star && <span className="text-gold">⭐</span>}
           </h3>
         </div>
@@ -511,12 +603,14 @@ function AddToDay({
   stop,
   onAdd,
   onCancel,
+  defaultDayId,
 }: {
   stop: Stop;
   onAdd: (dayId: string, stop: Stop) => void;
   onCancel: () => void;
+  defaultDayId?: string;
 }) {
-  const [dayId, setDayId] = useState(days[1]!.id);
+  const [dayId, setDayId] = useState(defaultDayId ?? days[1]!.id);
   const [time, setTime] = useState("12:00");
   const day = days.find((d) => d.id === dayId)!;
   const fit = checkFit(stop, day.iso, time);
@@ -563,14 +657,20 @@ function AddToDay({
   );
 }
 
-function WishlistRow({
+function PlaceRow({
   item,
   plan,
   onAdd,
+  onDelete,
+  defaultDayId,
+  actionLabel = "Add to a day",
 }: {
   item: Stop;
   plan: PlanState;
   onAdd: (dayId: string, stop: Stop) => void;
+  onDelete?: () => void;
+  defaultDayId?: string;
+  actionLabel?: string;
 }) {
   const [open, setOpen] = useState(false);
   const placedOn = days.filter((d) =>
@@ -581,7 +681,7 @@ function WishlistRow({
     <div className="rounded-xl border border-border bg-background p-3">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <h4 className="font-bold">{item.title}</h4>
+          <h4 className="font-bold text-primary">{item.title}</h4>
           {item.about && <p className="mt-1 text-sm text-muted-foreground">{item.about}</p>}
           {item.plan && (
             <p className="mt-1 text-sm text-muted-foreground">
@@ -600,12 +700,23 @@ function WishlistRow({
             </p>
           )}
         </div>
-        <button
-          onClick={() => setOpen(!open)}
-          className="shrink-0 rounded-lg border border-primary/30 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/5"
-        >
-          {open ? "Close" : "Add to a day"}
-        </button>
+        <div className="flex shrink-0 items-center gap-1">
+          <button
+            onClick={() => setOpen(!open)}
+            className="rounded-lg border border-primary/30 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/5"
+          >
+            {open ? "Close" : actionLabel}
+          </button>
+          {onDelete && (
+            <button
+              onClick={onDelete}
+              aria-label={`Delete ${item.title}`}
+              className="rounded-lg px-2 py-1 text-sm text-muted-foreground hover:text-destructive"
+            >
+              ✕
+            </button>
+          )}
+        </div>
       </div>
 
       {open && (
@@ -616,8 +727,53 @@ function WishlistRow({
             setOpen(false);
           }}
           onCancel={() => setOpen(false)}
+          {...(defaultDayId ? { defaultDayId } : {})}
         />
       )}
+    </div>
+  );
+}
+
+/** Adds an entry to your own category — name, and a line about it. */
+function NewPlaceForm({ onSave }: { onSave: (stop: Stop) => void }) {
+  const [title, setTitle] = useState("");
+  const [about, setAbout] = useState("");
+
+  function submit() {
+    const name = title.trim();
+    if (!name) return;
+    onSave({
+      id: newStopId(),
+      title: name,
+      query: `${name} Wien`,
+      ...(about.trim() ? { about: about.trim() } : {}),
+    });
+    setTitle("");
+    setAbout("");
+  }
+
+  return (
+    <div className="space-y-2 rounded-xl border border-dashed border-border bg-background p-3">
+      <input
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        onKeyDown={(e) => e.key === "Enter" && submit()}
+        placeholder="Place name"
+        className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary/50"
+      />
+      <input
+        value={about}
+        onChange={(e) => setAbout(e.target.value)}
+        onKeyDown={(e) => e.key === "Enter" && submit()}
+        placeholder="What is it? (optional)"
+        className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary/50"
+      />
+      <button
+        onClick={submit}
+        className="rounded-lg bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90"
+      >
+        Add to my list
+      </button>
     </div>
   );
 }

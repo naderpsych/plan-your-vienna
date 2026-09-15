@@ -42,7 +42,8 @@ export type Day = {
   open?: string;
   warn?: string;
   stops: Stop[];
-  alternatives: string[];
+  /** Fallbacks for the day — same shape as a stop, so they can be added to it. */
+  alternatives: Stop[];
 };
 
 export const HOTEL = {
@@ -122,9 +123,36 @@ export const days: Day[] = [
       },
     ],
     alternatives: [
-      "Gasthaus zu den 3 Hacken (Beisl from 1618, courtyard)",
-      "Meissl & Schadn (veal schnitzel, grand hall)",
-      "Skopik & Lohn (modern, relaxed, from 18:00)",
+      {
+        id: "alt-sat-hacken",
+        title: "Gasthaus zu den 3 Hacken",
+        about:
+          "A Beisl licensed since 1618 and claimed as the oldest inn in the city, with a courtyard at the back.",
+        plan: "Plain Viennese tavern cooking if Plachutta is full or feels too formal.",
+        lat: 48.2072,
+        lng: 16.3723,
+        query: "Gasthaus zu den 3 Hacken Wien",
+      },
+      {
+        id: "alt-sat-meissl",
+        title: "Meissl & Schadn",
+        about:
+          "A grand dining hall that treats the veal schnitzel as a ceremony, carved and served at the table.",
+        plan: "The dressier schnitzel dinner. Book ahead.",
+        lat: 48.2028,
+        lng: 16.3737,
+        query: "Meissl & Schadn Wien",
+      },
+      {
+        id: "alt-sat-skopik",
+        title: "Skopik & Lohn",
+        about:
+          "A modern bistro in Leopoldstadt under a ceiling covered in one long black scribble by an artist.",
+        plan: "Lighter and later — kitchen from 18:00, good if the flight lands very late.",
+        lat: 48.2166,
+        lng: 16.3796,
+        query: "Skopik & Lohn Wien",
+      },
     ],
   },
   {
@@ -204,10 +232,46 @@ export const days: Day[] = [
       },
     ],
     alternatives: [
-      "Palmenhaus (glass greenhouse, until 23:00)",
-      "Kahlenberg (views and vineyards)",
-      "Stadtpark",
-      "Leopold / Albertina if it rains",
+      {
+        id: "alt-sun-palmenhaus",
+        title: "Palmenhaus",
+        about:
+          "The imperial glass palm house of 1901 on the Burggarten, now a brasserie under the iron and glass.",
+        plan: "Drinks or a late dinner in the greenhouse. Open until 23:00.",
+        lat: 48.2047,
+        lng: 16.3673,
+        query: "Palmenhaus Burggarten Wien",
+      },
+      {
+        id: "alt-sun-kahlenberg",
+        title: "Kahlenberg",
+        about:
+          "The vineyard hill north of the city with the terrace view over Vienna and the Danube.",
+        plan: "Bus 38A from Heiligenstadt. Best about an hour before sunset.",
+        lat: 48.2789,
+        lng: 16.3335,
+        query: "Kahlenberg Wien",
+      },
+      {
+        id: "alt-sun-stadtpark",
+        title: "Stadtpark",
+        about:
+          "The city park on the Ring, with the gilded Johann Strauss statue everyone photographs.",
+        plan: "A flat half-hour walk if the day needs slowing down.",
+        lat: 48.2049,
+        lng: 16.3797,
+        query: "Stadtpark Wien",
+      },
+      {
+        id: "alt-sun-leopold",
+        title: "Leopold Museum / Albertina",
+        about:
+          "Two central museums — the largest Schiele collection in the world, and the Habsburg print rooms.",
+        plan: "The rain plan. Both open on Sunday, both indoors all day.",
+        lat: 48.2025,
+        lng: 16.3592,
+        query: "Leopold Museum Wien",
+      },
     ],
   },
   {
@@ -308,10 +372,46 @@ export const days: Day[] = [
       },
     ],
     alternatives: [
-      "Schatzkammer (imperial crowns – closed tomorrow, so today or never)",
-      "Café Landtmann (Freud's actual café)",
-      "Meissl & Schadn / Pöschl",
-      "Hundertwasserhaus + Kunst Haus Wien",
+      {
+        id: "alt-mon-schatzkammer",
+        title: "Schatzkammer",
+        about:
+          "The imperial treasury in the Hofburg: the crown of the Holy Roman Empire, the Holy Lance, the Habsburg jewels.",
+        plan: "An hour. Closed tomorrow — so today or not on this trip.",
+        warn: "Closed on Tuesdays",
+        lat: 48.2065,
+        lng: 16.3647,
+        query: "Kaiserliche Schatzkammer Wien",
+      },
+      {
+        id: "alt-mon-landtmann",
+        title: "Café Landtmann",
+        about: "The Ring café beside the Burgtheater that was genuinely Freud's regular.",
+        plan: "Coffee with far more elbow room than Café Central, and no queue at the door.",
+        lat: 48.2117,
+        lng: 16.3612,
+        query: "Cafe Landtmann Wien",
+      },
+      {
+        id: "alt-mon-poeschl",
+        title: "Meissl & Schadn / Pöschl",
+        about:
+          "Two schnitzel houses a few streets apart — one a grand hall, one a tiny panelled room.",
+        plan: "The backup if Figlmüller has no table.",
+        lat: 48.2033,
+        lng: 16.3712,
+        query: "Gasthaus Pöschl Wien",
+      },
+      {
+        id: "alt-mon-hundertwasser",
+        title: "Hundertwasserhaus + Kunst Haus Wien",
+        about:
+          "Hundertwasser's council block with uneven floors and trees growing out of the windows, and his museum two streets away.",
+        plan: "Twenty minutes at the house from the outside, an hour in the museum.",
+        lat: 48.2076,
+        lng: 16.3939,
+        query: "Hundertwasserhaus Wien",
+      },
     ],
   },
   {
@@ -429,11 +529,54 @@ export const days: Day[] = [
       },
     ],
     alternatives: [
-      "Demel (Kaiserschmarrn made in front of you)",
-      "Café Hawelka (Buchteln in the evening)",
-      "Secession (Beethoven Frieze)",
-      "Supersense (cut your own vinyl)",
-      "Café Sperl",
+      {
+        id: "alt-tue-demel",
+        title: "Demel",
+        about: "Imperial court bakery on the Kohlmarkt, where the bakers work behind glass.",
+        plan: "Kaiserschmarrn made in front of you. Half an hour.",
+        lat: 48.2091,
+        lng: 16.369,
+        query: "Demel Kohlmarkt Wien",
+      },
+      {
+        id: "alt-tue-hawelka",
+        title: "Café Hawelka",
+        about: "A dim, unreformed coffee house from 1939 hung with artists' posters.",
+        plan: "Go late — the Buchteln come out of the oven in the evening.",
+        lat: 48.2087,
+        lng: 16.3697,
+        query: "Cafe Hawelka Wien",
+      },
+      {
+        id: "alt-tue-secession",
+        title: "Secession",
+        about:
+          "The 1898 hall under a golden dome of laurel leaves, built as a manifesto, holding Klimt's Beethoven Frieze in the basement.",
+        plan: "Forty minutes, mostly for the frieze.",
+        warn: "Closed on Mondays",
+        lat: 48.2007,
+        lng: 16.3657,
+        query: "Secession Wien",
+      },
+      {
+        id: "alt-tue-supersense",
+        title: "Supersense",
+        about:
+          "An analogue workshop in a palazzo — instant film, letterpress, and a lathe that cuts records.",
+        plan: "You can record and cut your own vinyl on the spot. Book the lathe ahead.",
+        lat: 48.2135,
+        lng: 16.3865,
+        query: "Supersense Wien",
+      },
+      {
+        id: "alt-tue-sperl",
+        title: "Café Sperl",
+        about: "An 1880 café with its original billiard tables, five minutes from the hotel.",
+        plan: "The closest proper coffee house to where you sleep.",
+        lat: 48.1985,
+        lng: 16.3629,
+        query: "Cafe Sperl Wien",
+      },
     ],
   },
   {
@@ -447,22 +590,17 @@ export const days: Day[] = [
     stops: [
       breakfast("wed"),
       {
-        id: "wed-narrenturm",
+        id: "wed-josephinum",
         time: "10:15",
-        title: "Narrenturm",
+        title: "Josephinum",
         about:
-          "The round 1784 'fools' tower', Europe's first purpose-built asylum, now a pathological-anatomy collection.",
+          "Twelve hundred anatomical wax models, made in Florence in the 1780s so army surgeons could learn without corpses, in the old military-medical academy.",
         plan:
-          "An hour. This is the only day of your trip it is open, so it is now or not at all.",
+          "An hour, and a two-minute walk from the Deewan. Swapped in for the Narrenturm — change it for anything from the wish list or the map below.",
         star: true,
         lat: 48.2166,
-        lng: 16.351,
-        query: "Narrenturm Wien",
-        hours: {
-          week: [null, null, null, "10:00-18:00", "10:00-18:00", "10:00-18:00", "10:00-18:00"],
-          note: "Wed–Sat only",
-          source: "manual",
-        },
+        lng: 16.3513,
+        query: "Josephinum Wien",
       },
       {
         id: "wed-deewan",
@@ -523,10 +661,35 @@ export const days: Day[] = [
       },
     ],
     alternatives: [
-      "Josephinum (wax models, an easier visit)",
-      "TIAN (Michelin vegetarian, ⚠️ clashes with the opera)",
-      "Harvest",
-      "Hundertwasserhaus",
+      {
+        id: "alt-wed-tian",
+        title: "TIAN",
+        about: "Michelin-starred vegetarian tasting menus in the first district.",
+        plan: "A whole evening at the table.",
+        warn:
+          "A tasting menu cannot be squeezed in before a 19:00 curtain — this replaces the opera, it does not fit around it",
+        lat: 48.2063,
+        lng: 16.3767,
+        query: "TIAN Restaurant Wien",
+      },
+      {
+        id: "alt-wed-harvest",
+        title: "Harvest",
+        about: "A long-running vegan bistro in Leopoldstadt, small and unfussy.",
+        plan: "A sit-down vegan dinner if Swing Kitchen feels too much like fast food.",
+        lat: 48.2166,
+        lng: 16.3789,
+        query: "Harvest Bistrot Wien",
+      },
+      {
+        id: "alt-wed-hundertwasser",
+        title: "Hundertwasserhaus",
+        about: "The wavy council block with trees in the windows, 15 minutes from the canal walk.",
+        plan: "Slots in neatly after the Donaukanal, before you head back to change.",
+        lat: 48.2076,
+        lng: 16.3939,
+        query: "Hundertwasserhaus Wien",
+      },
     ],
   },
   {

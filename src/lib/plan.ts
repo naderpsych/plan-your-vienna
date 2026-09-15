@@ -15,16 +15,22 @@ export type PlanState = {
   removed: string[];
   /** Extra stops per day id. */
   added: Record<string, Stop[]>;
+  /** The traveller's own list, kept beside the built-in wish list. */
+  mine: Stop[];
 };
 
-const EMPTY: PlanState = { removed: [], added: {} };
+const EMPTY: PlanState = { removed: [], added: {}, mine: [] };
 
 export function loadPlan(): PlanState {
   try {
     const raw = localStorage.getItem(KEY);
     if (!raw) return EMPTY;
     const parsed = JSON.parse(raw) as Partial<PlanState>;
-    return { removed: parsed.removed ?? [], added: parsed.added ?? {} };
+    return {
+      removed: parsed.removed ?? [],
+      added: parsed.added ?? {},
+      mine: parsed.mine ?? [],
+    };
   } catch {
     return EMPTY;
   }
