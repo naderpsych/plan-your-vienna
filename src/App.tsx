@@ -1,5 +1,15 @@
-import { lazy, Suspense, useEffect, useState } from "react";
-import { days, bookings, foodList, wishlist, type Stop } from "@/data/itinerary";
+import { lazy, Suspense, useEffect, useMemo, useState } from "react";
+import {
+  bookings,
+  foodList,
+  wishlist,
+  type Day,
+  type Kind,
+  type Stop,
+} from "@/data/itinerary";
+// `days` is the six planned days plus today, so every day control gets it free.
+import { allDays as days, todayDay } from "@/lib/days";
+import { buildCatalogue, type CatalogueItem } from "@/lib/catalogue";
 import { warehouse } from "@/data/warehouse";
 import { KIND_LABEL } from "@/data/itinerary";
 import {
@@ -20,9 +30,10 @@ const TripMap = lazy(() => import("@/components/TripMap"));
 const MyNotes = lazy(() => import("@/components/MyNotes"));
 const Weather = lazy(() => import("@/components/Weather"));
 
-const FIRST_DAY = days[0]!.iso;
+const FORECAST_RANGE = days.map((d) => d.iso).sort();
+const FIRST_DAY = FORECAST_RANGE[0]!;
 const warehouseCount = warehouse.reduce((n, g) => n + g.items.length, 0);
-const LAST_DAY = days[days.length - 1]!.iso;
+const LAST_DAY = FORECAST_RANGE[FORECAST_RANGE.length - 1]!;
 
 function navUrl(s: Stop) {
   const dest = s.query ?? (s.lat && s.lng ? `${s.lat},${s.lng}` : s.title);
@@ -297,6 +308,14 @@ export default function App() {
               </Banner>
             )}
 
+            {stops.length === 0 && (
+              <p className="rounded-2xl border border-dashed border-border bg-card px-4 py-6 text-center text-sm text-muted-foreground">
+                {day.id === todayDay.id
+                  ? "Nothing planned for today. Add places from your lists below — only what is actually open right now will come back green."
+                  : "This day is empty. Add something below."}
+              </p>
+            )}
+
             <ol className="relative space-y-3 border-l-2 border-dashed border-border pl-5">
               {stops.map((s) => (
                 <li key={s.id} className="relative">
@@ -311,8 +330,9 @@ export default function App() {
               ))}
               <li className="relative">
                 <span className="absolute -left-[27px] top-5 size-3 rounded-full border-2 border-background bg-border" />
-                <AddCustomStop
-                  dayIso={day.iso}
+                <AddPlacePanel
+                  day={day}
+                  plan={plan}
                   onAdd={(stop) => addStop(day.id, stop)}
                 />
               </li>
@@ -799,6 +819,211 @@ function PlaceRow({
   );
 }
 
+const KIND_FILTERS: { value: Kind | "all"; label: string }[] = [
+  { value: "all", label: "Everything" },
+  { value: "food", label: "Restaurants" },
+  { value: "cafe", label: "Cafés" },
+  { value: "market", label: "Markets" },
+  { value: "museum", label: "Museums" },
+  { value: "sight", label: "Landmarks" },
+  { value: "view", label: "Viewpoints" },
+  { value: "park", label: "Parks" },
+  { value: "shop", label: "Shops" },
+  { value: "concert", label: "Concerts" },
+];
+
+/**
+ * Pick a place for this day out of everything already saved — the wish list,
+ * the day alternatives, the map and your own additions, folded into one list —
+ * or type something new. Each candidate is checked against this day's hours.
+ */
+function AddPlacePanel({
+  day,
+  plan,
+  onAdd,
+}: {
+  day: Day;
+  plan: PlanState;
+  onAdd: (stop: Stop) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const [mode, setMode] = useState<"lists" | "new">("lists");
+  const [kind, setKind] = useState<Kind | "all">("all");
+  const [query, setQuery] = useState("");
+  const [time, setTime] = useState("12:00");
+
+  const catalogue = useMemo(() => buildCatalogue(plan.mine), [plan.mine]);
+  const already = new Set((plan.added[day.id] ?? []).map((s) => s.id.split("--")[0]));
+
+  const matches = catalogue.filter((item) => {
+    if (kind !== "all" && item.kind !== kind) return false;
+    if (!query.trim()) return true;
+    const q = query.trim().toLowerCase();
+    return (
+      item.title.toLowerCase().includes(q) ||
+      (item.about ?? "").toLowerCase().includes(q)
+    );
+  });
+
+  // Open first, then the ones with no hours on file, then the closed ones.
+  const ranked = [...matches].sort((a, b) => {
+    const rank = (item: CatalogueItem) => {
+      const fit = checkFit(item, day.iso, time);
+      return fit.level === "ok" ? 0 : fit.level === "tight" ? 1 : fit.level === "unknown" ? 2 : 3;
+    };
+    return rank(a) - rank(b);
+  });
+
+  if (!open) {
+    return (
+      <button
+        onClick={() => setOpen(true)}
+        className="w-full rounded-2xl border border-dashed border-border bg-card/50 px-4 py-3 text-sm font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary"
+      >
+        + Add a place to {day.id === todayDay.id ? "today" : day.weekday}
+      </button>
+    );
+  }
+
+  return (
+    <div className="space-y-3 rounded-2xl border border-border bg-card p-4">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="inline-flex rounded-full bg-secondary p-1">
+          {(
+            [
+              ["lists", "From my lists"],
+              ["new", "Type a new place"],
+            ] as const
+          ).map(([value, label]) => (
+            <button
+              key={value}
+              onClick={() => setMode(value)}
+              className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-colors ${
+                mode === value
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+        <button
+          onClick={() => setOpen(false)}
+          className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-muted-foreground"
+        >
+          Close
+        </button>
+      </div>
+
+      {mode === "new" ? (
+        <NewStopFields
+          time={time}
+          setTime={setTime}
+          onSave={(stop) => {
+            onAdd(stop);
+            setOpen(false);
+          }}
+        />
+      ) : (
+        <>
+          <div className="flex flex-wrap gap-2">
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search your lists…"
+              className="min-w-0 flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary/50"
+            />
+            <input
+              type="time"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+              className="rounded-lg border border-border bg-background px-3 py-2 text-sm"
+              aria-label="What time"
+            />
+          </div>
+
+          <div className="flex flex-wrap gap-1.5">
+            {KIND_FILTERS.map((f) => (
+              <button
+                key={f.value}
+                onClick={() => setKind(f.value)}
+                className={`rounded-full border px-3 py-1 text-xs font-semibold transition-colors ${
+                  kind === f.value
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-border text-muted-foreground hover:border-primary/40"
+                }`}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
+
+          <p className="text-xs text-muted-foreground">
+            {ranked.length} place{ranked.length === 1 ? "" : "s"} across your wish list,
+            the day alternatives, the map and your own — open ones first, checked against{" "}
+            {day.id === todayDay.id ? "today" : `${day.weekday} ${day.date}`} at {time}.
+          </p>
+
+          <div className="max-h-96 space-y-2 overflow-y-auto">
+            {ranked.slice(0, 60).map((item) => {
+              const fit = checkFit(item, day.iso, time);
+              const tone =
+                fit.level === "ok"
+                  ? "text-primary"
+                  : fit.level === "bad"
+                    ? "text-destructive"
+                    : "text-muted-foreground";
+              const mark =
+                fit.level === "ok" ? "✅" : fit.level === "bad" ? "⛔" : "ℹ️";
+              return (
+                <div
+                  key={item.id}
+                  className="flex items-start justify-between gap-3 rounded-xl border border-border bg-background px-3 py-2"
+                  style={isFood(item) ? { background: "var(--card-head-food)" } : undefined}
+                >
+                  <div className="min-w-0">
+                    <p className="font-semibold" style={{ color: "var(--place-title)" }}>
+                      {item.title}
+                    </p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">
+                      {item.kind && (
+                        <span className="font-bold uppercase tracking-wide">
+                          {KIND_LABEL[item.kind]}
+                        </span>
+                      )}
+                      {item.kind && " · "}
+                      <span>{item.sources.join(" + ")}</span>
+                    </p>
+                    <p className={`mt-1 text-xs font-semibold ${tone}`}>
+                      {mark} {fit.message}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      onAdd({ ...item, id: `${item.id}--${day.id}`, time });
+                      setOpen(false);
+                    }}
+                    disabled={already.has(item.id)}
+                    className="shrink-0 rounded-lg border border-primary/30 bg-card px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/5 disabled:opacity-40"
+                  >
+                    {already.has(item.id) ? "Added" : `Add ${time}`}
+                  </button>
+                </div>
+              );
+            })}
+            {ranked.length === 0 && (
+              <p className="py-4 text-center text-sm text-muted-foreground">
+                Nothing matches. Try another category, or type the place yourself.
+              </p>
+            )}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 /** Adds an entry to your own category — name, and a line about it. */
 function NewPlaceForm({ onSave }: { onSave: (stop: Stop) => void }) {
   const [title, setTitle] = useState("");
@@ -843,47 +1068,35 @@ function NewPlaceForm({ onSave }: { onSave: (stop: Stop) => void }) {
   );
 }
 
-/** Free-text place, for something you spotted that is not on any list. */
-function AddCustomStop({
-  dayIso,
-  onAdd,
+/** The "type a new place" half of the add panel. */
+function NewStopFields({
+  time,
+  setTime,
+  onSave,
 }: {
-  dayIso: string;
-  onAdd: (stop: Stop) => void;
+  time: string;
+  setTime: (value: string) => void;
+  onSave: (stop: Stop) => void;
 }) {
-  const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
-  const [time, setTime] = useState("12:00");
-  const [plan, setPlan] = useState("");
+  const [note, setNote] = useState("");
 
   function submit() {
     const name = title.trim();
     if (!name) return;
-    onAdd({
+    onSave({
       id: newStopId(),
       title: name,
       time,
       query: `${name} Wien`,
-      ...(plan.trim() ? { plan: plan.trim() } : {}),
+      ...(note.trim() ? { plan: note.trim() } : {}),
     });
     setTitle("");
-    setPlan("");
-    setOpen(false);
-  }
-
-  if (!open) {
-    return (
-      <button
-        onClick={() => setOpen(true)}
-        className="w-full rounded-2xl border border-dashed border-border bg-card/50 px-4 py-3 text-sm font-semibold text-muted-foreground hover:border-primary/40 hover:text-primary"
-      >
-        + Add a place to this day
-      </button>
-    );
+    setNote("");
   }
 
   return (
-    <div className="space-y-3 rounded-2xl border border-border bg-card p-4">
+    <div className="space-y-2">
       <div className="flex flex-wrap gap-2">
         <input
           autoFocus
@@ -898,33 +1111,26 @@ function AddCustomStop({
           value={time}
           onChange={(e) => setTime(e.target.value)}
           className="rounded-lg border border-border bg-background px-3 py-2 text-sm"
+          aria-label="What time"
         />
       </div>
       <input
-        value={plan}
-        onChange={(e) => setPlan(e.target.value)}
+        value={note}
+        onChange={(e) => setNote(e.target.value)}
         onKeyDown={(e) => e.key === "Enter" && submit()}
         placeholder="What are you doing there? (optional)"
         className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary/50"
       />
       <p className="text-xs text-muted-foreground">
-        Opening hours are checked once the daily agent finds the place on Google. Until then
-        the card links straight to its Google listing.
+        The hours agent picks the place up on its next run and the card starts
+        showing its opening hours. Until then it links straight to Google.
       </p>
-      <div className="flex gap-2">
-        <button
-          onClick={submit}
-          className="rounded-lg bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90"
-        >
-          Add to {new Date(`${dayIso}T12:00:00`).toLocaleDateString("en-GB", { weekday: "long" })}
-        </button>
-        <button
-          onClick={() => setOpen(false)}
-          className="rounded-lg border border-border px-4 py-2 text-xs font-semibold text-muted-foreground"
-        >
-          Cancel
-        </button>
-      </div>
+      <button
+        onClick={submit}
+        className="rounded-lg bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90"
+      >
+        Add at {time}
+      </button>
     </div>
   );
 }

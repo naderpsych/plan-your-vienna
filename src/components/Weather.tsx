@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 const LAT = 48.2082;
 const LNG = 16.3738;
-const CACHE_KEY = "vienna-weather-v1";
+const CACHE_KEY = "vienna-weather-v2";
 const CACHE_MS = 3 * 60 * 60 * 1000;
 
 type DayWeather = {
@@ -69,7 +69,9 @@ export default function Weather({ iso, from, to }: { iso: string; from: string; 
 
   useEffect(() => {
     try {
-      const raw = localStorage.getItem(CACHE_KEY);
+      // The key carries the range, so adding a day to the trip refetches
+      // instead of serving a cache that never covered it.
+      const raw = localStorage.getItem(`${CACHE_KEY}:${from}:${to}`);
       if (raw) {
         const cached = JSON.parse(raw) as Cache;
         if (Date.now() - cached.at < CACHE_MS) {
@@ -86,7 +88,10 @@ export default function Weather({ iso, from, to }: { iso: string; from: string; 
       .then((result) => {
         setDays(result);
         try {
-          localStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), days: result }));
+          localStorage.setItem(
+            `${CACHE_KEY}:${from}:${to}`,
+            JSON.stringify({ at: Date.now(), days: result }),
+          );
         } catch {
           /* ignore */
         }

@@ -67,13 +67,14 @@ export function stopsFor(dayId: string, base: Stop[], plan: PlanState): Stop[] {
 
 type GeneratedEntry = {
   week: (string | null)[];
-  human?: string;
-  google_name?: string;
-  checked?: string;
+  human?: string | null;
+  google_name?: string | null;
+  address?: string | null;
+  checked?: string | null;
   closed_permanently?: boolean;
 };
 
-const generated = generatedHours as {
+const generated = generatedHours as unknown as {
   generated: string | null;
   places: Record<string, GeneratedEntry>;
 };
