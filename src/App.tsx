@@ -1,5 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { ClientOnly } from "@tanstack/react-router";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { days, bookings, foodList, wishlist, type Stop } from "@/data/itinerary";
 import { warehouse } from "@/data/warehouse";
@@ -18,26 +16,6 @@ import {
 const TripMap = lazy(() => import("@/components/TripMap"));
 const MyNotes = lazy(() => import("@/components/MyNotes"));
 const Weather = lazy(() => import("@/components/Weather"));
-
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Vienna 19–24 Sep · Daily itinerary & maps" },
-      {
-        name: "description",
-        content:
-          "A detailed Vienna itinerary: a schedule for every day, live weather, opening-hour checks, alternatives, an Austrian food list and a map with the route and navigation.",
-      },
-      { property: "og:title", content: "Vienna 19–24 Sep · Daily itinerary & maps" },
-      {
-        property: "og:description",
-        content:
-          "A daily schedule, an interactive map with the route, and a navigation button for every stop.",
-      },
-    ],
-  }),
-  component: Index,
-});
 
 const FIRST_DAY = days[0]!.iso;
 const LAST_DAY = days[days.length - 1]!.iso;
@@ -59,7 +37,7 @@ function routeUrl(stops: Stop[]) {
 
 const EMPTY_PLAN: PlanState = { removed: [], added: {}, mine: [] };
 
-function Index() {
+export default function App() {
   const [dayIdx, setDayIdx] = useState(0);
   const [view, setView] = useState<"itinerary" | "map">("itinerary");
   const [openList, setOpenList] = useState<string | null>(null);
@@ -180,11 +158,9 @@ function Index() {
             <p className="text-sm text-muted-foreground">{day.theme}</p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <ClientOnly fallback={null}>
-              <Suspense fallback={null}>
-                <Weather iso={day.iso} from={FIRST_DAY} to={LAST_DAY} />
-              </Suspense>
-            </ClientOnly>
+            <Suspense fallback={null}>
+              <Weather iso={day.iso} from={FIRST_DAY} to={LAST_DAY} />
+            </Suspense>
             <span className="font-mono text-xs text-muted-foreground">
               {located.length} stops on the map
             </span>
@@ -194,23 +170,15 @@ function Index() {
         {view === "map" ? (
           <section className="space-y-4">
             <div className="h-[65vh] overflow-hidden rounded-2xl border border-border shadow-[var(--shadow-card)]">
-              <ClientOnly
+              <Suspense
                 fallback={
                   <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
                     Loading map…
                   </div>
                 }
               >
-                <Suspense
-                  fallback={
-                    <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
-                      Loading map…
-                    </div>
-                  }
-                >
-                  <TripMap day={{ ...day, stops }} />
-                </Suspense>
-              </ClientOnly>
+                <TripMap day={{ ...day, stops }} />
+              </Suspense>
             </div>
 
             <a
@@ -472,11 +440,9 @@ function Index() {
               </div>
             </section>
 
-            <ClientOnly fallback={null}>
-              <Suspense fallback={null}>
-                <MyNotes />
-              </Suspense>
-            </ClientOnly>
+            <Suspense fallback={null}>
+              <MyNotes />
+            </Suspense>
           </>
         )}
       </main>
