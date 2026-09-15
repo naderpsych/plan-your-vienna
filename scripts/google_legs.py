@@ -36,8 +36,10 @@ UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
 BLOCK_SIGNS = ("Bevor Sie zu Google weitergehen", "unusual traffic",
                "ungewöhnlicher Datenverkehr", "Ich bin kein Roboter")
 
-# "1 Std. 5 Min." / "47 Min."
-DURATION = re.compile(r"(?:(\d+)\s*Std\.?)?\s*(?:(\d+)\s*Min)")
+# Google prints "1 Std. 5 min" / "47 min" — lower case, so match either.
+DURATION = re.compile(r"(?:(\d+)\s*(?:Std\.?|Stunden?))?\s*(?:(\d+)\s*min)", re.I)
+# Night buses start with N. Their times say nothing about a Monday evening.
+NIGHT_LINE = re.compile(r"\bN\d{1,2}\b")
 # U4, S7, bus 60B, tram D …
 LINES = re.compile(r"\b(U\d|S\d{1,2}|\d{1,3}[A-Z]?)\b")
 
@@ -144,6 +146,10 @@ def read_duration(page, origin, destination, mode):
             break
     if not text:
         text = body
+
+    # A run in the small hours only sees night buses — worse than no answer.
+    if mode == "transit" and NIGHT_LINE.search(text):
+        return None, None, False
 
     m = DURATION.search(text)
     if not m:
