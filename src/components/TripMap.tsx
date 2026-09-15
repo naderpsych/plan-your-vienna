@@ -31,10 +31,9 @@ export default function TripMap({ day }: { day: Day }) {
   return (
     <MapContainer
       key={day.id}
-      center={center}
-      zoom={13}
-      {...(bounds ? { bounds } : {})}
+      {...(bounds ? { bounds } : { center, zoom: 14 })}
       scrollWheelZoom
+
       className="h-full w-full"
       style={{ background: "var(--color-muted)" }}
     >
