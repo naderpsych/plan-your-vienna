@@ -1,4 +1,517 @@
 {
-  "generated": null,
-  "places": {}
+  "generated": "2026-09-15T15:44:01+00:00",
+  "places": {
+    "alt-sat-hacken": {
+      "week": [
+        null,
+        "11:30-23:00",
+        "11:30-23:00",
+        "11:30-23:00",
+        "11:30-23:00",
+        "11:30-23:00",
+        "11:30-23:00"
+      ],
+      "human": "Tue 11:30-23:00 · Wed 11:30-23:00 · Thu 11:30-23:00 · Fri 11:30-23:00 · Sat 11:30-23:00 · Sun Closed · Mon 11:30-23:00",
+      "google_name": "Gasthaus \"Zu den 3 Hacken\"",
+      "address": "Singerstraße 28, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "alt-sat-skopik": {
+      "week": [
+        "18:00-24:00",
+        "18:00-24:00",
+        "18:00-24:00",
+        "18:00-24:00",
+        "18:00-24:00",
+        "18:00-24:00",
+        "18:00-24:00"
+      ],
+      "human": "Tue 18:00-24:00 · Wed 18:00-24:00 · Thu 18:00-24:00 · Fri 18:00-24:00 · Sat 18:00-24:00 · Sun 18:00-24:00 · Mon 18:00-24:00",
+      "google_name": "Skopik & Lohn",
+      "address": "Leopoldsgasse 17, 1020 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "sun-heuriger": {
+      "week": [
+        "11:00-22:00",
+        null,
+        null,
+        null,
+        "14:00-22:00",
+        "12:00-22:00",
+        "12:00-22:00"
+      ],
+      "human": "Tue Closed · Wed Closed · Thu 14:00-22:00 · Fri 12:00-22:00 · Sat 12:00-22:00 · Sun 11:00-22:00 · Mon Closed",
+      "google_name": null,
+      "address": "Eichelhofweg 125, 1190 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "alt-sun-palmenhaus": {
+      "week": [
+        "09:00-23:00",
+        "10:00-23:00",
+        "10:00-23:00",
+        "10:00-23:00",
+        "10:00-23:00",
+        "10:00-23:00",
+        "09:00-23:00"
+      ],
+      "human": "Tue 10:00-23:00 · Wed 10:00-23:00 · Thu 10:00-23:00 · Fri 10:00-23:00 · Sat 09:00-23:00 · Sun 09:00-23:00 · Mon 10:00-23:00",
+      "google_name": "Brasserie Palmenhaus Wien",
+      "address": "Burggarten 1, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "alt-sun-stadtpark": {
+      "week": [
+        "00:00-24:00",
+        "00:00-24:00",
+        "00:00-24:00",
+        "00:00-24:00",
+        "00:00-24:00",
+        "00:00-24:00",
+        "00:00-24:00"
+      ],
+      "human": "Tue open 24h · Wed open 24h · Thu open 24h · Fri open 24h · Sat open 24h · Sun open 24h · Mon open 24h",
+      "google_name": "Stadtpark",
+      "address": "Parkring 1, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "mon-lainzer": {
+      "week": [
+        "08:00-19:00",
+        "08:00-19:00",
+        "08:00-19:00",
+        "08:00-19:00",
+        "08:00-19:00",
+        "08:00-19:00",
+        "08:00-19:00"
+      ],
+      "human": "Tue 08:00-19:00 · Wed 08:00-19:00 · Thu 08:00-19:00 · Fri 08:00-19:00 · Sat 08:00-19:00 · Sun 08:00-19:00 · Mon 08:00-19:00",
+      "google_name": "Lainzer Tiergarten",
+      "address": "Lainzer Tor, 1130 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "mon-brunnenmarkt": {
+      "week": [
+        null,
+        "06:00-21:00",
+        "06:00-21:00",
+        "06:00-21:00",
+        "06:00-21:00",
+        "06:00-21:00",
+        "06:00-18:00"
+      ],
+      "human": "Tue 06:00-21:00 · Wed 06:00-21:00 · Thu 06:00-21:00 · Fri 06:00-21:00 · Sat 06:00-18:00 · Sun Closed · Mon 06:00-21:00",
+      "google_name": "Brunnenmarkt",
+      "address": "Brunnengasse 16, 1160 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "mon-prunksaal": {
+      "week": [
+        "09:00-18:00",
+        "09:00-18:00",
+        "09:00-18:00",
+        "09:00-18:00",
+        "09:00-21:00",
+        "09:00-18:00",
+        "09:00-18:00"
+      ],
+      "human": "Tue 09:00-18:00 · Wed 09:00-18:00 · Thu 09:00-21:00 · Fri 09:00-18:00 · Sat 09:00-18:00 · Sun 09:00-18:00 · Mon 09:00-18:00",
+      "google_name": "Prunksaal",
+      "address": "Josefsplatz 1, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "mon-zuckerl": {
+      "week": [
+        null,
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00"
+      ],
+      "human": "Tue 10:00-18:00 · Wed 10:00-18:00 · Thu 10:00-18:00 · Fri 10:00-18:00 · Sat 10:00-18:00 · Sun Closed · Mon 10:00-18:00",
+      "google_name": "Zuckerlwerkstatt",
+      "address": "Herrengasse 6-8/4, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "alt-mon-schatzkammer": {
+      "week": [
+        "09:00-17:30",
+        "09:00-17:30",
+        null,
+        "09:00-17:30",
+        "09:00-17:30",
+        "09:00-17:30",
+        "09:00-17:30"
+      ],
+      "human": "Tue Closed · Wed 09:00-17:30 · Thu 09:00-17:30 · Fri 09:00-17:30 · Sat 09:00-17:30 · Sun 09:00-17:30 · Mon 09:00-17:30",
+      "google_name": "Kaiserliche Schatzkammer",
+      "address": "Schweizerhof, Hofburg, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "alt-mon-landtmann": {
+      "week": [
+        "07:30-22:00",
+        "07:30-24:00",
+        "07:30-24:00",
+        "07:30-24:00",
+        "07:30-24:00",
+        "07:30-24:00",
+        "07:30-24:00"
+      ],
+      "human": "Tue 07:30-24:00 · Wed 07:30-24:00 · Thu 07:30-24:00 · Fri 07:30-24:00 · Sat 07:30-24:00 · Sun 07:30-22:00 · Mon 07:30-24:00",
+      "google_name": "Café Landtmann",
+      "address": "Universitätsring 4, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "alt-mon-poeschl": {
+      "week": [
+        null,
+        "12:00-23:00",
+        "12:00-23:00",
+        "12:00-23:00",
+        "12:00-23:00",
+        "12:00-23:00",
+        "12:00-23:00"
+      ],
+      "human": "Tue 12:00-23:00 · Wed 12:00-23:00 · Thu 12:00-23:00 · Fri 12:00-23:00 · Sat 12:00-23:00 · Sun Closed · Mon 12:00-23:00",
+      "google_name": "Gasthaus Pöschl",
+      "address": "Weihburggasse 17, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "tue-khm": {
+      "week": [
+        "10:00-18:00",
+        null,
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-21:00",
+        "10:00-18:00",
+        "10:00-18:00"
+      ],
+      "human": "Tue 10:00-18:00 · Wed 10:00-18:00 · Thu 10:00-21:00 · Fri 10:00-18:00 · Sat 10:00-18:00 · Sun 10:00-18:00 · Mon Closed",
+      "google_name": "Kunsthistorisches Museum Wien",
+      "address": "Maria-Theresien-Platz, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "tue-ankeruhr": {
+      "week": [
+        "00:00-24:00",
+        "00:00-24:00",
+        "00:00-24:00",
+        "00:00-24:00",
+        "00:00-24:00",
+        "00:00-24:00",
+        "00:00-24:00"
+      ],
+      "human": "Tue open 24h · Wed open 24h · Thu open 24h · Fri open 24h · Sat open 24h · Sun open 24h · Mon open 24h",
+      "google_name": "Ankeruhr",
+      "address": "Hoher Markt 10-11, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "tue-tea": {
+      "week": [
+        null,
+        "09:30-18:30",
+        "09:30-18:30",
+        "09:30-18:30",
+        "09:30-18:30",
+        "09:30-18:30",
+        "09:30-17:00"
+      ],
+      "human": "Tue 09:30-18:30 · Wed 09:30-18:30 · Thu 09:30-18:30 · Fri 09:30-18:30 · Sat 09:30-17:00 · Sun Closed · Mon 09:30-18:30",
+      "google_name": "Theehandlung Schönbichler und TeeGschwendner",
+      "address": "Wollzeile 4, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "tue-graben": {
+      "week": [
+        null,
+        "09:00-18:30",
+        "09:00-18:30",
+        "09:00-18:30",
+        "09:00-18:30",
+        "09:00-18:30",
+        "10:00-17:00"
+      ],
+      "human": "Tue 09:00-18:30 · Wed 09:00-18:30 · Thu 09:00-18:30 · Fri 09:00-18:30 · Sat 10:00-17:00 · Sun Closed · Mon 09:00-18:30",
+      "google_name": "Altmann & Kühne",
+      "address": "Graben 30, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "tue-gegenbauer": {
+      "week": [
+        null,
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "09:00-17:00"
+      ],
+      "human": "Tue 10:00-18:00 · Wed 10:00-18:00 · Thu 10:00-18:00 · Fri 10:00-18:00 · Sat 09:00-17:00 · Sun Closed · Mon 10:00-18:00",
+      "google_name": "WIENER ESSIG BRAUEREI, WIENER KAFFEE RÖSTEREI Gegenbauer",
+      "address": "Naschmarkt Stand 111/112, 1060 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "tue-vollpension": {
+      "week": [
+        "08:00-20:00",
+        "08:00-20:00",
+        "08:00-20:00",
+        "08:00-20:00",
+        "08:00-20:00",
+        "08:00-20:00",
+        "08:00-20:00"
+      ],
+      "human": "Tue 08:00-20:00 · Wed 08:00-20:00 · Thu 08:00-20:00 · Fri 08:00-20:00 · Sat 08:00-20:00 · Sun 08:00-20:00 · Mon 08:00-20:00",
+      "google_name": "Vollpension Generationencafé in der Schleifmühlgasse",
+      "address": "Schleifmühlgasse 16, 1040 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "alt-tue-demel": {
+      "week": [
+        "10:00-19:00",
+        "10:00-19:00",
+        "10:00-19:00",
+        "10:00-19:00",
+        "10:00-19:00",
+        "10:00-19:00",
+        "10:00-19:00"
+      ],
+      "human": "Tue 10:00-19:00 · Wed 10:00-19:00 · Thu 10:00-19:00 · Fri 10:00-19:00 · Sat 10:00-19:00 · Sun 10:00-19:00 · Mon 10:00-19:00",
+      "google_name": "Café Demel",
+      "address": "Kohlmarkt 14, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "alt-tue-hawelka": {
+      "week": [
+        "10:00-21:00",
+        "09:00-24:00",
+        "09:00-24:00",
+        "09:00-24:00",
+        "09:00-24:00",
+        "09:00-01:00",
+        "09:00-01:00"
+      ],
+      "human": "Tue 09:00-24:00 · Wed 09:00-24:00 · Thu 09:00-24:00 · Fri 09:00-01:00 · Sat 09:00-01:00 · Sun 10:00-21:00 · Mon 09:00-24:00",
+      "google_name": "Café Hawelka",
+      "address": "Dorotheergasse 6, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "alt-tue-secession": {
+      "week": [
+        "10:00-18:00",
+        null,
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00",
+        "10:00-18:00"
+      ],
+      "human": "Tue 10:00-18:00 · Wed 10:00-18:00 · Thu 10:00-18:00 · Fri 10:00-18:00 · Sat 10:00-18:00 · Sun 10:00-18:00 · Mon Closed",
+      "google_name": "Wiener Secession",
+      "address": "Friedrichstraße 12, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "alt-tue-sperl": {
+      "week": [
+        "10:00-20:00",
+        "07:00-22:00",
+        "07:00-22:00",
+        "07:00-22:00",
+        "07:00-22:00",
+        "07:00-22:00",
+        "07:00-22:00"
+      ],
+      "human": "Tue 07:00-22:00 · Wed 07:00-22:00 · Thu 07:00-22:00 · Fri 07:00-22:00 · Sat 07:00-22:00 · Sun 10:00-20:00 · Mon 07:00-22:00",
+      "google_name": "Cafe Sperl",
+      "address": "Gumpendorfer Str. 11, 1060 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "wed-josephinum": {
+      "week": [
+        "10:00-18:00",
+        null,
+        null,
+        "10:00-18:00",
+        "10:00-20:00",
+        "10:00-18:00",
+        "10:00-18:00"
+      ],
+      "human": "Tue Closed · Wed 10:00-18:00 · Thu 10:00-20:00 · Fri 10:00-18:00 · Sat 10:00-18:00 · Sun 10:00-18:00 · Mon Closed",
+      "google_name": "Josephinum - Medizinhistorisches Museum Wien",
+      "address": "Währinger Str. 25, 1090 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "wed-deewan": {
+      "week": [
+        null,
+        "11:00-23:00",
+        "11:00-23:00",
+        "11:00-23:00",
+        "11:00-23:00",
+        "11:00-23:00",
+        "11:00-23:00"
+      ],
+      "human": "Tue 11:00-23:00 · Wed 11:00-23:00 · Thu 11:00-23:00 · Fri 11:00-23:00 · Sat 11:00-23:00 · Sun Closed · Mon 11:00-23:00",
+      "google_name": "Der Wiener Deewan",
+      "address": "Liechtensteinstraße 10, 1090 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "wed-swing": {
+      "week": [
+        "11:00-22:00",
+        "11:00-22:00",
+        "11:00-22:00",
+        "11:00-22:00",
+        "11:00-22:00",
+        "11:00-23:00",
+        "11:00-23:00"
+      ],
+      "human": "Tue 11:00-22:00 · Wed 11:00-22:00 · Thu 11:00-22:00 · Fri 11:00-23:00 · Sat 11:00-23:00 · Sun 11:00-22:00 · Mon 11:00-22:00",
+      "google_name": "Swing Kitchen",
+      "address": "Schwedenpl. 3-4/1/16, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "alt-wed-tian": {
+      "week": [
+        null,
+        null,
+        "18:00-23:00",
+        "18:00-23:00",
+        "18:00-23:00",
+        "18:00-23:00",
+        "18:00-23:00"
+      ],
+      "human": "Tue 18:00-23:00 · Wed 18:00-23:00 · Thu 18:00-23:00 · Fri 18:00-23:00 · Sat 18:00-23:00 · Sun Closed · Mon Closed",
+      "google_name": "TIAN Restaurant",
+      "address": "Himmelpfortgasse 23, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "w-naschmarkt-flea": {
+      "week": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        "08:00-15:00"
+      ],
+      "human": "Tue Closed · Wed Closed · Thu Closed · Fri Closed · Sat 08:00-15:00 · Sun Closed · Mon Closed",
+      "google_name": "Kettenbrückengasse Flohmarkt",
+      "address": "Kettenbrückengasse 5, 1050 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "w-kaffemik": {
+      "week": [
+        "11:00-17:00",
+        "08:00-18:00",
+        "08:00-18:00",
+        "08:00-18:00",
+        "08:00-18:00",
+        "08:00-18:00",
+        "10:00-18:00"
+      ],
+      "human": "Tue 08:00-18:00 · Wed 08:00-18:00 · Thu 08:00-18:00 · Fri 08:00-18:00 · Sat 10:00-18:00 · Sun 11:00-17:00 · Mon 08:00-18:00",
+      "google_name": "kaffemik",
+      "address": "Zollergasse 5, 1070 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "w-oberlaa": {
+      "week": [
+        "08:00-20:00",
+        "08:00-20:00",
+        "08:00-20:00",
+        "08:00-20:00",
+        "08:00-20:00",
+        "08:00-20:00",
+        "08:00-20:00"
+      ],
+      "human": "Tue 08:00-20:00 · Wed 08:00-20:00 · Thu 08:00-20:00 · Fri 08:00-20:00 · Sat 08:00-20:00 · Sun 08:00-20:00 · Mon 08:00-20:00",
+      "google_name": "Kurkonditorei OBERLAA",
+      "address": "Neuer Markt 16, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "w-butterfly": {
+      "week": [
+        "10:00-17:45",
+        "10:00-17:45",
+        "10:00-17:45",
+        "10:00-17:45",
+        "10:00-17:45",
+        "10:00-17:45",
+        "10:00-17:45"
+      ],
+      "human": "Tue 10:00-17:45 · Wed 10:00-17:45 · Thu 10:00-17:45 · Fri 10:00-17:45 · Sat 10:00-17:45 · Sun 10:00-17:45 · Mon 10:00-17:45",
+      "google_name": "Schmetterlinghaus",
+      "address": "Hofburg, Burggarten Palmenhaus, Schmetterlinghaus, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "w-demel": {
+      "week": [
+        "10:00-19:00",
+        "10:00-19:00",
+        "10:00-19:00",
+        "10:00-19:00",
+        "10:00-19:00",
+        "10:00-19:00",
+        "10:00-19:00"
+      ],
+      "human": "Tue 10:00-19:00 · Wed 10:00-19:00 · Thu 10:00-19:00 · Fri 10:00-19:00 · Sat 10:00-19:00 · Sun 10:00-19:00 · Mon 10:00-19:00",
+      "google_name": "Café Demel",
+      "address": "Kohlmarkt 14, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    },
+    "w-bratislava": {
+      "week": [
+        "08:00-17:30",
+        "08:00-17:30",
+        "08:00-17:30",
+        "08:00-17:30",
+        "08:00-17:30",
+        "08:00-17:30",
+        "08:00-17:30"
+      ],
+      "human": "Tue 08:00-17:30 · Wed 08:00-17:30 · Thu 08:00-17:30 · Fri 08:00-17:30 · Sat 08:00-17:30 · Sun 08:00-17:30 · Mon 08:00-17:30",
+      "google_name": "Twin City Liner",
+      "address": "Schiffstation Wien City Franz-Josefs-Kai Schwedenplatz 2, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-15"
+    }
+  }
 }
