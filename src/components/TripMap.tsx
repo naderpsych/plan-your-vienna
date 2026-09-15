@@ -37,8 +37,9 @@ export default function TripMap({ day }: { day: Day }) {
     >
       <TileLayer
         attribution="&copy; OpenStreetMap"
-        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+        url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+
       <Polyline
         positions={line}
         pathOptions={{
