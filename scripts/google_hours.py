@@ -3,13 +3,14 @@
 Google Maps hours agent for the Vienna trip.
 
 Opens a real headless Chrome, searches Google Maps for every place in the
-itinerary, expands the weekly hours table and reads the rows off the screen.
+itinerary and in the map warehouse, expands the weekly hours table and reads
+the rows off the screen.
 No API, no key, no billing — the same approach as google_agent.py in the
 timeout-food project, ported to Vienna and to German locale, because
 google.com/maps?hl=de prints 24-hour times that need no AM/PM parsing.
 
 Writes src/data/hours.generated.json, which the site prefers over the hours
-typed into src/data/itinerary.ts.
+typed into the data files.
 
 Run:  python scripts/google_hours.py [max places]
 """
@@ -28,7 +29,10 @@ for stream in (sys.stdout, sys.stderr):
         stream.reconfigure(encoding="utf-8", errors="replace")
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SOURCE = os.path.join(ROOT, "src", "data", "itinerary.ts")
+SOURCES = [
+    os.path.join(ROOT, "src", "data", "itinerary.ts"),
+    os.path.join(ROOT, "src", "data", "warehouse.ts"),
+]
 TARGET = os.path.join(ROOT, "src", "data", "hours.generated.json")
 
 BATCH = int(sys.argv[1]) if len(sys.argv) > 1 else 60
@@ -88,11 +92,19 @@ def parse_hours(rows):
 
 
 def places_from_source():
-    """(id, query, title) for every stop in itinerary.ts that has a query."""
+    """(id, query, title) for every place in the data files that has a query."""
+    out = []
+    seen = set()
+    for source in SOURCES:
+        out.extend(_places_in(source, seen))
+    return out
+
+
+def _places_in(path, seen):
     out = []
     current_id = None
     current_title = None
-    with open(SOURCE, encoding="utf-8") as fh:
+    with open(path, encoding="utf-8") as fh:
         for line in fh:
             m = re.search(r'\bid:\s*"([^"]+)"', line)
             if m:
@@ -104,7 +116,9 @@ def places_from_source():
                 continue
             m = re.search(r'\bquery:\s*"([^"]+)"', line)
             if m and current_id:
-                out.append((current_id, m.group(1), current_title or current_id))
+                if current_id not in seen:
+                    seen.add(current_id)
+                    out.append((current_id, m.group(1), current_title or current_id))
                 current_id = None
     return out
 

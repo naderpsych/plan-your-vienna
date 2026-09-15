@@ -8,7 +8,7 @@ on:
     inputs:
       batch:
         description: "How many places to look up in this run"
-        default: "60"
+        default: "140"
 
 permissions:
   contents: write
@@ -20,7 +20,7 @@ concurrency:
 jobs:
   hours:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 50
     steps:
       - uses: actions/checkout@v4
 
