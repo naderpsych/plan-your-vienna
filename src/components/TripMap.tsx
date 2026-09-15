@@ -61,7 +61,7 @@ export default function TripMap({ day }: { day: Day }) {
           icon={numberIcon(i + 1)}
         >
           <Popup>
-            <div dir="rtl" className="space-y-1 text-right">
+            <div className="space-y-1 text-left">
               {s.time && (
                 <div className="font-mono text-xs text-muted-foreground">{s.time}</div>
               )}
@@ -77,7 +77,7 @@ export default function TripMap({ day }: { day: Day }) {
                   s.query ?? `${s.lat},${s.lng}`,
                 )}`}
               >
-                נווט לכאן →
+                Navigate here →
               </a>
             </div>
           </Popup>

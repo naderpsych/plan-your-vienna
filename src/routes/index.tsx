@@ -9,17 +9,17 @@ const MyNotes = lazy(() => import("@/components/MyNotes"));
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "וינה 19–24.9 · מסלול יומי ומפות" },
+      { title: "Vienna 19–24 Sep · Daily itinerary & maps" },
       {
         name: "description",
         content:
-          "מסלול טיול מפורט בווינה: לוח זמנים לכל יום, אזהרות פתיחה וסגירה, חלופות, רשימת אוכל אוסטרי ומפה עם מסלול וניווט.",
+          "A detailed Vienna itinerary: a schedule for every day, opening and closing warnings, alternatives, an Austrian food list and a map with the route and navigation.",
       },
-      { property: "og:title", content: "וינה 19–24.9 · מסלול יומי ומפות" },
+      { property: "og:title", content: "Vienna 19–24 Sep · Daily itinerary & maps" },
       {
         property: "og:description",
         content:
-          "לוח זמנים יומי, מפה אינטראקטיבית עם המסלול, וכפתור ניווט לכל עצירה.",
+          "A daily schedule, an interactive map with the route, and a navigation button for every stop.",
       },
     ],
   }),
@@ -50,7 +50,7 @@ function Index() {
 
 
   return (
-    <div dir="rtl" className="min-h-screen bg-background text-foreground">
+    <div dir="ltr" className="min-h-screen bg-background text-foreground">
       <header
         className="px-4 pb-7 pt-8 text-primary-foreground sm:px-8"
         style={{ backgroundImage: "var(--gradient-header)" }}
@@ -59,16 +59,17 @@ function Index() {
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-gold">
             Wien · 19–24 September
           </p>
-          <h1 className="mt-2 text-4xl font-bold sm:text-5xl">וינה, שישה ימים</h1>
+          <h1 className="mt-2 text-4xl font-bold sm:text-5xl">Vienna, six days</h1>
           <p className="mt-2 max-w-xl text-sm text-primary-foreground/75">
-            לוח זמנים יומי, מה סגור ומה פתוח, חלופות — ומפה עם המסלול המלא של כל יום.
+            A daily schedule, what is closed and what is open, alternatives — and a map with
+            the full route for each day.
           </p>
 
           <div className="mt-6 inline-flex rounded-full bg-primary-foreground/12 p-1 backdrop-blur">
             {(
               [
-                ["itinerary", "לוח הימים"],
-                ["map", "מפת היום"],
+                ["itinerary", "Itinerary"],
+                ["map", "Day map"],
               ] as const
             ).map(([key, label]) => (
               <button
@@ -94,7 +95,7 @@ function Index() {
             <button
               key={d.id}
               onClick={() => setDayIdx(i)}
-              className={`shrink-0 rounded-xl border px-4 py-2 text-right transition-all ${
+              className={`shrink-0 rounded-xl border px-4 py-2 text-left transition-all ${
                 i === dayIdx
                   ? "border-primary bg-primary text-primary-foreground shadow-[var(--shadow-card)]"
                   : "border-border bg-card text-foreground hover:border-primary/40"
@@ -124,7 +125,7 @@ function Index() {
             <p className="text-sm text-muted-foreground">{day.theme}</p>
           </div>
           <span className="font-mono text-xs text-muted-foreground">
-            {located.length} עצירות על המפה
+            {located.length} stops on the map
           </span>
         </div>
 
@@ -134,14 +135,14 @@ function Index() {
               <ClientOnly
                 fallback={
                   <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
-                    טוען מפה…
+                    Loading map…
                   </div>
                 }
               >
                 <Suspense
                   fallback={
                     <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
-                      טוען מפה…
+                      Loading map…
                     </div>
                   }
                 >
@@ -156,7 +157,7 @@ function Index() {
               rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
             >
-              פתח את כל המסלול ב‑Google Maps ↗
+              Open the whole route in Google Maps ↗
             </a>
 
             <ol className="grid gap-2 sm:grid-cols-2">
@@ -180,7 +181,7 @@ function Index() {
                     rel="noreferrer"
                     className="rounded-lg border border-primary/30 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/5"
                   >
-                    ניווט
+                    Navigate
                   </a>
                 </li>
               ))}
@@ -191,19 +192,19 @@ function Index() {
             {day.warn && <Banner tone="warn">{day.warn}</Banner>}
             {day.closed && (
               <Banner tone="warn">
-                <strong>סגור היום:</strong> {day.closed}
+                <strong>Closed today:</strong> {day.closed}
               </Banner>
             )}
             {day.open && (
               <Banner tone="ok">
-                <strong>פתוח דווקא היום:</strong> {day.open}
+                <strong>Open today:</strong> {day.open}
               </Banner>
             )}
 
-            <ol className="relative space-y-3 border-r-2 border-dashed border-border pr-5">
+            <ol className="relative space-y-3 border-l-2 border-dashed border-border pl-5">
               {day.stops.map((s, i) => (
                 <li key={`${s.title}-${i}`} className="relative">
-                  <span className="absolute -right-[27px] top-5 size-3 rounded-full border-2 border-background bg-gold" />
+                  <span className="absolute -left-[27px] top-5 size-3 rounded-full border-2 border-background bg-gold" />
                   <article className="rounded-2xl border border-border bg-card p-4 shadow-[var(--shadow-card)] transition-transform hover:-translate-y-0.5">
                     <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                       {s.time && (
@@ -233,13 +234,13 @@ function Index() {
                           rel="noreferrer"
                           className="rounded-lg border border-primary/30 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/5"
                         >
-                          ניווט GPS
+                          GPS navigation
                         </a>
                         <button
                           onClick={() => setView("map")}
                           className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-muted-foreground hover:border-primary/30 hover:text-primary"
                         >
-                          הצג במפה
+                          Show on map
                         </button>
                       </div>
                     )}
@@ -251,7 +252,7 @@ function Index() {
             {day.alternatives.length > 0 && (
               <div className="rounded-2xl border border-border bg-secondary p-4">
                 <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
-                  חלופות
+                  Alternatives
                 </h3>
                 <ul className="mt-2 flex flex-wrap gap-2">
                   {day.alternatives.map((a) => (
@@ -271,7 +272,7 @@ function Index() {
         {view === "itinerary" && (
           <>
             <section className="mt-12 rounded-2xl border border-gold/40 bg-card p-5 shadow-[var(--shadow-card)]">
-              <h2 className="text-xl font-bold">להזמין השבוע</h2>
+              <h2 className="text-xl font-bold">Book this week</h2>
               <ul className="mt-3 flex flex-wrap gap-2">
                 {bookings.map((b) => (
                   <li
@@ -285,7 +286,7 @@ function Index() {
             </section>
 
             <section className="mt-8">
-              <h2 className="text-2xl font-bold">🥨 רשימת האוכל האוסטרי</h2>
+              <h2 className="text-2xl font-bold">🥨 The Austrian food list</h2>
               <div className="mt-4 space-y-2">
                 {foodList.map((group) => {
                   const open = openFood === group.title;
@@ -296,7 +297,7 @@ function Index() {
                     >
                       <button
                         onClick={() => setOpenFood(open ? null : group.title)}
-                        className="flex w-full items-center justify-between px-4 py-3 text-right font-bold"
+                        className="flex w-full items-center justify-between px-4 py-3 text-left font-bold"
                       >
                         <span>{group.title}</span>
                         <span className="text-muted-foreground">{open ? "−" : "+"}</span>
