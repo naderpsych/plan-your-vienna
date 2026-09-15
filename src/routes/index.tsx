@@ -32,8 +32,8 @@ function navUrl(s: Stop) {
 
 function routeUrl(stops: Stop[]) {
   const pts = stops.filter((s) => s.lat && s.lng);
-  if (!pts.length) return "https://www.google.com/maps";
   const dest = pts[pts.length - 1];
+  if (!dest) return "https://www.google.com/maps";
   const mid = pts.slice(0, -1).map((s) => `${s.lat},${s.lng}`).join("|");
   return `https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=${dest.lat},${dest.lng}${
     mid ? `&waypoints=${encodeURIComponent(mid)}` : ""
@@ -44,8 +44,9 @@ function Index() {
   const [dayIdx, setDayIdx] = useState(0);
   const [view, setView] = useState<"itinerary" | "map">("itinerary");
   const [openFood, setOpenFood] = useState<string | null>(null);
-  const day = days[dayIdx];
+  const day = days[dayIdx] ?? days[0]!;
   const located = day.stops.filter((s) => s.lat && s.lng);
+
 
   return (
     <div dir="rtl" className="min-h-screen bg-background text-foreground">
