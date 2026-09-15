@@ -57,7 +57,6 @@ export default function App() {
   const [dayIdx, setDayIdx] = useState(0);
   const [view, setView] = useState<"itinerary" | "map" | "warehouse">("itinerary");
   const [openList, setOpenList] = useState<string | null>(null);
-  const [altOpen, setAltOpen] = useState(false);
   const [plan, setPlan] = useState<PlanState>(EMPTY_PLAN);
   const forecast = useForecast(FIRST_DAY, LAST_DAY);
 
@@ -394,41 +393,6 @@ export default function App() {
               </p>
             )}
 
-            {day.alternatives.length > 0 && (
-              <div className="overflow-hidden rounded-2xl border border-border bg-secondary">
-                <button
-                  onClick={() => setAltOpen(!altOpen)}
-                  className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left"
-                >
-                  <span className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
-                    Alternatives for {day.weekday}
-                  </span>
-                  <span className="flex items-center gap-2">
-                    <span className="font-mono text-xs text-muted-foreground">
-                      {day.alternatives.length}
-                    </span>
-                    <span className="text-muted-foreground">{altOpen ? "−" : "+"}</span>
-                  </span>
-                </button>
-                {altOpen && (
-                  <div className="space-y-2 border-t border-border px-4 py-4">
-                    <p className="text-xs text-muted-foreground">
-                      Tap one to read what it is, then drop it straight into the day.
-                    </p>
-                    {day.alternatives.map((alt) => (
-                      <PlaceRow
-                        key={alt.id}
-                        item={alt}
-                        plan={plan}
-                        onAdd={addStop}
-                        defaultDayId={day.id}
-                        actionLabel="Add to this day"
-                      />
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
           </section>
         )}
 
@@ -595,16 +559,6 @@ function StopCard({
           <KindLine stop={stop} iso={iso} />
         </div>
         <div className="flex shrink-0 items-center gap-1">
-          {swaps && swaps.length > 0 && onSwap && (
-            <button
-              onClick={() => setSwapOpen(!swapOpen)}
-              aria-label={`Swap ${stop.title} for something else`}
-              title="Swap for an alternative"
-              className="rounded-lg px-2 py-1 text-sm text-muted-foreground hover:bg-card hover:text-primary"
-            >
-              ⇄
-            </button>
-          )}
           {onRemove && (
             <button
               onClick={onRemove}
@@ -617,60 +571,6 @@ function StopCard({
           )}
         </div>
       </div>
-
-      {swapOpen && swaps && onSwap && (
-        <div className="space-y-2 border-b border-border bg-secondary px-4 py-3">
-          <p className="text-xs text-muted-foreground">
-            Same slot, same category — {stop.time} on this day. Swapping keeps the time and
-            drops {stop.title}.
-          </p>
-          {swaps.map((alt) => {
-            const fit = checkFit(alt, iso, stop.time ?? "12:00");
-            const longer = visitMinutes(alt) - visitMinutes(stop);
-            return (
-              <div
-                key={alt.id}
-                className="flex items-start justify-between gap-3 rounded-xl border border-border bg-background px-3 py-2"
-              >
-                <div className="min-w-0">
-                  <p className="font-semibold" style={{ color: "var(--place-title)" }}>
-                    {alt.title}
-                  </p>
-                  {alt.about && (
-                    <p className="mt-0.5 text-xs text-muted-foreground">{alt.about}</p>
-                  )}
-                  <p
-                    className={`mt-1 text-xs font-semibold ${
-                      fit.level === "ok"
-                        ? "text-primary"
-                        : fit.level === "bad"
-                          ? "text-destructive"
-                          : "text-muted-foreground"
-                    }`}
-                  >
-                    {fit.level === "ok" ? "✅" : fit.level === "bad" ? "⛔" : "ℹ️"} {fit.message}
-                  </p>
-                  {longer >= 30 && (
-                    <p className="mt-0.5 text-xs text-muted-foreground">
-                      ⏳ About {formatMinutes(longer)} longer than {stop.title} — check what
-                      comes after.
-                    </p>
-                  )}
-                </div>
-                <button
-                  onClick={() => {
-                    onSwap(alt);
-                    setSwapOpen(false);
-                  }}
-                  className="shrink-0 rounded-lg border border-primary/30 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/5"
-                >
-                  Swap in
-                </button>
-              </div>
-            );
-          })}
-        </div>
-      )}
 
       <div className="px-4 py-3">
       {stop.about && <p className="text-sm leading-relaxed">{stop.about}</p>}
@@ -726,7 +626,69 @@ function StopCard({
             Hours on Google
           </a>
         )}
+        {swaps && swaps.length > 0 && onSwap && (
+          <button
+            onClick={() => setSwapOpen(!swapOpen)}
+            className="rounded-lg border border-primary/30 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/5"
+          >
+            {swapOpen ? "Hide options" : `More options · ${swaps.length}`}
+          </button>
+        )}
       </div>
+
+      {swapOpen && swaps && onSwap && (
+        <div className="mt-3 space-y-2 rounded-xl border border-border bg-secondary p-3">
+          <p className="text-xs text-muted-foreground">
+            Same category, same {stop.time} slot, open on this day. Swapping keeps the time
+            and drops {stop.title}.
+          </p>
+          {swaps.map((alt) => {
+            const fit = checkFit(alt, iso, stop.time ?? "12:00");
+            const longer = visitMinutes(alt) - visitMinutes(stop);
+            return (
+              <div
+                key={alt.id}
+                className="flex items-start justify-between gap-3 rounded-xl border border-border bg-background px-3 py-2"
+              >
+                <div className="min-w-0">
+                  <p className="font-semibold" style={{ color: "var(--place-title)" }}>
+                    {alt.title}
+                  </p>
+                  {alt.about && (
+                    <p className="mt-0.5 text-xs text-muted-foreground">{alt.about}</p>
+                  )}
+                  <p
+                    className={`mt-1 text-xs font-semibold ${
+                      fit.level === "ok"
+                        ? "text-primary"
+                        : fit.level === "bad"
+                          ? "text-destructive"
+                          : "text-muted-foreground"
+                    }`}
+                  >
+                    {fit.level === "ok" ? "✅" : fit.level === "bad" ? "⛔" : "ℹ️"} {fit.message}
+                  </p>
+                  {longer >= 30 && (
+                    <p className="mt-0.5 text-xs text-muted-foreground">
+                      ⏳ About {formatMinutes(longer)} longer than {stop.title} — check what
+                      comes after.
+                    </p>
+                  )}
+                </div>
+                <button
+                  onClick={() => {
+                    onSwap(alt);
+                    setSwapOpen(false);
+                  }}
+                  className="shrink-0 rounded-lg border border-primary/30 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/5"
+                >
+                  Swap in
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      )}
       </div>
     </article>
   );
