@@ -1,11 +1,13 @@
 /**
- * Rough distances between two stops.
+ * The leg between two stops.
  *
- * These are straight-line figures with a detour factor, not routed directions —
- * good enough to tell a five-minute hop from a half-hour trek, and every leg
- * links out to Google for the real route.
+ * Distance is computed here — that is geometry, and a detour factor makes it
+ * close enough. Travel time is not guessed: the transit figure comes from
+ * Google, read by the legs agent and stored in legs.generated.json. Until the
+ * agent has a pair, the line shows the distance and sends you to Google.
  */
 import type { Stop } from "@/data/itinerary";
+import generatedLegs from "@/data/legs.generated.json";
 
 /** Straight-line kilometres between two points. */
 export function haversineKm(
@@ -23,22 +25,37 @@ export function haversineKm(
   return 2 * R * Math.asin(Math.sqrt(h));
 }
 
+type GeneratedLeg = {
+  walk_min?: number | null;
+  transit_min?: number | null;
+  transit_summary?: string | null;
+  checked?: string | null;
+};
+
+const legs = generatedLegs as unknown as {
+  generated: string | null;
+  legs: Record<string, GeneratedLeg>;
+};
+
 export type Leg = {
   /** Street distance estimate, in kilometres. */
   km: number;
-  minutes: number;
+  /** Minutes, straight from Google. Null when the agent has not read this pair. */
+  minutes: number | null;
   mode: "walk" | "transit";
+  /** Which lines Google suggested, when it said. */
+  summary?: string;
   url: string;
 };
 
 /** Vienna streets are not straight, so pad the crow-flies distance. */
 const DETOUR = 1.25;
-const WALK_KMH = 4.6;
-/** Waiting, walking to the stop, changing lines. */
-const TRANSIT_OVERHEAD_MIN = 9;
-const TRANSIT_KMH = 19;
-/** Past this, nobody walks it. */
-const WALK_LIMIT_MIN = 28;
+/** Beyond this nobody walks it, so the transit time is the one that matters. */
+const WALKABLE_KM = 1.8;
+
+export function legKey(from: Stop, to: Stop): string {
+  return `${from.id}>${to.id}`;
+}
 
 export function legBetween(from: Stop, to: Stop): Leg | null {
   if (!from.lat || !from.lng || !to.lat || !to.lng) return null;
@@ -50,19 +67,21 @@ export function legBetween(from: Stop, to: Stop): Leg | null {
   if (straight < 0.05) return null; // same place, near enough
 
   const km = straight * DETOUR;
-  const walkMinutes = Math.round((km / WALK_KMH) * 60);
-  const url =
+  const base =
     `https://www.google.com/maps/dir/?api=1&origin=${from.lat},${from.lng}` +
     `&destination=${to.lat},${to.lng}`;
 
-  if (walkMinutes <= WALK_LIMIT_MIN) {
-    return { km, minutes: walkMinutes, mode: "walk", url: `${url}&travelmode=walking` };
-  }
+  const known = legs.legs?.[legKey(from, to)];
+  const walkable = km <= WALKABLE_KM;
+  const mode: "walk" | "transit" = walkable ? "walk" : "transit";
+  const minutes = walkable ? (known?.walk_min ?? null) : (known?.transit_min ?? null);
+
   return {
     km,
-    minutes: Math.round(TRANSIT_OVERHEAD_MIN + (km / TRANSIT_KMH) * 60),
-    mode: "transit",
-    url: `${url}&travelmode=transit`,
+    minutes,
+    mode,
+    url: `${base}&travelmode=${walkable ? "walking" : "transit"}`,
+    ...(!walkable && known?.transit_summary ? { summary: known.transit_summary } : {}),
   };
 }
 
@@ -76,4 +95,14 @@ export function formatMinutes(minutes: number): string {
   const h = Math.floor(minutes / 60);
   const m = minutes % 60;
   return m ? `${h}h ${m}` : `${h}h`;
+}
+
+/** What the timeline prints between two cards. */
+export function describeLeg(leg: Leg): string {
+  const distance = formatDistance(leg.km);
+  if (leg.minutes === null) {
+    return `${distance} · ${leg.mode === "walk" ? "walk" : "by public transport"} — tap for the time`;
+  }
+  if (leg.mode === "walk") return `${distance} · ${leg.minutes} min walk`;
+  return `${distance} · ${leg.minutes} min${leg.summary ? ` · ${leg.summary}` : ""}`;
 }

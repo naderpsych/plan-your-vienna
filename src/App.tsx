@@ -10,7 +10,7 @@ import {
 // `days` is the six planned days plus today, so every day control gets it free.
 import { allDays as days, todayDay } from "@/lib/days";
 import { buildCatalogue, type CatalogueItem } from "@/lib/catalogue";
-import { formatDistance, formatMinutes, legBetween } from "@/lib/geo";
+import { describeLeg, formatMinutes, legBetween } from "@/lib/geo";
 import { warehouse } from "@/data/warehouse";
 import { KIND_LABEL, visitMinutes } from "@/data/itinerary";
 import {
@@ -368,12 +368,7 @@ export default function App() {
                         className="mt-2 inline-flex items-center gap-2 pl-1 text-xs text-muted-foreground hover:text-primary"
                       >
                         <span aria-hidden>↓</span>
-                        <span>
-                          {formatDistance(leg.km)} ·{" "}
-                          {leg.mode === "walk"
-                            ? `${leg.minutes} min walk`
-                            : `~${leg.minutes} min by public transport`}
-                        </span>
+                        <span>{describeLeg(leg)}</span>
                       </a>
                     )}
                   </li>

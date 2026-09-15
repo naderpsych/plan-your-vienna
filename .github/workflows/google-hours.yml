@@ -1,4 +1,4 @@
-name: Google Maps hours agent
+name: Google Maps agent
 
 on:
   schedule:
@@ -34,7 +34,11 @@ jobs:
           python -m playwright install --with-deps chromium
 
       - name: Read the hours off Google Maps
-        run: python scripts/google_hours.py ${{ github.event.inputs.batch || '60' }}
+        run: python scripts/google_hours.py ${{ github.event.inputs.batch || '140' }}
+
+      # Travel times are read off Google too, never calculated here.
+      - name: Time the legs between stops
+        run: python scripts/google_legs.py 40
 
       - name: Commit what changed
         run: |
@@ -45,11 +49,11 @@ jobs:
             git stash --include-untracked
             git reset --hard origin/main
             git stash pop || true
-            git add src/data/hours.generated.json
+            git add src/data/hours.generated.json src/data/legs.generated.json
             if git diff --cached --quiet; then
               echo "no new hours"; break
             fi
-            git commit -m "Google hours agent: refresh opening hours ($(date -u +%Y-%m-%d))"
+            git commit -m "Google agent: refresh opening hours and travel times ($(date -u +%Y-%m-%d))"
             if git push; then
               echo "pushed"; break
             fi
