@@ -4,6 +4,7 @@ import { lazy, Suspense, useState } from "react";
 import { days, bookings, foodList, type Stop } from "@/data/itinerary";
 
 const TripMap = lazy(() => import("@/components/TripMap"));
+const MyNotes = lazy(() => import("@/components/MyNotes"));
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -317,6 +318,12 @@ function Index() {
                 })}
               </div>
             </section>
+
+            <ClientOnly fallback={null}>
+              <Suspense fallback={null}>
+                <MyNotes />
+              </Suspense>
+            </ClientOnly>
           </>
         )}
       </main>
