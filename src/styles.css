@@ -19,6 +19,13 @@
  */
 
 @theme inline {
+  --font-display: "Frank Ruhl Libre", Georgia, serif;
+  --font-sans: "Heebo", ui-sans-serif, system-ui, sans-serif;
+  --color-gold: var(--gold);
+  --color-gold-foreground: var(--gold-foreground);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
