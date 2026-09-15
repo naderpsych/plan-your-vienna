@@ -26,15 +26,19 @@ export default function TripMap({ day }: { day: Day }) {
     : [48.2082, 16.3738];
 
   const line = located.map((s) => [s.lat, s.lng] as [number, number]);
+  const bounds = line.length > 1 ? L.latLngBounds(line).pad(0.15) : undefined;
 
   return (
     <MapContainer
+      key={day.id}
       center={center}
       zoom={13}
+      bounds={bounds}
       scrollWheelZoom
       className="h-full w-full"
       style={{ background: "var(--color-muted)" }}
     >
+
       <TileLayer
         attribution="&copy; OpenStreetMap"
         url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
