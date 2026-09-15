@@ -1,17 +1,39 @@
+/**
+ * Trip data.
+ *
+ * `about` says what the place is, `plan` says what we actually do there.
+ * `hours.week` is indexed 0 = Sunday … 6 = Saturday; null means closed.
+ * Hours are a best-effort copy of the published times — the daily agent in
+ * .github/workflows/refresh-hours.yml refreshes them from OpenStreetMap, and
+ * every card links to Google so you can double-check before you walk over.
+ */
+
+export type Hours = {
+  week: (string | null)[];
+  note?: string;
+  source?: "manual" | "osm";
+  checked?: string;
+};
+
 export type Stop = {
+  id: string;
   time?: string;
   title: string;
-  detail?: string;
-  note?: string;
+  about?: string;
+  plan?: string;
   warn?: string;
   star?: boolean;
+  /** Hotel anchors — always first, never removable. */
+  fixed?: boolean;
   lat?: number;
   lng?: number;
   query?: string;
+  hours?: Hours;
 };
 
 export type Day = {
   id: string;
+  iso: string;
   date: string;
   weekday: string;
   theme: string;
@@ -23,46 +45,80 @@ export type Day = {
   alternatives: string[];
 };
 
+export const HOTEL = {
+  name: "Jaz in the City Vienna",
+  address: "Windmühlgasse 3, 1060 Wien",
+  lat: 48.1979,
+  lng: 16.3576,
+  query: "Jaz in the City Vienna",
+};
+
+const daily = (h: string): (string | null)[] => [h, h, h, h, h, h, h];
+
+/** Austrian public holidays — the planner warns if you aim at one. */
+export const holidays: Record<string, string> = {
+  "2026-01-01": "Neujahr",
+  "2026-01-06": "Heilige Drei Könige",
+  "2026-04-06": "Ostermontag",
+  "2026-05-01": "Staatsfeiertag",
+  "2026-05-14": "Christi Himmelfahrt",
+  "2026-05-25": "Pfingstmontag",
+  "2026-06-04": "Fronleichnam",
+  "2026-08-15": "Mariä Himmelfahrt",
+  "2026-10-26": "Nationalfeiertag",
+  "2026-11-01": "Allerheiligen",
+  "2026-12-08": "Mariä Empfängnis",
+  "2026-12-25": "Christtag",
+  "2026-12-26": "Stefanitag",
+};
+
+const breakfast = (day: string): Stop => ({
+  id: `${day}-hotel`,
+  time: "08:30",
+  title: HOTEL.name,
+  about: `Your hotel at ${HOTEL.address}, one street off Mariahilfer Straße.`,
+  plan: "Wake up around 08:00–09:00, breakfast downstairs, out the door by 10:00.",
+  fixed: true,
+  lat: HOTEL.lat,
+  lng: HOTEL.lng,
+  query: HOTEL.query,
+  hours: { week: daily("06:30-10:30"), note: "Breakfast service", source: "manual" },
+});
+
 export const days: Day[] = [
   {
     id: "sat",
+    iso: "2026-09-19",
     date: "Sep 19",
     weekday: "Saturday",
     theme: "Arrival",
+    warn: "You land late — the whole day is really just check-in and dinner",
     stops: [
       {
-        time: "Before 14:00",
-        title: "Naschmarkt Flea Market",
-        detail: "Saturdays only · 8 min from the hotel. If you land early",
-        lat: 48.1968,
-        lng: 16.3627,
-        query: "Naschmarkt Flohmarkt Wien",
+        id: "sat-hotel",
+        time: "18:00",
+        title: HOTEL.name,
+        about: `Your hotel at ${HOTEL.address}, a two-minute walk from Mariahilfer Straße.`,
+        plan: "Arrive, check in, drop the bags and change before dinner.",
+        fixed: true,
+        lat: HOTEL.lat,
+        lng: HOTEL.lng,
+        query: HOTEL.query,
       },
       {
-        time: "16:00",
-        title: "kaffemik",
-        detail: "Zollergasse 5 · third wave, 5 min from the hotel",
-        lat: 48.199,
-        lng: 16.3506,
-        query: "kaffemik Zollergasse 5 Wien",
-      },
-      {
-        time: "17:30",
-        title: "Mariahilfer Straße",
-        detail: "Shops open until 18:00. Tomorrow everything is closed",
-        lat: 48.1988,
-        lng: 16.3492,
-        query: "Mariahilfer Strasse Wien",
-      },
-      {
+        id: "sat-plachutta",
         time: "19:30",
         title: "Plachutta Wollzeile 38",
-        detail: "Tafelspitz in a copper pot. Book ahead",
+        about:
+          "The Tafelspitz institution since 1993 — boiled beef served in its copper pot, still the dish Vienna is judged by.",
+        plan:
+          "Dinner. 20 minutes by U3 from the hotel, so leave by 19:00. Book ahead, this place fills up.",
         warn:
           "Soup first, with the bread and the marrow bone, then the beef. One portion feeds two. Skip the tartare",
         lat: 48.2087,
         lng: 16.3775,
         query: "Plachutta Wollzeile 38 Wien",
+        hours: { week: daily("11:30-23:30"), source: "manual" },
       },
     ],
     alternatives: [
@@ -73,54 +129,78 @@ export const days: Day[] = [
   },
   {
     id: "sun",
+    iso: "2026-09-20",
     date: "Sep 20",
     weekday: "Sunday",
     theme: "Art, wine and a concert",
     star: true,
-    warn: "All shops are closed. Museums and restaurants are open",
+    warn: "Every shop in Vienna is closed. Museums, cafés and restaurants are open",
     stops: [
+      breakfast("sun"),
       {
-        time: "9:00",
+        id: "sun-belvedere",
+        time: "10:15",
         title: "Belvedere",
-        detail: "Klimt's The Kiss · empty at this hour",
+        about:
+          "A baroque palace holding the world's largest Klimt collection — The Kiss hangs in the Upper Belvedere.",
+        plan:
+          "Two hours, Upper Belvedere only. Go straight to The Kiss before the tour groups land, then work backwards through the rest.",
         lat: 48.1915,
         lng: 16.3809,
         query: "Belvedere Wien",
+        hours: { week: daily("09:00-18:00"), source: "manual" },
       },
       {
-        time: "11:00",
+        id: "sun-beethovengang",
+        time: "12:30",
         title: "Beethovengang",
-        detail: "Flat path along a stream, 2 km · U4 Heiligenstadt + bus",
+        about:
+          "The shaded stream path in Heiligenstadt where Beethoven walked while going deaf — there is a bust of him halfway along.",
+        plan:
+          "A flat 2 km stroll, about 45 minutes. U4 to Heiligenstadt, then the bus up. No climbing.",
         lat: 48.2495,
         lng: 16.335,
         query: "Beethovengang Wien",
       },
       {
-        time: "13:30",
+        id: "sun-heuriger",
+        time: "14:30",
         title: "Heuriger in Nussdorf",
-        detail: "Pumpkin soup with pumpkin seed oil",
-        warn: "Sturm is alcoholic → Traubenmost for your wife",
+        about:
+          "A wine tavern in the vineyard village at the edge of the city, where growers pour their own young wine in the courtyard.",
+        plan:
+          "Late lunch outdoors. Order the pumpkin soup with pumpkin seed oil and whatever is on the buffet counter.",
+        warn: "Sturm is alcoholic → ask for Traubenmost for your wife",
         lat: 48.2585,
         lng: 16.348,
         query: "Heuriger Nussdorf Wien",
+        hours: { week: daily("15:00-23:00"), note: "Varies by tavern", source: "manual" },
       },
       {
-        time: "15:30 / 19:00",
+        id: "sun-konzerthaus",
+        time: "19:00",
         title: "50 Pianos · Konzerthaus",
-        detail: "Two performances, €44–59",
+        about:
+          "One-off spectacle in Vienna's 1913 concert hall: fifty pianos playing together on one stage.",
+        plan:
+          "The evening show. €44–59. Book this week — it is the single thing here that sells out.",
         star: true,
         lat: 48.2003,
         lng: 16.3773,
         query: "Wiener Konzerthaus",
       },
       {
-        time: "Evening",
+        id: "sun-gerstner",
+        time: "21:30",
         title: "Gerstner",
-        detail:
-          "Kärntner Str. 51 · the only place at this level open today, until 22:00",
+        about:
+          "Imperial court confectioner since 1847, three floors above Kärntner Straße opposite the opera.",
+        plan:
+          "A cake and a Melange after the concert — five minutes' walk from the Konzerthaus and the only place at this level still open.",
         lat: 48.2039,
         lng: 16.3705,
         query: "Gerstner Kärntner Strasse 51 Wien",
+        hours: { week: daily("10:00-23:00"), source: "manual" },
       },
     ],
     alternatives: [
@@ -132,6 +212,7 @@ export const days: Day[] = [
   },
   {
     id: "mon",
+    iso: "2026-09-21",
     date: "Sep 21",
     weekday: "Monday",
     theme: "Nature and markets",
@@ -139,58 +220,91 @@ export const days: Day[] = [
       "KHM, Secession, Wien Museum, Josephinum, Narrenturm, galleries, Schnitzelwirt, Staud's",
     open: "Prunksaal, Schatzkammer, Café Central, Zuckerlwerkstatt, Albertina, Leopold",
     stops: [
+      breakfast("mon"),
       {
-        time: "9:00",
+        id: "mon-lainzer",
+        time: "10:15",
         title: "Lainzer Tiergarten",
-        detail:
-          "Wild boar on the trail · U4 Hietzing + bus 60B · flat, 20 min to Villa Hermes",
+        about:
+          "A walled imperial hunting ground on the city edge, now a nature reserve where wild boar and deer walk the paths.",
+        plan:
+          "Head out right after breakfast — U4 to Hietzing, then bus 60B, about 50 minutes door to gate. Flat 20-minute walk to Villa Hermes and back.",
         star: true,
         lat: 48.1746,
         lng: 16.2312,
         query: "Lainzer Tiergarten Wien",
+        hours: { week: daily("08:00-17:30"), source: "manual" },
       },
       {
-        time: "13:00",
+        id: "mon-brunnenmarkt",
+        time: "14:30",
         title: "Brunnenmarkt",
-        detail: "U6 Josefstädter Str. · Yppenplatz at the north end – good food",
+        about:
+          "The longest street market in Vienna and the least touristy — Turkish and Balkan stalls, produce, spices.",
+        plan:
+          "Walk it end to end, then eat at Yppenplatz at the north end where the good small kitchens are.",
         lat: 48.2098,
         lng: 16.3349,
         query: "Brunnenmarkt Yppenplatz Wien",
+        hours: {
+          week: [null, "06:00-19:30", "06:00-19:30", "06:00-19:30", "06:00-19:30", "06:00-19:30", "06:00-17:00"],
+          source: "manual",
+        },
       },
       {
-        time: "15:30",
+        id: "mon-prunksaal",
+        time: "16:00",
         title: "Prunksaal",
-        detail: "Josefsplatz 1 · Baroque hall from 1726, 80 m long, giant globes",
+        about:
+          "The State Hall of the Austrian National Library, 1726 — an 80-metre baroque room of dark wood, frescoes and two giant Renaissance globes.",
+        plan:
+          "45 minutes is enough. Last entry is 17:30, so do not push it later.",
         star: true,
         lat: 48.2064,
         lng: 16.366,
         query: "Prunksaal Josefsplatz 1 Wien",
+        hours: { week: daily("10:00-18:00"), note: "Last entry 17:30", source: "manual" },
       },
       {
-        time: "16:45",
+        id: "mon-central",
+        time: "17:00",
         title: "Café Central",
-        detail: "Herrengasse 14 · 4 min away. Book ahead",
+        about:
+          "The vaulted 1876 coffee house where Trotsky, Freud and half of imperial Vienna sat all day over one coffee.",
+        plan: "Coffee and a cake, four minutes' walk from the Prunksaal. Reserve or expect a queue.",
         lat: 48.2103,
         lng: 16.3654,
         query: "Cafe Central Herrengasse 14 Wien",
+        hours: {
+          week: ["10:00-21:00", "08:00-21:00", "08:00-21:00", "08:00-21:00", "08:00-21:00", "08:00-21:00", "08:00-21:00"],
+          source: "manual",
+        },
       },
       {
-        time: "17:30",
+        id: "mon-zuckerl",
+        time: "17:45",
         title: "Zuckerlwerkstatt",
-        detail: "Herrengasse 6 · candy made by hand in front of you. Until 18:00",
+        about:
+          "A working candy workshop where they pull, roll and cut hard sweets by hand on a marble table in front of you.",
+        plan: "Ten minutes and a bag to take home. They shut at 18:00 sharp, so go straight from the café.",
         lat: 48.2098,
         lng: 16.366,
         query: "Zuckerlwerkstatt Herrengasse 6 Wien",
+        hours: { week: [null, "10:00-18:00", "10:00-18:00", "10:00-18:00", "10:00-18:00", "10:00-18:00", "10:00-18:00"], source: "manual" },
       },
       {
+        id: "mon-figlmuller",
         time: "20:00",
         title: "Figlmüller Wollzeile",
-        detail:
-          "Book now. They do have veal schnitzel. The potato salad with pumpkin seed oil is a must",
+        about:
+          "The schnitzel address since 1905 — pounded so wide it hangs off the plate.",
+        plan:
+          "Dinner. Book now. Ask for the veal version, and the potato salad with pumpkin seed oil is not optional.",
         star: true,
         lat: 48.2087,
         lng: 16.3745,
         query: "Figlmüller Wollzeile Wien",
+        hours: { week: daily("11:00-22:30"), source: "manual" },
       },
     ],
     alternatives: [
@@ -202,84 +316,116 @@ export const days: Day[] = [
   },
   {
     id: "tue",
+    iso: "2026-09-22",
     date: "Sep 22",
     weekday: "Tuesday",
     theme: "City, shops, galleries",
     closed: "Schatzkammer, Leopold",
     stops: [
+      breakfast("tue"),
       {
-        time: "8:00",
-        title: "Oberlaa",
-        detail: "Neuer Markt 16 · Kardinalschnitte – what the Viennese actually buy",
-        lat: 48.2049,
-        lng: 16.3703,
-        query: "Oberlaa Neuer Markt 16 Wien",
-      },
-      {
-        time: "9:00",
-        title: "KHM",
-        detail: "Bruegel's Tower of Babel, Vermeer, Caravaggio · two hours",
+        id: "tue-khm",
+        time: "10:15",
+        title: "Kunsthistorisches Museum",
+        about:
+          "The Habsburg art collection in a purpose-built palace — the largest Bruegel room anywhere, plus Vermeer and Caravaggio.",
+        plan:
+          "Two hours, picture gallery only. Bruegel first (Tower of Babel, Hunters in the Snow), then the Kunstkammer if legs allow.",
         lat: 48.2038,
         lng: 16.3616,
         query: "Kunsthistorisches Museum Wien",
+        hours: {
+          week: ["10:00-18:00", null, "10:00-18:00", "10:00-18:00", "10:00-21:00", "10:00-18:00", "10:00-18:00"],
+          note: "Closed Mondays, late on Thursdays",
+          source: "manual",
+        },
       },
       {
+        id: "tue-ankeruhr",
         time: "12:00",
         title: "Anker Clock",
-        detail: "Hoher Markt · 12 figures on parade, exactly at 12:00",
+        about:
+          "A 1914 art nouveau clock bridging two buildings, with twelve historical figures that cross it on a track.",
+        plan:
+          "All twelve figures parade only at noon — be standing in Hoher Markt by 11:55. Takes ten minutes, then you are done.",
         lat: 48.2113,
         lng: 16.3729,
         query: "Ankeruhr Hoher Markt Wien",
       },
       {
+        id: "tue-tea",
         time: "12:30",
         title: "Schönbichler → Haas & Haas",
-        detail: "Wollzeile 4 (tea since 1870) · Stephansplatz 4 (tea house)",
+        about:
+          "Two old tea houses two streets apart: Schönbichler selling loose leaf since 1870, Haas & Haas with a courtyard behind the cathedral.",
+        plan: "Buy tea at Schönbichler, then a light lunch in the Haas & Haas courtyard.",
         lat: 48.2085,
         lng: 16.3735,
         query: "Schönbichler Wollzeile 4 Wien",
+        hours: { week: [null, "09:00-18:30", "09:00-18:30", "09:00-18:30", "09:00-18:30", "09:00-18:30", "09:00-17:00"], source: "manual" },
       },
       {
+        id: "tue-graben",
         time: "14:00",
         title: "Altmann & Kühne · Julius Meinl · Lobmeyr",
-        detail: "At Lobmeyr go up to the 3rd floor – glass museum",
+        about:
+          "Three shops on the Graben: miniature chocolates in hand-made boxes, the grand grocer, and the glassmaker who lit the Vienna State Opera.",
+        plan:
+          "Souvenir run. At Lobmeyr climb to the third floor — there is a free glass museum up there nobody visits.",
         lat: 48.2091,
         lng: 16.3699,
         query: "Altmann & Kühne Graben Wien",
+        hours: { week: [null, "10:00-18:00", "10:00-18:00", "10:00-18:00", "10:00-18:00", "10:00-18:00", "10:00-17:00"], source: "manual" },
       },
       {
+        id: "tue-peterskirche",
         time: "15:00",
         title: "Free organ concert · Peterskirche",
-        detail: "30 min",
+        about:
+          "A baroque church squeezed behind the Graben that runs a free organ recital every afternoon.",
+        plan: "Thirty minutes, no ticket, walk in and sit down. Starts at 15:00.",
         star: true,
         lat: 48.2088,
         lng: 16.3699,
         query: "Peterskirche Wien",
+        hours: { week: daily("07:00-20:00"), note: "Recital daily at 15:00", source: "manual" },
       },
       {
+        id: "tue-gegenbauer",
         time: "16:30",
         title: "Gegenbauer",
-        detail:
-          "Naschmarkt 111 · artisan vinegar, tastings of everything + pumpkin seed oil. Until 18:00",
+        about:
+          "A third-generation vinegar house at the Naschmarkt that ferments vinegar from asparagus, tomato and beer.",
+        plan:
+          "They pour tastings of everything across the counter. Buy a bottle plus the pumpkin seed oil. Closes at 18:00.",
         lat: 48.198,
         lng: 16.3635,
         query: "Gegenbauer Naschmarkt Wien",
+        hours: { week: [null, "09:00-18:00", "09:00-18:00", "09:00-18:00", "09:00-18:00", "09:00-18:00", "09:00-17:00"], source: "manual" },
       },
       {
+        id: "tue-vollpension",
         time: "17:15",
         title: "Vollpension + 3 galleries",
-        detail: "All on the same street – Schleifmühlgasse",
+        about:
+          "A café where grandmothers bake the cakes, on a street lined with contemporary galleries.",
+        plan: "Cake at Vollpension, then wander into whichever galleries on Schleifmühlgasse are open.",
         lat: 48.1966,
         lng: 16.3651,
         query: "Vollpension Schleifmühlgasse Wien",
+        hours: { week: daily("09:00-20:00"), source: "manual" },
       },
       {
+        id: "tue-schnitzelwirt",
         time: "20:00",
         title: "Schnitzelwirt",
-        detail: "Neubaugasse 52 · 6 min from the hotel, huge portions",
+        about:
+          "A plain neighbourhood tavern famous for portions that arrive larger than the plate.",
+        plan: "Dinner, six minutes' walk from the hotel. Order one schnitzel between two and still expect leftovers.",
         lat: 48.1975,
         lng: 16.3486,
         query: "Schnitzelwirt Neubaugasse 52 Wien",
+        hours: { week: [null, "11:00-21:30", "11:00-21:30", "11:00-21:30", "11:00-21:30", "11:00-21:30", "11:00-21:30"], source: "manual" },
       },
     ],
     alternatives: [
@@ -292,50 +438,84 @@ export const days: Day[] = [
   },
   {
     id: "wed",
+    iso: "2026-09-23",
     date: "Sep 23",
     weekday: "Wednesday",
     theme: "Vegan + opera",
     star: true,
-    warn: "The vegan place closes at 22:00, the opera ends at 22:15. Eat beforehand",
+    warn: "The vegan kitchen closes at 22:00 and the opera runs to 22:15 — eat before, not after",
     stops: [
+      breakfast("wed"),
       {
-        time: "10:00",
+        id: "wed-narrenturm",
+        time: "10:15",
         title: "Narrenturm",
-        detail: "The only day it is open during your stay · 10:00–17:00",
+        about:
+          "The round 1784 'fools' tower', Europe's first purpose-built asylum, now a pathological-anatomy collection.",
+        plan:
+          "An hour. This is the only day of your trip it is open, so it is now or not at all.",
         star: true,
         lat: 48.2166,
         lng: 16.351,
         query: "Narrenturm Wien",
+        hours: {
+          week: [null, null, null, "10:00-18:00", "10:00-18:00", "10:00-18:00", "10:00-18:00"],
+          note: "Wed–Sat only",
+          source: "manual",
+        },
       },
       {
+        id: "wed-deewan",
         time: "12:30",
         title: "Der Wiener Deewan",
-        detail: "400 m away · vegan curries, pay as you wish",
+        about:
+          "Pakistani canteen run on a pay-as-you-wish basis — the curries are all vegan and the students keep it full.",
+        plan: "Lunch, 400 m from the Narrenturm. Take what you want, pay what you think it was worth.",
         lat: 48.2148,
         lng: 16.3557,
         query: "Der Wiener Deewan Wien",
+        hours: { week: [null, "11:00-22:00", "11:00-22:00", "11:00-22:00", "11:00-22:00", "11:00-22:00", "11:00-22:00"], source: "manual" },
       },
       {
+        id: "wed-donaukanal",
         time: "14:30",
         title: "Donaukanal",
-        detail: "Flat walk, graffiti",
+        about:
+          "The canal embankment through the middle of town, walled in legal graffiti and lined with bars on pontoons.",
+        plan: "A flat walk along the water, as long or short as you feel. Nothing to book.",
         lat: 48.213,
         lng: 16.379,
         query: "Donaukanal Wien",
       },
-      { time: "15:30", title: "Rest" },
       {
+        id: "wed-rest",
+        time: "15:30",
+        title: "Back to the hotel",
+        about: "Your own room, ten minutes from the opera house.",
+        plan: "Rest and change — the opera is long and you have been walking for five days.",
+        lat: HOTEL.lat,
+        lng: HOTEL.lng,
+        query: HOTEL.query,
+      },
+      {
+        id: "wed-swing",
         time: "17:00",
         title: "Swing Kitchen",
-        detail: "Schwedenplatz (or Yamm! for Austrian-vegetarian)",
+        about: "Austrian vegan fast food — burgers that started as a Heuriger family's side project.",
+        plan: "Early dinner before the curtain. Yamm! at Schwedenplatz is the sit-down alternative.",
         lat: 48.2116,
         lng: 16.379,
         query: "Swing Kitchen Schwedenplatz Wien",
+        hours: { week: daily("11:00-22:00"), source: "manual" },
       },
       {
+        id: "wed-oper",
         time: "19:00",
-        title: "Staatsoper",
-        detail: "La clemenza di Tito",
+        title: "Wiener Staatsoper",
+        about:
+          "The 1869 state opera house, still running a different production almost every night of the season.",
+        plan:
+          "La clemenza di Tito. Be seated by 18:45. Ends around 22:15 — hence the early dinner.",
         star: true,
         lat: 48.203,
         lng: 16.369,
@@ -351,40 +531,127 @@ export const days: Day[] = [
   },
   {
     id: "thu",
+    iso: "2026-09-24",
     date: "Sep 24",
     weekday: "Thursday",
     theme: "Departure",
+    warn: "You leave straight after breakfast — nothing else fits this morning",
     stops: [
       {
-        time: "7:30",
-        title: "Joseph Brot",
-        lat: 48.202,
-        lng: 16.38,
-        query: "Joseph Brot Wien",
+        id: "thu-hotel",
+        time: "08:00",
+        title: HOTEL.name,
+        about: `Your hotel at ${HOTEL.address}.`,
+        plan: "Last breakfast, pack, check out.",
+        fixed: true,
+        lat: HOTEL.lat,
+        lng: HOTEL.lng,
+        query: HOTEL.query,
+        hours: { week: daily("06:30-10:30"), note: "Breakfast service", source: "manual" },
       },
       {
-        time: "10:00",
-        title: "Butterfly House",
-        detail: "20 min",
-        lat: 48.2044,
-        lng: 16.367,
-        query: "Schmetterlinghaus Wien",
-      },
-      {
-        time: "10:00",
-        title: "Demel",
-        lat: 48.2091,
-        lng: 16.369,
-        query: "Demel Kohlmarkt Wien",
-      },
-      {
-        title: "Full-day option: Bratislava",
-        detail:
-          "Twin City Liner, 75 min, from €28. Passes through Donau-Auen National Park",
-        warn: "Passports",
+        id: "thu-depart",
+        time: "09:00",
+        title: "Leave for the airport",
+        about: "City Airport Train or the S7 from Wien Mitte, about 20–25 minutes to VIE.",
+        plan: "Out of the hotel by 09:00. Anything you still want is on the wish list below.",
+        fixed: true,
+        lat: 48.2065,
+        lng: 16.3854,
+        query: "Wien Mitte Bahnhof",
       },
     ],
     alternatives: [],
+  },
+];
+
+/**
+ * Places that did not make it into a day — either because they clash with the
+ * schedule or because they were cut when the arrival and departure times were
+ * fixed. Add any of them to a day from the wish list at the bottom of the page.
+ */
+export const wishlist: Stop[] = [
+  {
+    id: "w-naschmarkt-flea",
+    title: "Naschmarkt Flea Market",
+    about: "Vienna's big Saturday-only flea market, at the far end of the Naschmarkt.",
+    plan: "Saturdays only, and it winds down by 16:00 — with an 18:00 landing this trip misses it entirely.",
+    warn: "Saturdays only. Your Saturday starts at 18:00, so this one is realistically out",
+    lat: 48.1968,
+    lng: 16.3627,
+    query: "Naschmarkt Flohmarkt Wien",
+    hours: { week: [null, null, null, null, null, null, "06:30-16:00"], source: "manual" },
+  },
+  {
+    id: "w-kaffemik",
+    title: "kaffemik",
+    about: "Third-wave coffee bar on Zollergasse with rotating roasters.",
+    plan: "Five minutes from the hotel — easy to slot in before any morning that starts in the centre.",
+    lat: 48.199,
+    lng: 16.3506,
+    query: "kaffemik Zollergasse 5 Wien",
+    hours: { week: [null, "08:30-18:00", "08:30-18:00", "08:30-18:00", "08:30-18:00", "08:30-18:00", "09:00-18:00"], source: "manual" },
+  },
+  {
+    id: "w-mariahilfer",
+    title: "Mariahilfer Straße",
+    about: "The long pedestrian shopping street your hotel sits behind.",
+    plan: "Shops run to about 19:00 on weekdays and 18:00 on Saturday. Closed Sunday.",
+    lat: 48.1988,
+    lng: 16.3492,
+    query: "Mariahilfer Strasse Wien",
+    hours: { week: [null, "09:00-19:00", "09:00-19:00", "09:00-19:00", "09:00-19:00", "09:00-19:00", "09:00-18:00"], source: "manual" },
+  },
+  {
+    id: "w-oberlaa",
+    title: "Oberlaa",
+    about: "Viennese pastry chain at Neuer Markt, known for the Kardinalschnitte.",
+    plan: "A 20-minute coffee stop — what the Viennese actually buy rather than the tourist cake.",
+    lat: 48.2049,
+    lng: 16.3703,
+    query: "Oberlaa Neuer Markt 16 Wien",
+    hours: { week: daily("08:00-20:00"), source: "manual" },
+  },
+  {
+    id: "w-joseph",
+    title: "Joseph Brot",
+    about: "Sourdough bakery and breakfast room, widely held to be the best bread in the city.",
+    plan: "Breakfast outside the hotel, if you ever want to skip the buffet.",
+    lat: 48.202,
+    lng: 16.38,
+    query: "Joseph Brot Wien",
+    hours: { week: ["08:00-18:00", "07:30-19:00", "07:30-19:00", "07:30-19:00", "07:30-19:00", "07:30-19:00", "07:30-19:00"], source: "manual" },
+  },
+  {
+    id: "w-butterfly",
+    title: "Schmetterlinghaus",
+    about: "A small art nouveau palm house in the Burggarten flown full of live butterflies.",
+    plan: "Twenty minutes, right in the centre — good filler between two city stops.",
+    lat: 48.2044,
+    lng: 16.367,
+    query: "Schmetterlinghaus Wien",
+    hours: { week: ["10:00-18:15", "10:00-16:45", "10:00-16:45", "10:00-16:45", "10:00-16:45", "10:00-16:45", "10:00-18:15"], source: "manual" },
+  },
+  {
+    id: "w-demel",
+    title: "Demel",
+    about: "Imperial court bakery on the Kohlmarkt, where the bakers work behind glass.",
+    plan: "Kaiserschmarrn made in front of you. Half an hour, any afternoon.",
+    lat: 48.2091,
+    lng: 16.369,
+    query: "Demel Kohlmarkt Wien",
+    hours: { week: daily("10:00-19:00"), source: "manual" },
+  },
+  {
+    id: "w-bratislava",
+    title: "Day trip: Bratislava",
+    about:
+      "The Slovak capital, 75 minutes down the Danube by Twin City Liner, through the Donau-Auen national park.",
+    plan: "A whole day, from €28. Only works if you give up a full Vienna day for it.",
+    warn: "Passports",
+    lat: 48.2121,
+    lng: 16.3789,
+    query: "Twin City Liner Wien Schwedenplatz",
   },
 ];
 

@@ -1,0 +1,57 @@
+name: Google Maps hours agent
+
+on:
+  schedule:
+    # Once a day, early morning Vienna time
+    - cron: "40 4 * * *"
+  workflow_dispatch:
+    inputs:
+      batch:
+        description: "How many places to look up in this run"
+        default: "60"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: google-hours
+  cancel-in-progress: false
+
+jobs:
+  hours:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Playwright
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Read the hours off Google Maps
+        run: python scripts/google_hours.py ${{ github.event.inputs.batch || '60' }}
+
+      - name: Commit what changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git stash --include-untracked
+            git reset --hard origin/main
+            git stash pop || true
+            git add src/data/hours.generated.json
+            if git diff --cached --quiet; then
+              echo "no new hours"; break
+            fi
+            git commit -m "Google hours agent: refresh opening hours ($(date -u +%Y-%m-%d))"
+            if git push; then
+              echo "pushed"; break
+            fi
+            echo "push failed (attempt $attempt) — retrying on the newest commit"
+          done

@@ -66,8 +66,8 @@ export default function TripMap({ day }: { day: Day }) {
                 <div className="font-mono text-xs text-muted-foreground">{s.time}</div>
               )}
               <div className="font-semibold text-foreground">{s.title}</div>
-              {s.detail && (
-                <div className="text-xs text-muted-foreground">{s.detail}</div>
+              {s.about && (
+                <div className="text-xs text-muted-foreground">{s.about}</div>
               )}
               <a
                 className="inline-block pt-1 text-xs font-semibold text-primary underline"
