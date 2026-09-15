@@ -45,6 +45,7 @@ export default function App() {
   const [dayIdx, setDayIdx] = useState(0);
   const [view, setView] = useState<"itinerary" | "map" | "warehouse">("itinerary");
   const [openList, setOpenList] = useState<string | null>(null);
+  const [altOpen, setAltOpen] = useState(false);
   const [plan, setPlan] = useState<PlanState>(EMPTY_PLAN);
 
   useEffect(() => {
@@ -328,25 +329,38 @@ export default function App() {
             )}
 
             {day.alternatives.length > 0 && (
-              <div className="rounded-2xl border border-border bg-secondary p-4">
-                <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
-                  Alternatives for {day.weekday}
-                </h3>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  Tap one to read what it is, then drop it straight into the day.
-                </p>
-                <div className="mt-3 space-y-2">
-                  {day.alternatives.map((alt) => (
-                    <PlaceRow
-                      key={alt.id}
-                      item={alt}
-                      plan={plan}
-                      onAdd={addStop}
-                      defaultDayId={day.id}
-                      actionLabel="Add to this day"
-                    />
-                  ))}
-                </div>
+              <div className="overflow-hidden rounded-2xl border border-border bg-secondary">
+                <button
+                  onClick={() => setAltOpen(!altOpen)}
+                  className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left"
+                >
+                  <span className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
+                    Alternatives for {day.weekday}
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <span className="font-mono text-xs text-muted-foreground">
+                      {day.alternatives.length}
+                    </span>
+                    <span className="text-muted-foreground">{altOpen ? "−" : "+"}</span>
+                  </span>
+                </button>
+                {altOpen && (
+                  <div className="space-y-2 border-t border-border px-4 py-4">
+                    <p className="text-xs text-muted-foreground">
+                      Tap one to read what it is, then drop it straight into the day.
+                    </p>
+                    {day.alternatives.map((alt) => (
+                      <PlaceRow
+                        key={alt.id}
+                        item={alt}
+                        plan={plan}
+                        onAdd={addStop}
+                        defaultDayId={day.id}
+                        actionLabel="Add to this day"
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
             )}
           </section>
