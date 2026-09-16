@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-15T23:00:46+00:00",
+  "generated": "2026-09-16T09:46:09+00:00",
   "places": {
     "alt-sat-hacken": {
       "week": [
@@ -15,7 +15,7 @@
       "google_name": "Gasthaus \"Zu den 3 Hacken\"",
       "address": "Singerstraße 28, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "alt-sat-skopik": {
       "week": [
@@ -31,7 +31,7 @@
       "google_name": "Skopik & Lohn",
       "address": "Leopoldsgasse 17, 1020 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "sun-heuriger": {
       "week": [
@@ -75,11 +75,11 @@
         "00:00-24:00",
         "00:00-24:00"
       ],
-      "human": "Tue open 24h · Wed open 24h · Thu open 24h · Fri open 24h · Sat open 24h · Sun open 24h · Mon open 24h",
+      "human": "Wed open 24h · Thu open 24h · Fri open 24h · Sat open 24h · Sun open 24h · Mon open 24h · Tue open 24h",
       "google_name": "Stadtpark",
       "address": "Parkring 1, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "mon-lainzer": {
       "week": [
@@ -95,7 +95,7 @@
       "google_name": "Lainzer Tiergarten",
       "address": "Lainzer Tor, 1130 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "mon-brunnenmarkt": {
       "week": [
@@ -111,7 +111,7 @@
       "google_name": "Brunnenmarkt",
       "address": "Brunnengasse 16, 1160 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "mon-prunksaal": {
       "week": [
@@ -127,7 +127,7 @@
       "google_name": "Prunksaal",
       "address": "Josefsplatz 1, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "mon-zuckerl": {
       "week": [
@@ -143,7 +143,7 @@
       "google_name": "Zuckerlwerkstatt",
       "address": "Herrengasse 6-8/4, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "alt-mon-schatzkammer": {
       "week": [
@@ -159,7 +159,7 @@
       "google_name": "Kaiserliche Schatzkammer",
       "address": "Schweizerhof, Hofburg, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "alt-mon-landtmann": {
       "week": [
@@ -175,7 +175,7 @@
       "google_name": "Café Landtmann",
       "address": "Universitätsring 4, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "alt-mon-poeschl": {
       "week": [
@@ -191,7 +191,7 @@
       "google_name": "Gasthaus Pöschl",
       "address": "Weihburggasse 17, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "tue-khm": {
       "week": [
@@ -207,7 +207,7 @@
       "google_name": "Kunsthistorisches Museum Wien",
       "address": "Maria-Theresien-Platz, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "tue-ankeruhr": {
       "week": [
@@ -223,7 +223,7 @@
       "google_name": "Ankeruhr",
       "address": "Hoher Markt 10-11, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "tue-tea": {
       "week": [
@@ -239,7 +239,7 @@
       "google_name": "Theehandlung Schönbichler und TeeGschwendner",
       "address": "Wollzeile 4, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "tue-graben": {
       "week": [
@@ -255,7 +255,7 @@
       "google_name": "Altmann & Kühne",
       "address": "Graben 30, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "tue-gegenbauer": {
       "week": [
@@ -271,7 +271,7 @@
       "google_name": "WIENER ESSIG BRAUEREI, WIENER KAFFEE RÖSTEREI Gegenbauer",
       "address": "Naschmarkt Stand 111/112, 1060 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "tue-vollpension": {
       "week": [
@@ -287,7 +287,7 @@
       "google_name": "Vollpension Generationencafé in der Schleifmühlgasse",
       "address": "Schleifmühlgasse 16, 1040 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "alt-tue-demel": {
       "week": [
@@ -319,7 +319,7 @@
       "google_name": "Café Hawelka",
       "address": "Dorotheergasse 6, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "alt-tue-secession": {
       "week": [
@@ -335,7 +335,7 @@
       "google_name": "Wiener Secession",
       "address": "Friedrichstraße 12, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "alt-tue-sperl": {
       "week": [
@@ -351,7 +351,7 @@
       "google_name": "Cafe Sperl",
       "address": "Gumpendorfer Str. 11, 1060 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "wed-josephinum": {
       "week": [
@@ -367,7 +367,7 @@
       "google_name": "Josephinum - Medizinhistorisches Museum Wien",
       "address": "Währinger Str. 25, 1090 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "wed-deewan": {
       "week": [
@@ -383,7 +383,7 @@
       "google_name": "Der Wiener Deewan",
       "address": "Liechtensteinstraße 10, 1090 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "wed-swing": {
       "week": [
@@ -399,7 +399,7 @@
       "google_name": "Swing Kitchen",
       "address": "Schwedenpl. 3-4/1/16, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "alt-wed-tian": {
       "week": [
@@ -415,7 +415,7 @@
       "google_name": "TIAN Restaurant",
       "address": "Himmelpfortgasse 23, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "w-naschmarkt-flea": {
       "week": [
@@ -431,7 +431,7 @@
       "google_name": "Kettenbrückengasse Flohmarkt",
       "address": "Kettenbrückengasse 5, 1050 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "w-kaffemik": {
       "week": [
@@ -447,7 +447,7 @@
       "google_name": "kaffemik",
       "address": "Zollergasse 5, 1070 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "w-oberlaa": {
       "week": [
@@ -479,7 +479,7 @@
       "google_name": "Schmetterlinghaus",
       "address": "Hofburg, Burggarten Palmenhaus, Schmetterlinghaus, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "w-demel": {
       "week": [
@@ -495,7 +495,7 @@
       "google_name": "Café Demel",
       "address": "Kohlmarkt 14, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "w-bratislava": {
       "week": [
@@ -511,7 +511,7 @@
       "google_name": "Twin City Liner",
       "address": "Schiffstation Wien City Franz-Josefs-Kai Schwedenplatz 2, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "tue-peterskirche": {
       "week": [
@@ -543,7 +543,7 @@
       "google_name": "Hofburg",
       "address": "1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-imperial-treasury-vienna": {
       "week": [
@@ -559,7 +559,7 @@
       "google_name": "Kaiserliche Schatzkammer",
       "address": "Schweizerhof, Hofburg, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-neue-burg-teil-der-wiener-hofburg": {
       "week": [
@@ -575,7 +575,7 @@
       "google_name": "Neue Burg",
       "address": "Heldenplatz, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-st-stephen-s-cathedral": {
       "week": [
@@ -591,7 +591,7 @@
       "google_name": "Domkirche St. Stephan",
       "address": "Stephansplatz 3, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-vienna-city-hall": {
       "week": [
@@ -607,7 +607,7 @@
       "google_name": "Das Wiener Rathaus",
       "address": "Friedrich-Schmidt-Platz 1, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-austrian-parliament": {
       "week": [
@@ -623,7 +623,7 @@
       "google_name": "Parlament Österreich",
       "address": "Dr.-Karl-Renner-Ring 3, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-sch-nbrunn-palace": {
       "week": [
@@ -639,7 +639,7 @@
       "google_name": "Schloss Schönbrunn",
       "address": "Schönbrunner Schloßstraße 47, 1130 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-secession": {
       "week": [
@@ -655,7 +655,7 @@
       "google_name": "Wiener Secession",
       "address": "Friedrichstraße 12, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-karlskirche": {
       "week": [
@@ -671,7 +671,7 @@
       "google_name": "Karlskirche",
       "address": "Karlskirche, Karlsplatz 10, 1040 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-votive-church": {
       "week": [
@@ -687,7 +687,7 @@
       "google_name": "Votivkirche",
       "address": "Rooseveltplatz, 1090 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-st-francis-of-assisi-church": {
       "week": [
@@ -703,7 +703,7 @@
       "google_name": "Katholische Kirche St. Franziskus von Assisi",
       "address": "Mexikoplatz 12, 1020 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-otto-wagner-kirche-am-steinhof": {
       "week": [
@@ -719,7 +719,7 @@
       "google_name": "Wien Museum Otto-Wagner-Kirche am Steinhof",
       "address": "Baumgartner Höhe 1, 1140 Wien-Penzing, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-sisi-museum": {
       "week": [
@@ -735,7 +735,7 @@
       "google_name": "Sisi Museum Hofburg Wien",
       "address": "Michaelerkuppel, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-ephesos-museum-der-antikensammlung-des": {
       "week": [
@@ -751,7 +751,7 @@
       "google_name": "Ephesos Museum",
       "address": "Heldenplatz, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-papyrus-collection-and-papyrus-museum-": {
       "week": [
@@ -767,7 +767,7 @@
       "google_name": "Papyrusmuseum der Österreichischen Nationalbibliothek",
       "address": "Neue Burg Heldenplatz Untergeschoß, Heldenplatz, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-weltmuseum-wien": {
       "week": [
@@ -783,7 +783,7 @@
       "google_name": "Weltmuseum Wien",
       "address": "Heldenplatz, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-albertina": {
       "week": [
@@ -799,7 +799,7 @@
       "google_name": null,
       "address": "Albertinapl. 1, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-kunsthistorisches-museum-wien": {
       "week": [
@@ -815,7 +815,7 @@
       "google_name": "Kunsthistorisches Museum Wien",
       "address": "Maria-Theresien-Platz, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-mumok-museum-moderner-kunst-stiftung-l": {
       "week": [
@@ -831,7 +831,7 @@
       "google_name": "mumok - Museum moderner Kunst Stiftung Ludwig Wien",
       "address": "Museumsplatz 1, 1070 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-architekturzentrum-wien": {
       "week": [
@@ -847,7 +847,7 @@
       "google_name": "Architekturzentrum Wien",
       "address": "Museumsplatz 1, 1070 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-kunsthalle-wien-museumsquartier": {
       "week": [
@@ -863,7 +863,7 @@
       "google_name": "Kunsthalle Wien Museumsquartier",
       "address": "Museumsplatz 1, 1070 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-imperial-carriage-museum-vienna": {
       "week": [
@@ -879,7 +879,7 @@
       "google_name": "Kaiserliche Wagenburg",
       "address": "Wagenburg Museum of Carriages at Schönbrunn Palace, 1130, Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-kunst-haus-wien-museum-hundertwasser": {
       "week": [
@@ -895,7 +895,7 @@
       "google_name": "Kunst Haus Wien - Museum Hundertwasser",
       "address": "Untere Weißgerberstraße 13, 1030 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-globe-museum-of-the-austrian-national-": {
       "week": [
@@ -911,7 +911,7 @@
       "google_name": "Globenmuseum der Österreichischen Nationalbibliothek",
       "address": "Palais Mollard, Herrengasse 9, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-heldenplatz": {
       "week": [
@@ -927,7 +927,7 @@
       "google_name": "Heldenplatz",
       "address": "Heldenplatz 21/4, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-danube-tower": {
       "week": [
@@ -943,7 +943,7 @@
       "google_name": "Donauturm",
       "address": "Donauturmplatz 1, 1220 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-caf-im-kunsthistorischen-museum-wien": {
       "week": [
@@ -959,7 +959,7 @@
       "google_name": "Café im Kunsthistorischen Museum Wien",
       "address": "Maria-Theresien-Platz 1, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-justizpalast": {
       "week": [
@@ -975,7 +975,7 @@
       "google_name": "Justizpalast",
       "address": "Schmerlingpl. 10-11, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-albertina-terrace": {
       "week": [
@@ -991,7 +991,7 @@
       "google_name": null,
       "address": "Albertinapl. 1, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-stephansdom-nordturm": {
       "week": [
@@ -1007,7 +1007,7 @@
       "google_name": "Stephansdom Nordturm",
       "address": "Stephansplatz 8, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-mq-libelle": {
       "week": [
@@ -1023,7 +1023,7 @@
       "google_name": "MQ Libelle",
       "address": "Museumsplatz 1/5, 1070 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-ikea-westbahnhof-roof-terrace": {
       "week": [
@@ -1039,7 +1039,7 @@
       "google_name": "Rooftop IKEA Wien Westbahnhof",
       "address": "Europaplatz 1, 1150 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-gloriette-sch-nbrunn": {
       "week": [
@@ -1055,7 +1055,7 @@
       "google_name": null,
       "address": "Gloriettestraße, 1130 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-burggarten": {
       "week": [
@@ -1071,7 +1071,7 @@
       "google_name": "Burggarten",
       "address": "Josefsplatz 1, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-volksgarten": {
       "week": [
@@ -1087,7 +1087,7 @@
       "google_name": "Volksgarten",
       "address": "1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-stadtpark": {
       "week": [
@@ -1103,7 +1103,7 @@
       "google_name": "Stadtpark",
       "address": "Parkring 1, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-setagayapark": {
       "week": [
@@ -1119,7 +1119,7 @@
       "google_name": "Setagayapark",
       "address": "Gallmeyergasse 4, 1190 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-caf-sperl": {
       "week": [
@@ -1135,7 +1135,7 @@
       "google_name": "Cafe Sperl",
       "address": "Gumpendorfer Str. 11, 1060 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-caf-landtmann": {
       "week": [
@@ -1151,7 +1151,7 @@
       "google_name": "Café Landtmann",
       "address": "Universitätsring 4, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-caf-sacher-wien": {
       "week": [
@@ -1167,7 +1167,7 @@
       "google_name": "Café Sacher Wien",
       "address": "Philharmoniker Str. 4, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-caf-pr-ckel": {
       "week": [
@@ -1183,7 +1183,7 @@
       "google_name": "Café Prückel",
       "address": "Stubenring 24, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-terrassencaf-im-hundertwasserhaus": {
       "week": [
@@ -1199,7 +1199,7 @@
       "google_name": "Terrassencafé im Hundertwasserhaus",
       "address": "Kegelgasse 34-38, 1030 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-gasthaus-kopp": {
       "week": [
@@ -1215,7 +1215,7 @@
       "google_name": "Gasthaus Kopp",
       "address": "Engerthstr. 104, 1200 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-bitzinger-sausage-stand": {
       "week": [
@@ -1227,11 +1227,11 @@
         "08:00-04:00",
         "08:00-04:00"
       ],
-      "human": "Tue 08:00-04:00 · Wed 08:00-04:00 · Thu 08:00-04:00 · Fri 08:00-04:00 · Sat 08:00-04:00 · Sun 08:00-04:00 · Mon 08:00-04:00",
+      "human": "Wed 08:00-04:00 · Thu 08:00-04:00 · Fri 08:00-04:00 · Sat 08:00-04:00 · Sun 08:00-04:00 · Mon 08:00-04:00 · Tue 08:00-04:00",
       "google_name": "Bitzinger",
       "address": "Albertinapl. 1, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-zw-lf-apostelkeller": {
       "week": [
@@ -1247,7 +1247,7 @@
       "google_name": "Zwölf Apostelkeller",
       "address": "Sonnenfelsgasse 3, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-gasthaus-woracziczky": {
       "week": [
@@ -1263,7 +1263,7 @@
       "google_name": "Gasthaus Woracziczky",
       "address": "Spengergasse 52, 1050 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-atmosphere-rooftop-bar": {
       "week": [
@@ -1279,7 +1279,7 @@
       "google_name": "Atmosphere Rooftop Bar",
       "address": "Schubertring 5/7, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-lam-e-rooftop": {
       "week": [
@@ -1291,11 +1291,11 @@
         "12:00-02:00",
         "12:00-02:00"
       ],
-      "human": "Tue 12:00-01:00 · Wed 12:00-01:00 · Thu 12:00-02:00 · Fri 12:00-02:00 · Sat 12:00-02:00 · Sun 12:00-01:00 · Mon 12:00-01:00",
+      "human": "Wed 12:00-01:00 · Thu 12:00-02:00 · Fri 12:00-02:00 · Sat 12:00-02:00 · Sun 12:00-01:00 · Mon 12:00-01:00 · Tue 12:00-01:00",
       "google_name": "Lamée Rooftop",
       "address": "Lichtensteg 2, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-via-toledo-enopizzeria": {
       "week": [
@@ -1311,7 +1311,7 @@
       "google_name": "Via Toledo Enopizzeria",
       "address": "Laudongasse 13, 1080 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-sterreichische-werkst-tten": {
       "week": [
@@ -1327,7 +1327,7 @@
       "google_name": "Österreichische Werkstätten",
       "address": "Kärntner Str. 6, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-the-world-to-go-vienna": {
       "week": [
@@ -1343,7 +1343,7 @@
       "google_name": "THE WORLD TO GO VIENNA",
       "address": "Josefsplatz 6/1, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-shakespeare-company": {
       "week": [
@@ -1359,7 +1359,7 @@
       "google_name": "Shakespeare & Company",
       "address": "Sterngasse 2, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "sun-belvedere": {
       "week": [
@@ -1391,7 +1391,7 @@
       "google_name": "Brasserie Palmenhaus Wien",
       "address": "Burggarten 1, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "sun-gerstner": {
       "week": [
@@ -1407,7 +1407,7 @@
       "google_name": null,
       "address": "Kärntner Str. 51, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "tue-schnitzelwirt": {
       "week": [
@@ -1423,39 +1423,39 @@
       "google_name": "Schnitzelwirt",
       "address": "Neubaugasse 52, 1070 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "w-joseph": {
       "week": [
-        "07:30-17:00",
-        "07:30-19:00",
-        "07:30-19:00",
-        "07:30-18:00",
-        "07:30-18:00",
-        "07:30-19:00",
-        "07:30-18:00"
+        "07:00-18:00",
+        "06:30-19:00",
+        "06:30-19:00",
+        "06:30-19:00",
+        "06:30-19:00",
+        "06:30-19:00",
+        "08:00-16:00"
       ],
-      "human": "Wed 07:30-19:00 · Thu 07:30-19:00 · Fri 07:30-19:00 · Sat 07:30-18:00 · Sun 07:30-17:00 · Mon 07:30-19:00 · Tue 07:30-19:00 · Wed 07:30-18:00 · Thu 07:30-18:00",
+      "human": "Wed 06:30-19:00 · Thu 06:30-19:00 · Fri 06:30-19:00 · Sat 08:00-16:00 · Sun 07:00-18:00 · Mon 06:30-19:00 · Tue 06:30-19:00",
       "google_name": null,
-      "address": "Landstraßer Hauptstraße 4, 1030 Wien, Österreich",
+      "address": "Weyringergasse 21, 1040 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-prunksaal-austrian-national-library": {
       "week": [
         "09:00-18:00",
         "09:00-18:00",
         "09:00-18:00",
-        "09:00-18:00",
+        "09:00-21:00",
         "09:00-21:00",
         "09:00-18:00",
         "09:00-18:00"
       ],
-      "human": "Wed 09:00-18:00 · Thu 09:00-21:00 · Fri 09:00-18:00 · Sat 09:00-18:00 · Sun 09:00-18:00 · Mon 09:00-18:00 · Tue 09:00-18:00",
+      "human": "Wed 09:00-18:00 · Thu 09:00-21:00 · Fri 09:00-18:00 · Sat 09:00-18:00 · Sun 09:00-18:00 · Mon 09:00-18:00 · Tue 09:00-18:00 · Wed 09:00-21:00 · Thu 09:00-21:00",
       "google_name": null,
       "address": "Josefsplatz 1, 1010 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
     },
     "map-das-loft": {
       "week": [
@@ -1471,7 +1471,119 @@
       "google_name": "DAS LOFT restaurant",
       "address": "Praterstraße 1, 1020 Wien, Österreich",
       "closed_permanently": false,
-      "checked": "2026-09-15"
+      "checked": "2026-09-16"
+    },
+    "sun-belvedere-gardens": {
+      "week": [
+        "06:30-21:00",
+        "06:30-21:00",
+        "06:30-21:00",
+        "06:30-21:00",
+        "06:30-21:00",
+        "06:30-21:00",
+        "06:30-21:00"
+      ],
+      "human": "Wed 06:30-21:00 · Thu 06:30-21:00 · Fri 06:30-21:00 · Sat 06:30-21:00 · Sun 06:30-21:00 · Mon 06:30-21:00 · Tue 06:30-21:00",
+      "google_name": "Belvedere-Schlossgarten",
+      "address": "Prinz-Eugen-Straße 27, 1030 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-16"
+    },
+    "sun-chinacy": {
+      "week": [
+        "10:00-22:30",
+        null,
+        "10:00-22:30",
+        "10:00-22:30",
+        "10:00-22:30",
+        "10:00-23:30",
+        "10:00-23:30"
+      ],
+      "human": "Wed 10:00-22:30 · Thu 10:00-22:30 · Fri 10:00-23:30 · Sat 10:00-23:30 · Sun 10:00-22:30 · Mon Closed · Tue 10:00-22:30",
+      "google_name": "Chinacy am Karlsplatz",
+      "address": "Treitlstraße 2/4, 1040 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-16"
+    },
+    "mon-schoenbrunn": {
+      "week": [
+        "08:30-17:30",
+        "08:30-17:30",
+        "08:30-17:30",
+        "08:30-17:30",
+        "08:30-17:30",
+        "08:30-17:30",
+        "08:30-17:30"
+      ],
+      "human": "Wed 08:30-17:30 · Thu 08:30-17:30 · Fri 08:30-17:30 · Sat 08:30-17:30 · Sun 08:30-17:30 · Mon 08:30-17:30 · Tue 08:30-17:30",
+      "google_name": "Schloss Schönbrunn",
+      "address": "Schönbrunner Schloßstraße 47, 1130 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-16"
+    },
+    "mon-schoenbrunn-lunch": {
+      "week": [
+        "10:00-20:00",
+        "10:00-20:00",
+        "10:00-20:00",
+        "10:00-20:00",
+        "10:00-20:00",
+        "10:00-20:00",
+        "10:00-20:00"
+      ],
+      "human": "Wed 10:00-20:00 · Thu 10:00-20:00 · Fri 10:00-20:00 · Sat 10:00-20:00 · Sun 10:00-20:00 · Mon 10:00-20:00 · Tue 10:00-20:00",
+      "google_name": null,
+      "address": "Schloss Schönbrunn, Schönbrunner Schloßstraße 47/Kavalierstrakt 52, 1130 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-16"
+    },
+    "mon-schoenbrunn-gardens": {
+      "week": [
+        "06:30-20:00",
+        "06:30-20:00",
+        "06:30-20:00",
+        "06:30-20:00",
+        "06:30-20:00",
+        "06:30-20:00",
+        "06:30-20:00"
+      ],
+      "human": "Wed 06:30-20:00 · Thu 06:30-20:00 · Fri 06:30-20:00 · Sat 06:30-20:00 · Sun 06:30-20:00 · Mon 06:30-20:00 · Tue 06:30-20:00",
+      "google_name": "Schlosspark Schönbrunn",
+      "address": "Schönbrunner Schloßstraße 47, 1130 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-16"
+    },
+    "tue-figlmuller": {
+      "week": [
+        "11:30-23:30",
+        "11:30-23:30",
+        "11:30-23:30",
+        "11:30-22:00",
+        "11:30-22:00",
+        "11:30-23:30",
+        "11:30-23:30"
+      ],
+      "human": "Wed 11:30-23:30 · Thu 11:30-23:30 · Fri 11:30-23:30 · Sat 11:30-23:30 · Sun 11:30-23:30 · Mon 11:30-23:30 · Tue 11:30-23:30 · Wed 11:30-22:00 · Thu 11:30-22:00",
+      "google_name": "Figlmüller Bäckerstraße",
+      "address": "Bäckerstraße 6, 1010 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-16"
+    },
+    "map-t-rkenschanzpark": {
+      "week": [
+        "06:00-20:00",
+        "06:00-20:00",
+        "06:00-20:00",
+        "00:00-24:00",
+        "00:00-24:00",
+        "06:00-20:00",
+        "06:00-20:00"
+      ],
+      "human": "Wed 06:00-20:00 · Thu 06:00-20:00 · Fri 06:00-20:00 · Sat 06:00-20:00 · Sun 06:00-20:00 · Mon 06:00-20:00 · Tue 06:00-20:00 · Wed open 24h · Thu open 24h",
+      "google_name": "Türkenschanzpark",
+      "address": "Hasenauerstraße Türkenschanzpark, 1180 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-16"
     }
   }
 }

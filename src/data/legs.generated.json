@@ -1,4 +1,105 @@
 {
-  "generated": "2026-09-15T23:06:28+00:00",
-  "legs": {}
+  "generated": "2026-09-16T09:49:21+00:00",
+  "legs": {
+    "sat-hotel>sat-glacis": {
+      "walk_min": 7,
+      "checked": "2026-09-16"
+    },
+    "sat-glacis>sat-mq": {
+      "walk_min": 3,
+      "checked": "2026-09-16"
+    },
+    "sun-belvedere>sun-belvedere-gardens": {
+      "walk_min": 1,
+      "checked": "2026-09-16"
+    },
+    "sun-belvedere-gardens>sun-gerstner": {
+      "walk_min": 11,
+      "checked": "2026-09-16"
+    },
+    "sun-gerstner>sun-hotel-rest": {
+      "walk_min": 7,
+      "checked": "2026-09-16"
+    },
+    "sun-hotel-rest>sun-chinacy": {
+      "walk_min": 6,
+      "checked": "2026-09-16"
+    },
+    "sun-chinacy>sun-opera-arrive": {
+      "walk_min": 6,
+      "checked": "2026-09-16"
+    },
+    "sun-opera-arrive>sun-hotel-back": {
+      "walk_min": 4,
+      "checked": "2026-09-16"
+    },
+    "mon-schoenbrunn>mon-schoenbrunn-lunch": {
+      "walk_min": 1,
+      "checked": "2026-09-16"
+    },
+    "mon-schoenbrunn-lunch>mon-schoenbrunn-gardens": {
+      "walk_min": 2,
+      "checked": "2026-09-16"
+    },
+    "mon-schoenbrunn-gardens>mon-hotel-rest": {
+      "walk_min": 13,
+      "checked": "2026-09-16"
+    },
+    "mon-hotel-rest>sat-plachutta": {
+      "walk_min": 13,
+      "checked": "2026-09-16"
+    },
+    "tue-hotel-leave>tue-khm": {
+      "walk_min": 4,
+      "checked": "2026-09-16"
+    },
+    "tue-khm>sun-palmenhaus": {
+      "walk_min": 8,
+      "checked": "2026-09-16"
+    },
+    "sun-palmenhaus>mon-prunksaal": {
+      "walk_min": 1,
+      "checked": "2026-09-16"
+    },
+    "mon-prunksaal>w-demel": {
+      "walk_min": 17,
+      "checked": "2026-09-16"
+    },
+    "w-demel>tue-kohlmarkt-graben": {
+      "walk_min": 1,
+      "checked": "2026-09-16"
+    },
+    "tue-kohlmarkt-graben>tue-hotel-rest": {
+      "walk_min": 15,
+      "checked": "2026-09-16"
+    },
+    "tue-hotel-rest>tue-figlmuller": {
+      "walk_min": 13,
+      "checked": "2026-09-16"
+    },
+    "wed-naschmarkt>wed-josephinum": {
+      "walk_min": 11,
+      "checked": "2026-09-16"
+    },
+    "wed-josephinum>wed-deewan": {
+      "walk_min": 4,
+      "checked": "2026-09-16"
+    },
+    "wed-deewan>wed-hotel-rest": {
+      "walk_min": 8,
+      "checked": "2026-09-16"
+    },
+    "wed-hotel-rest>wed-old-town": {
+      "walk_min": 9,
+      "checked": "2026-09-16"
+    },
+    "wed-old-town>wed-wrenkh": {
+      "walk_min": 14,
+      "checked": "2026-09-16"
+    },
+    "wed-wrenkh>wed-hotel-back": {
+      "walk_min": 14,
+      "checked": "2026-09-16"
+    }
+  }
 }
