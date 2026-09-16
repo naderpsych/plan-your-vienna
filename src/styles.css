@@ -103,6 +103,8 @@
   --card-head-food: oklch(0.935 0.045 72);
   --card-head-food-border: oklch(0.88 0.06 70);
   --place-title: oklch(0.42 0.105 253);
+  /* Icon colour inside a food circle — the warm band's ink. */
+  --food-ink: oklch(0.5 0.13 55);
   --shadow-card: 0 1px 2px oklch(0.23 0.04 258 / 6%), 0 12px 28px -18px oklch(0.23 0.04 258 / 28%);
   --gradient-header: linear-gradient(
     160deg,

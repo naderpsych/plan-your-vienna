@@ -12,6 +12,7 @@ Writes src/data/legs.generated.json, keyed "<from id>><to id>".
 
 Run:  python scripts/google_legs.py [max pairs]
 """
+import calendar
 import json
 import os
 import random
@@ -38,8 +39,12 @@ BLOCK_SIGNS = ("Bevor Sie zu Google weitergehen", "unusual traffic",
 
 # Google prints "1 Std. 5 min" / "47 min" — lower case, so match either.
 DURATION = re.compile(r"(?:(\d+)\s*(?:Std\.?|Stunden?))?\s*(?:(\d+)\s*min)", re.I)
-# Night buses start with N. Their times say nothing about a Monday evening.
-NIGHT_LINE = re.compile(r"\bN\d{1,2}\b")
+CLOCK = re.compile(r"(\d{1,2}):(\d{2})")
+
+# Cards whose time is the arrival only, while the plan says when they end.
+ENDS_AT = {
+    "sun-opera-arrive": "21:45",
+}
 # U4, S7, bus 60B, tram D …
 LINES = re.compile(r"\b(U\d|S\d{1,2}|\d{1,3}[A-Z]?)\b")
 
@@ -60,6 +65,7 @@ def stops_by_day():
     current = None
     stop = None
     in_stops = False
+    day_iso = None
     with open(SOURCE, encoding="utf-8") as fh:
         for line in fh:
             if line.startswith("export const wishlist"):
@@ -85,6 +91,11 @@ def stops_by_day():
                 current = (m.group(1), [])
                 days.append(current)
                 in_stops = False
+                day_iso = None
+                continue
+            m = re.search(r'^    iso: "(\d{4}-\d{2}-\d{2})",', line)
+            if m:
+                day_iso = m.group(1)
                 continue
             if current is None:
                 continue
@@ -98,9 +109,14 @@ def stops_by_day():
                 continue
             m = re.search(r'^        id: "([^"]+)",', line)
             if m:
-                stop = {"id": m.group(1), "lat": None, "lng": None}
+                stop = {"id": m.group(1), "lat": None, "lng": None,
+                        "time": None, "iso": day_iso}
                 continue
             if stop is None:
+                continue
+            m = re.search(r'^        time: "([^"]+)",', line)
+            if m:
+                stop["time"] = m.group(1)
                 continue
             m = re.search(r"^        lat: ([\d.]+),", line)
             if m:
@@ -115,6 +131,35 @@ def stops_by_day():
     return days
 
 
+def departure(a, b):
+    """
+    When the plan leaves `a` for `b`: when `a` ends if its time is a range (or
+    the plan gives an end), otherwise when `b` starts. Returned as the local
+    wall-clock time Google expects in the !8j field.
+    """
+    iso = a.get("iso") or b.get("iso")
+    if not iso:
+        return None
+    clock = None
+    if a["id"] in ENDS_AT:
+        clock = ENDS_AT[a["id"]]
+    else:
+        times = CLOCK.findall(a.get("time") or "")
+        if len(times) >= 2:
+            clock = "%s:%s" % times[-1]
+        else:
+            start = CLOCK.findall(b.get("time") or "")
+            if start:
+                clock = "%s:%s" % start[0]
+            elif times:
+                clock = "%s:%s" % times[0]
+    if not clock:
+        return None
+    y, mo, d = (int(x) for x in iso.split("-"))
+    h, mi = (int(x) for x in clock.split(":"))
+    return calendar.timegm((y, mo, d, h, mi, 0)), "%s %02d:%02d" % (iso, h, mi)
+
+
 def pairs_to_check():
     out = []
     for _day_id, stops in stops_by_day():
@@ -123,13 +168,16 @@ def pairs_to_check():
     return out
 
 
-def read_duration(page, origin, destination, mode):
-    url = (
-        "https://www.google.com/maps/dir/?api=1"
-        f"&origin={origin['lat']},{origin['lng']}"
-        f"&destination={destination['lat']},{destination['lng']}"
-        f"&travelmode={mode}&hl=de"
-    )
+def read_duration(page, origin, destination, mode, depart=None):
+    route = (f"https://www.google.com/maps/dir/{origin['lat']},{origin['lng']}/"
+             f"{destination['lat']},{destination['lng']}/")
+    if mode == "transit" and depart:
+        # 6e0 = depart at, 7e2 = local time, 8j = that time, 3e3 = transit
+        url = route + f"data=!4m6!4m5!2m3!6e0!7e2!8j{depart}!3e3?hl=de"
+    elif mode == "transit":
+        url = route + "data=!4m2!4m1!3e3?hl=de"
+    else:
+        url = route + "data=!4m2!4m1!3e2?hl=de"
     page.goto(url, timeout=60000, wait_until="domcontentloaded")
     page.wait_for_timeout(random.randint(4000, 6000))
 
@@ -146,10 +194,6 @@ def read_duration(page, origin, destination, mode):
             break
     if not text:
         text = body
-
-    # A run in the small hours only sees night buses — worse than no answer.
-    if mode == "transit" and NIGHT_LINE.search(text):
-        return None, None, False
 
     m = DURATION.search(text)
     if not m:
@@ -209,7 +253,11 @@ def main():
 
                 # Only worth a transit lookup when the walk is a real slog.
                 if walk is None or walk > 22:
-                    transit, summary, hit = read_duration(page, a, b, "transit")
+                    when = departure(a, b)
+                    transit, summary, hit = read_duration(
+                        page, a, b, "transit", when[0] if when else None)
+                    if when:
+                        entry["depart"] = when[1]
                     if hit:
                         blocked += 1
                         page.wait_for_timeout(random.randint(9000, 15000))

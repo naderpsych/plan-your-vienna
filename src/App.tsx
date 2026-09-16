@@ -1,5 +1,19 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import {
+  Castle,
+  Coffee,
+  Drama,
+  Footprints,
+  House,
+  Landmark,
+  Mountain,
+  ShoppingBag,
+  ShoppingBasket,
+  Trees,
+  UtensilsCrossed,
+  type LucideIcon,
+} from "lucide-react";
+import {
   bookings,
   foodList,
   weatherNote,
@@ -21,6 +35,7 @@ import {
   hoursToday,
   isFood,
   loadPlan,
+  minutesOf,
   newStopId,
   savePlan,
   stopsFor,
@@ -383,7 +398,7 @@ export default function App() {
               </p>
             )}
 
-            <ol className="relative space-y-3 border-l-2 border-dashed border-border pl-5">
+            <ol className="relative space-y-3 border-l-2 border-dashed border-border pl-9">
               {stops.map((s, i) => {
                 const next = stops[i + 1];
                 const leg = next ? legBetween(s, next) : null;
@@ -392,7 +407,7 @@ export default function App() {
                 );
                 return (
                   <li key={s.id} className="relative">
-                    <span className="absolute -left-[27px] top-5 size-3 rounded-full border-2 border-background bg-gold" />
+                    <KindDot stop={s} />
                     <StopCard
                       stop={s}
                       iso={day.iso}
@@ -420,7 +435,7 @@ export default function App() {
                 );
               })}
               <li className="relative">
-                <span className="absolute -left-[27px] top-5 size-3 rounded-full border-2 border-background bg-border" />
+                <span className="absolute -left-[43px] top-5 size-3 rounded-full border-2 border-background bg-border" />
                 <AddPlacePanel
                   day={day}
                   plan={plan}
@@ -592,6 +607,8 @@ function StopCard({
   onSwap?: (into: Stop) => void;
 }) {
   const [swapOpen, setSwapOpen] = useState(false);
+  const noteUnderTitle =
+    stop.id.startsWith("sat-") && !!stop.time && minutesOf(stop.time) === null;
   // Hotel anchors and travel blocks have no opening hours to argue with.
   const fit =
     stop.time && !stop.fixed && stop.query ? checkFit(stop, iso, stop.time) : null;
@@ -604,7 +621,7 @@ function StopCard({
       >
         <div className="min-w-0">
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-            {stop.time && (
+            {stop.time && !noteUnderTitle && (
               <span className="font-mono text-sm font-bold text-primary">{stop.time}</span>
             )}
             <h3 className="text-lg font-bold" style={{ color: "var(--place-title)" }}>
@@ -612,6 +629,10 @@ function StopCard({
             </h3>
           </div>
           <KindLine stop={stop} iso={iso} />
+          {/* On Saturday "If you have the energy" is a note about the title, so it reads after it. */}
+          {noteUnderTitle && (
+            <p className="mt-1 text-sm text-muted-foreground">{stop.time}</p>
+          )}
         </div>
         <div className="flex shrink-0 items-center gap-1">
           {onRemove && (
@@ -627,6 +648,14 @@ function StopCard({
         </div>
       </div>
 
+      {(stop.about ||
+        stop.plan ||
+        stop.warn ||
+        (stop.links && stop.links.length > 0) ||
+        (fit && fit.level !== "ok") ||
+        stop.lat ||
+        (!stop.fixed && stop.query) ||
+        (swaps && swaps.length > 0 && onSwap)) && (
       <div className="px-4 py-3">
       {stop.about && <p className="text-sm leading-relaxed">{stop.about}</p>}
       {stop.plan && (
@@ -760,7 +789,48 @@ function StopCard({
         </div>
       )}
       </div>
+      )}
     </article>
+  );
+}
+
+const KIND_ICON: Partial<Record<Kind, LucideIcon>> = {
+  hotel: House,
+  food: UtensilsCrossed,
+  cafe: Coffee,
+  market: ShoppingBasket,
+  museum: Landmark,
+  sight: Castle,
+  view: Mountain,
+  park: Trees,
+  walk: Footprints,
+  shop: ShoppingBag,
+  concert: Drama,
+};
+
+/**
+ * The mark on the timeline: a circle with the place type's icon, warm for
+ * somewhere you eat and blue otherwise. Travel rows keep a plain dot.
+ */
+function KindDot({ stop }: { stop: Stop }) {
+  const Icon = stop.kind ? KIND_ICON[stop.kind] : undefined;
+  if (!Icon) {
+    return (
+      <span className="absolute -left-[43px] top-5 size-3 rounded-full border-2 border-background bg-border" />
+    );
+  }
+  const food = isFood(stop);
+  return (
+    <span
+      className="absolute -left-[59px] top-2 flex size-[44px] items-center justify-center rounded-full border-2 border-background"
+      style={{
+        background: food ? "var(--card-head-food)" : "var(--card-head)",
+        color: food ? "var(--food-ink)" : "var(--place-title)",
+      }}
+      aria-hidden
+    >
+      <Icon size={24} strokeWidth={2} />
+    </span>
   );
 }
 
