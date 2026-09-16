@@ -1,8 +1,8 @@
 {
-  "generated": "2026-09-16T09:49:21+00:00",
+  "generated": "2026-09-16T10:41:34+00:00",
   "legs": {
     "sat-hotel>sat-glacis": {
-      "walk_min": 7,
+      "walk_min": 8,
       "checked": "2026-09-16"
     },
     "sat-glacis>sat-mq": {
@@ -18,7 +18,7 @@
       "checked": "2026-09-16"
     },
     "sun-gerstner>sun-hotel-rest": {
-      "walk_min": 7,
+      "walk_min": 8,
       "checked": "2026-09-16"
     },
     "sun-hotel-rest>sun-chinacy": {
@@ -46,7 +46,7 @@
       "checked": "2026-09-16"
     },
     "mon-hotel-rest>sat-plachutta": {
-      "walk_min": 13,
+      "walk_min": 14,
       "checked": "2026-09-16"
     },
     "tue-hotel-leave>tue-khm": {
@@ -74,7 +74,7 @@
       "checked": "2026-09-16"
     },
     "tue-hotel-rest>tue-figlmuller": {
-      "walk_min": 13,
+      "walk_min": 14,
       "checked": "2026-09-16"
     },
     "wed-naschmarkt>wed-josephinum": {
@@ -99,6 +99,34 @@
     },
     "wed-wrenkh>wed-hotel-back": {
       "walk_min": 14,
+      "checked": "2026-09-16"
+    },
+    "sun-breakfast>sun-belvedere": {
+      "walk_min": 9,
+      "checked": "2026-09-16"
+    },
+    "mon-breakfast>mon-schoenbrunn": {
+      "walk_min": 12,
+      "checked": "2026-09-16"
+    },
+    "tue-breakfast>tue-khm": {
+      "walk_min": 4,
+      "checked": "2026-09-16"
+    },
+    "wed-breakfast>wed-naschmarkt": {
+      "walk_min": 4,
+      "checked": "2026-09-16"
+    },
+    "wed-naschmarkt>wed-hotel-rest": {
+      "walk_min": 1,
+      "checked": "2026-09-16"
+    },
+    "wed-old-town>wed-tian-bistro": {
+      "walk_min": 11,
+      "checked": "2026-09-16"
+    },
+    "wed-tian-bistro>wed-hotel-back": {
+      "walk_min": 6,
       "checked": "2026-09-16"
     }
   }

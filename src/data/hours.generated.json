@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-16T09:46:09+00:00",
+  "generated": "2026-09-16T10:38:11+00:00",
   "places": {
     "alt-sat-hacken": {
       "week": [
@@ -1582,6 +1582,22 @@
       "human": "Wed 06:00-20:00 · Thu 06:00-20:00 · Fri 06:00-20:00 · Sat 06:00-20:00 · Sun 06:00-20:00 · Mon 06:00-20:00 · Tue 06:00-20:00 · Wed open 24h · Thu open 24h",
       "google_name": "Türkenschanzpark",
       "address": "Hasenauerstraße Türkenschanzpark, 1180 Wien, Österreich",
+      "closed_permanently": false,
+      "checked": "2026-09-16"
+    },
+    "wed-tian-bistro": {
+      "week": [
+        null,
+        null,
+        "17:00-23:00",
+        "17:00-23:00",
+        "17:00-23:00",
+        "17:00-23:00",
+        "17:00-23:00"
+      ],
+      "human": "Wed 17:00-23:00 · Thu 17:00-23:00 · Fri 17:00-23:00 · Sat 17:00-23:00 · Sun Closed · Mon Closed · Tue 17:00-23:00",
+      "google_name": "TIAN Bistro am Spittelberg",
+      "address": "Schrankgasse 4, 1070 Wien, Österreich",
       "closed_permanently": false,
       "checked": "2026-09-16"
     }
