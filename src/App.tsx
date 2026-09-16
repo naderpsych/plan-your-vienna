@@ -1,8 +1,8 @@
-import { lazy, Suspense, useEffect, useMemo, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import {
   bookings,
   foodList,
-  tripNotes,
+  weatherNote,
   wishlist,
   type Day,
   type Kind,
@@ -56,6 +56,40 @@ const EMPTY_PLAN: PlanState = { removed: [], added: {}, mine: [] };
 
 export default function App() {
   const [dayIdx, setDayIdx] = useState(0);
+  const [weatherOpen, setWeatherOpen] = useState(false);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+
+  // Keep the chosen day's button in view when a swipe moves to it.
+  useEffect(() => {
+    document
+      .querySelector(`[data-day-index="${dayIdx}"]`)
+      ?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  }, [dayIdx]);
+
+  /**
+   * Swipe left for the next day, right for the previous one. Mostly-vertical
+   * drags are scrolling, and drags on the map are panning, so both are left alone.
+   */
+  function onTouchStart(e: React.TouchEvent) {
+    const target = e.target as HTMLElement;
+    if (target.closest(".leaflet-container, input, textarea, select")) {
+      touchStart.current = null;
+      return;
+    }
+    const t = e.touches[0]!;
+    touchStart.current = { x: t.clientX, y: t.clientY };
+  }
+
+  function onTouchEnd(e: React.TouchEvent) {
+    const start = touchStart.current;
+    touchStart.current = null;
+    if (!start) return;
+    const t = e.changedTouches[0]!;
+    const dx = t.clientX - start.x;
+    const dy = t.clientY - start.y;
+    if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    setDayIdx((i) => (dx < 0 ? Math.min(i + 1, days.length - 1) : Math.max(i - 1, 0)));
+  }
   const [view, setView] = useState<"itinerary" | "map" | "warehouse">("itinerary");
   const [openList, setOpenList] = useState<string | null>(null);
   const [plan, setPlan] = useState<PlanState>(EMPTY_PLAN);
@@ -132,11 +166,16 @@ export default function App() {
             Wien · 19–24 September 2026
           </p>
           <h1 className="mt-2 text-4xl font-bold sm:text-5xl">Vienna, six days</h1>
-          <ul className="mt-3 max-w-2xl space-y-1.5 text-sm text-primary-foreground/80">
-            {tripNotes.map((note) => (
-              <li key={note}>{note}</li>
-            ))}
-          </ul>
+          <button
+            onClick={() => setWeatherOpen(!weatherOpen)}
+            aria-expanded={weatherOpen}
+            className="mt-3 inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 px-3 py-1 text-xs font-semibold text-primary-foreground/85 hover:border-primary-foreground/60"
+          >
+            🌦️ Weather {weatherOpen ? "−" : "+"}
+          </button>
+          {weatherOpen && (
+            <p className="mt-2 max-w-2xl text-sm text-primary-foreground/80">{weatherNote}</p>
+          )}
 
           <div className="mt-6 flex items-center gap-3">
             <div className="inline-flex shrink-0 rounded-full bg-primary-foreground/12 p-1 backdrop-blur">
@@ -181,6 +220,7 @@ export default function App() {
           {days.map((d, i) => (
             <button
               key={d.id}
+              data-day-index={i}
               onClick={() => setDayIdx(i)}
               className={`shrink-0 rounded-xl border px-4 py-2 text-left transition-all ${
                 i === dayIdx
@@ -204,7 +244,11 @@ export default function App() {
         </div>
       </div>
 
-      <main className="mx-auto max-w-5xl px-4 py-8 sm:px-8">
+      <main
+        className="mx-auto max-w-5xl px-4 py-8 sm:px-8"
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
         <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
           <div>
             <h2 className="text-2xl font-bold">

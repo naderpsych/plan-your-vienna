@@ -113,13 +113,11 @@ export const HOTEL = {
   query: "Jaz in the City Vienna",
 };
 
-/** The notes at the top of the itinerary. */
-export const tripNotes: string[] = [
-  "Update: Gerstner stays, and CHINACY Karlsplatz replaces Hard Rock before the opera on Sunday. Hard Rock stays on the list of options, with no fixed slot for now.",
-  "Hotel: Jaz in the City Vienna, Windmühlgasse 28.",
-  "Times are for planning; the cafés, gardens and shops are flexible. Travel times are estimates and have not been checked on Google. No bookings have been made yet.",
-  "Weather: the latest forecast checked suggests possible showers on Monday and Tuesday, so the gardens on Monday are flexible and Tuesday is mostly indoors anyway. Refresh the forecast close to the trip.",
-];
+/** The weather note from the itinerary, folded away in the header. */
+export const weatherNote =
+  "The latest forecast checked suggests possible showers on Monday and Tuesday, so the " +
+  "gardens on Monday are flexible and Tuesday is mostly indoors anyway. Refresh the " +
+  "forecast close to the trip.";
 
 const daily = (h: string): (string | null)[] => [h, h, h, h, h, h, h];
 
