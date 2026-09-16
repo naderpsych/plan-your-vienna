@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import {
   bookings,
   foodList,
+  tripNotes,
   wishlist,
   type Day,
   type Kind,
@@ -128,13 +129,14 @@ export default function App() {
       >
         <div className="mx-auto max-w-5xl">
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-gold">
-            Wien · 19–24 September
+            Wien · 19–24 September 2026
           </p>
           <h1 className="mt-2 text-4xl font-bold sm:text-5xl">Vienna, six days</h1>
-          <p className="mt-2 max-w-xl text-sm text-primary-foreground/75">
-            Every day starts at the hotel. Live forecast, opening-hour checks, and a map
-            with the full route — add or drop a place whenever the plan changes.
-          </p>
+          <ul className="mt-3 max-w-2xl space-y-1.5 text-sm text-primary-foreground/80">
+            {tripNotes.map((note) => (
+              <li key={note}>{note}</li>
+            ))}
+          </ul>
 
           <div className="mt-6 flex items-center gap-3">
             <div className="inline-flex shrink-0 rounded-full bg-primary-foreground/12 p-1 backdrop-blur">
@@ -352,7 +354,7 @@ export default function App() {
                       iso={day.iso}
                       onShowMap={() => setView("map")}
                       {...(s.fixed ? {} : { onRemove: () => removeStop(s.id) })}
-                      {...(s.fixed || swaps.length === 0
+                      {...(s.fixed || !s.query || swaps.length === 0
                         ? {}
                         : {
                             swaps,
@@ -382,6 +384,14 @@ export default function App() {
                 />
               </li>
             </ol>
+
+            {day.notes && day.notes.length > 0 && (
+              <div className="space-y-2 rounded-2xl border border-border bg-card p-4 text-sm leading-relaxed">
+                {day.notes.map((note) => (
+                  <p key={note}>{note}</p>
+                ))}
+              </div>
+            )}
 
             {removedHere.length > 0 && (
               <p className="text-xs text-muted-foreground">
@@ -539,7 +549,8 @@ function StopCard({
 }) {
   const [swapOpen, setSwapOpen] = useState(false);
   // Hotel anchors and travel blocks have no opening hours to argue with.
-  const fit = stop.time && !stop.fixed ? checkFit(stop, iso, stop.time) : null;
+  const fit =
+    stop.time && !stop.fixed && stop.query ? checkFit(stop, iso, stop.time) : null;
 
   return (
     <article className="overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] transition-transform hover:-translate-y-0.5">
@@ -585,6 +596,21 @@ function StopCard({
           ⚠️ {stop.warn}
         </p>
       )}
+      {stop.links && stop.links.length > 0 && (
+        <p className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-sm">
+          {stop.links.map((link) => (
+            <a
+              key={link.url}
+              href={link.url}
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold text-primary underline"
+            >
+              {link.label} ↗
+            </a>
+          ))}
+        </p>
+      )}
 
       {fit && fit.level !== "ok" && (
         <p
@@ -616,7 +642,7 @@ function StopCard({
             </button>
           </>
         )}
-        {!stop.fixed && (
+        {!stop.fixed && stop.query && (
           <a
             href={googleUrl(stop)}
             target="_blank"
