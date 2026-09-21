@@ -1,45 +1,45 @@
 {
-  "generated": "2026-09-20T09:46:36+00:00",
+  "generated": "2026-09-21T10:31:28+00:00",
   "legs": {
     "sat-hotel>sat-glacis": {
       "walk_min": 7,
-      "checked": "2026-09-20"
+      "checked": "2026-09-21"
     },
     "sat-glacis>sat-mq": {
-      "walk_min": 2,
-      "checked": "2026-09-20"
+      "walk_min": 3,
+      "checked": "2026-09-21"
     },
     "sun-belvedere>sun-belvedere-gardens": {
       "walk_min": 1,
-      "checked": "2026-09-20"
+      "checked": "2026-09-21"
     },
     "sun-belvedere-gardens>sun-gerstner": {
-      "walk_min": 7,
-      "checked": "2026-09-20"
+      "walk_min": 10,
+      "checked": "2026-09-21"
     },
     "sun-gerstner>sun-hotel-rest": {
-      "walk_min": 8,
-      "checked": "2026-09-20"
+      "walk_min": 7,
+      "checked": "2026-09-21"
     },
     "sun-hotel-rest>sun-chinacy": {
-      "walk_min": 5,
-      "checked": "2026-09-20"
+      "walk_min": 6,
+      "checked": "2026-09-21"
     },
     "sun-chinacy>sun-opera-arrive": {
-      "walk_min": 5,
-      "checked": "2026-09-20"
+      "walk_min": 6,
+      "checked": "2026-09-21"
     },
     "sun-opera-arrive>sun-hotel-back": {
-      "walk_min": 4,
-      "checked": "2026-09-20"
+      "walk_min": 3,
+      "checked": "2026-09-21"
     },
     "mon-schoenbrunn>mon-schoenbrunn-lunch": {
       "walk_min": 1,
-      "checked": "2026-09-20"
+      "checked": "2026-09-21"
     },
     "mon-schoenbrunn-lunch>mon-schoenbrunn-gardens": {
       "walk_min": 2,
-      "checked": "2026-09-20"
+      "checked": "2026-09-21"
     },
     "mon-schoenbrunn-gardens>mon-hotel-rest": {
       "walk_min": 13,
@@ -47,35 +47,35 @@
     },
     "mon-hotel-rest>sat-plachutta": {
       "walk_min": 13,
-      "checked": "2026-09-20"
+      "checked": "2026-09-21"
     },
     "tue-hotel-leave>tue-khm": {
       "walk_min": 4,
       "checked": "2026-09-16"
     },
     "tue-khm>sun-palmenhaus": {
-      "walk_min": 7,
-      "checked": "2026-09-20"
+      "walk_min": 8,
+      "checked": "2026-09-21"
     },
     "sun-palmenhaus>mon-prunksaal": {
       "walk_min": 1,
-      "checked": "2026-09-20"
+      "checked": "2026-09-21"
     },
     "mon-prunksaal>w-demel": {
-      "walk_min": 15,
-      "checked": "2026-09-20"
+      "walk_min": 19,
+      "checked": "2026-09-21"
     },
     "w-demel>tue-kohlmarkt-graben": {
       "walk_min": 1,
-      "checked": "2026-09-20"
+      "checked": "2026-09-21"
     },
     "tue-kohlmarkt-graben>tue-hotel-rest": {
       "walk_min": 13,
-      "checked": "2026-09-20"
+      "checked": "2026-09-21"
     },
     "tue-hotel-rest>tue-figlmuller": {
-      "walk_min": 12,
-      "checked": "2026-09-20"
+      "walk_min": 13,
+      "checked": "2026-09-21"
     },
     "wed-naschmarkt>wed-josephinum": {
       "walk_min": 11,
@@ -90,8 +90,8 @@
       "checked": "2026-09-16"
     },
     "wed-hotel-rest>wed-old-town": {
-      "walk_min": 8,
-      "checked": "2026-09-20"
+      "walk_min": 9,
+      "checked": "2026-09-21"
     },
     "wed-old-town>wed-wrenkh": {
       "walk_min": 14,
@@ -102,40 +102,40 @@
       "checked": "2026-09-16"
     },
     "sun-breakfast>sun-belvedere": {
-      "walk_min": 8,
-      "checked": "2026-09-20"
+      "walk_min": 10,
+      "checked": "2026-09-21"
     },
     "mon-breakfast>mon-schoenbrunn": {
       "walk_min": 13,
-      "checked": "2026-09-20"
+      "checked": "2026-09-21"
     },
     "tue-breakfast>tue-khm": {
       "walk_min": 3,
-      "checked": "2026-09-20"
+      "checked": "2026-09-21"
     },
     "wed-breakfast>wed-naschmarkt": {
       "walk_min": 4,
-      "checked": "2026-09-20"
+      "checked": "2026-09-21"
     },
     "wed-naschmarkt>wed-hotel-rest": {
       "walk_min": 1,
-      "checked": "2026-09-20"
+      "checked": "2026-09-21"
     },
     "wed-old-town>wed-tian-bistro": {
-      "walk_min": 9,
-      "checked": "2026-09-20"
+      "walk_min": 10,
+      "checked": "2026-09-21"
     },
     "wed-tian-bistro>wed-hotel-back": {
       "walk_min": 6,
-      "checked": "2026-09-20"
+      "checked": "2026-09-21"
     },
     "mon-schoenbrunn-gardens>mon-oberlaa": {
-      "walk_min": 18,
-      "checked": "2026-09-20"
+      "walk_min": 21,
+      "checked": "2026-09-21"
     },
     "mon-oberlaa>mon-hotel-rest": {
       "walk_min": 7,
-      "checked": "2026-09-20"
+      "checked": "2026-09-21"
     }
   }
 }
